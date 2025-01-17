@@ -22,11 +22,11 @@
       
         <tags>
             
-            <tag> 计算机图像学 </tag>
-            
             <tag> CG </tag>
             
             <tag> CAD </tag>
+            
+            <tag> 计算机图形学 </tag>
             
         </tags>
       
@@ -97,7 +97,7 @@
       <link href="/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/"/>
       <url>/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/</url>
       
-        <content type="html"><![CDATA[<div class="gallery-container" data-type="data" data-button="" data-limit="10" data-first="10">    <div class="gallery-items">[{"url":"/blog/images/postMemoji/1.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/2.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/3.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/4.jpg","alt":"2","title":""}]</div>  </div>]]></content>
+        <content type="html"><![CDATA[<div class="gallery-container" data-type="data" data-button="" data-limit="10" data-first="10">    <div class="gallery-items">[{"url":"/blog/images/postMemoji/1.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/2.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/3.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/4.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/ai-1.png","alt":"2","title":""}]</div>  </div>]]></content>
       
       
       <categories>
