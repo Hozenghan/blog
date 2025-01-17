@@ -1,0 +1,584 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>scu操作系统期末简答题提纲 | Hozenghan的博客</title><meta name="author" content="Hozenghan"><meta name="copyright" content="Hozenghan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="仅记录了任课老师课堂提示的重点提纲，具体细化梳理见“scu操作系统期末简答题提纲”，对scu_ccs的os有较大帮助">
+<meta property="og:type" content="article">
+<meta property="og:title" content="scu操作系统期末简答题提纲">
+<meta property="og:url" content="http://hozenghan.github.io/blog/2024/06/30/scu/2023-2024%E5%AD%A6%E5%B9%B4_%E6%98%A5/os%E7%AE%80%E7%AD%94%E9%A2%98%E6%8F%90%E7%BA%B2/index.html">
+<meta property="og:site_name" content="Hozenghan的博客">
+<meta property="og:description" content="仅记录了任课老师课堂提示的重点提纲，具体细化梳理见“scu操作系统期末简答题提纲”，对scu_ccs的os有较大帮助">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hozenghan.github.io/blog/coverImages/scu_23-24_os-1.jpg">
+<meta property="article:published_time" content="2024-06-29T16:00:01.000Z">
+<meta property="article:modified_time" content="2025-01-17T19:18:54.793Z">
+<meta property="article:author" content="Hozenghan">
+<meta property="article:tag" content="网络安全">
+<meta property="article:tag" content="scu">
+<meta property="article:tag" content="专业课">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hozenghan.github.io/blog/coverImages/scu_23-24_os-1.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "scu操作系统期末简答题提纲",
+  "url": "http://hozenghan.github.io/blog/2024/06/30/scu/2023-2024%E5%AD%A6%E5%B9%B4_%E6%98%A5/os%E7%AE%80%E7%AD%94%E9%A2%98%E6%8F%90%E7%BA%B2/",
+  "image": "http://hozenghan.github.io/blog/coverImages/scu_23-24_os-1.jpg",
+  "datePublished": "2024-06-29T16:00:01.000Z",
+  "dateModified": "2025-01-17T19:18:54.793Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Hozenghan",
+      "url": "http://hozenghan.github.io/blog/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/blog/images/sun.png"><link rel="canonical" href="http://hozenghan.github.io/blog/2024/06/30/scu/2023-2024%E5%AD%A6%E5%B9%B4_%E6%98%A5/os%E7%AE%80%E7%AD%94%E9%A2%98%E6%8F%90%E7%BA%B2/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/blog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'scu操作系统期末简答题提纲',
+  isHighlightShrink: false,
+  isToc: false,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/blog/images/profile.jpg" onerror="this.onerror=null;this.src='/blog/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> 博客首页</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/blog/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/blog/shuoshuo/"><i class="fa-fw fa fa-comments"></i><span> 分享</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-camera"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://hozenghan.github.io"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/blog/"><img class="site-icon" src="/blog/images/sun.png" alt="Logo"><span class="site-name">Hozenghan的博客</span></a><a class="nav-page-title" href="/blog/"><span class="site-name">scu操作系统期末简答题提纲</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> 博客首页</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/blog/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/blog/shuoshuo/"><i class="fa-fw fa fa-comments"></i><span> 分享</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-camera"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://hozenghan.github.io"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">scu操作系统期末简答题提纲</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-06-29T16:00:01.000Z" title="发表于 2024-06-30 00:00:01">2024-06-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-17T19:18:54.793Z" title="更新于 2025-01-18 03:18:54">2025-01-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/SCU/">SCU</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/SCU/2023-2024%E5%AD%A6%E5%B9%B4-%E6%98%A5/">2023-2024学年_春</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/SCU/2023-2024%E5%AD%A6%E5%B9%B4-%E6%98%A5/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">3.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:2,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-01-18 03:18:54&quot;}" hidden></div><ul>
+<li><p>判断</p>
+</li>
+<li><p>选择</p>
+</li>
+<li><p>简答</p>
+<ul>
+<li><p>chap02</p>
+<ul>
+<li><p>操作系统的概念</p>
+<ul>
+<li><p>操作系统是控制应用程序执行的程序，是计算机软硬件的接口，其本质上就是一个系统软件</p>
+</li>
+<li><p>OS与普通软件相比，具有更高的特权级别、更广泛的功能范围和更深入的系统资源管理能力。普通软件运行在操作系统之上，通过操作系统提供的接口和服务来实现其功能</p>
+</li>
+</ul>
+</li>
+<li><p>操作系统的目标、功能</p>
+<ul>
+<li><p>目标：方便、有效、可扩展</p>
+</li>
+<li><p>功能：</p>
+<ul>
+<li><p>作为用户和计算机的接口，为用户提供服务；</p>
+</li>
+<li><p>作为资源管理器，控制计算机资源适用；</p>
+</li>
+<li><p>提供易扩展性</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>操作系统的组成模块</p>
+<ul>
+<li><p>进程控制：创建调度和终止进程，管理进程间的通信和同步</p>
+</li>
+<li><p>虚拟内存：允许程序以逻辑方式访问存储器，而不用考虑物理内存上的可用空间数量</p>
+</li>
+<li><p>文件：文件是访问控制和保护的一个有用单元</p>
+</li>
+<li><p>IO管理：使操作系统能够与各种外部设备进行通信</p>
+</li>
+</ul>
+</li>
+<li><p>操作系统的发展脉络</p>
+<ul>
+<li><p>串行处理：无操作系统</p>
+</li>
+<li><p>简单批处理系统：监控程序，CPU等待I&#x2F;O处理</p>
+</li>
+<li><p>多道批处理系统：当一个作业等待I&#x2F;O时，可以执行其他作业，多个用户程序可切换（需要内存管理）</p>
+</li>
+<li><p>分时系统：计算机采用时间片轮转方式同时为多个用户服务</p>
+</li>
+</ul>
+</li>
+<li><p>批处理系统和分时系统的异同（有无终端，答表）</p>
+<ul>
+<li><p>主要目标不同</p>
+<ul>
+<li><p>批处理：充分利用处理器</p>
+</li>
+<li><p>分时：减小响应时间</p>
+</li>
+</ul>
+</li>
+<li><p>操作系统指令源</p>
+<ul>
+<li><p>批处理：作业控制语言命令、作业提供的命令</p>
+</li>
+<li><p>分时：终端键入的命令</p>
+</li>
+</ul>
+</li>
+<li><p>同：它们都使用了多道程序设计</p>
+</li>
+</ul>
+</li>
+<li><p>结合作业，结合操作系统的一般构成，描述linux中的概念（如linux的发展、构成模块）</p>
+</li>
+</ul>
+</li>
+<li><p>chap03</p>
+<ul>
+<li><p>进程的概念，跟一般应用程序的不同、关系</p>
+<ul>
+<li><p>概念：进程是由执行的程序代码和与代码相关的数据集组成的实体</p>
+</li>
+<li><p>进程是动态的、暂时的；程序是静态的、永久的</p>
+</li>
+<li><p>进程是正在执行程序，程序是进程的重要组成</p>
+</li>
+</ul>
+</li>
+<li><p>简单描述一下PCB基本的构成（说三四个字段，状态、优先级等，3.1图）</p>
+<ul>
+<li><p>PCB，进程控制块，一个进程元素集合，用于存储进程执行所需的信息</p>
+</li>
+<li><p>基本构成：标识符、状态、优先级、程序计数器、内存指针……</p>
+</li>
+</ul>
+</li>
+<li><p>进程的操作与控制函数（创建、销毁和切换）</p>
+<ul>
+<li><p>创建、销毁、切换、同步、互斥</p>
+</li>
+<li><p>fork、exit、exec</p>
+</li>
+</ul>
+</li>
+<li><p>进程的五状态（画图或给图描述）</p>
+<ul>
+<li><p>如图</p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/nihao.png" alt="2.1" style="zoom: 50%;" />
+</li>
+<li><p>新建态：刚刚创建的进程，操作系统还未把它加入可执行进程组</p>
+</li>
+<li><p>就绪态：进程做好了准备，只要有机会就开始执行</p>
+</li>
+<li><p>运行态：进程正在执行</p>
+</li>
+<li><p>阻塞态：进程在发生某些事件发生前不能执行，如I&#x2F;O操作完成</p>
+</li>
+<li><p>退出态：操作系统从可执行程序组中释放出的进程，停止或被取消</p>
+</li>
+</ul>
+</li>
+<li><p>进程的几个切换</p>
+<ul>
+<li><p>空——&gt;新建：创建执行一个程序的新进程</p>
+</li>
+<li><p>就绪——&gt;就绪：操作系统准备好再接纳一个进程</p>
+</li>
+<li><p>就绪——&gt;运行：需要选择一个新进程运行时，调度器选择</p>
+</li>
+<li><p>运行——&gt;退出：当前正在运行的进程表示自己已经完成或取消，它将被操作系统终止</p>
+</li>
+<li><p>运行——&gt;就绪：</p>
+<ul>
+<li><p>正在运行的进程达到了“最大运行时长”</p>
+</li>
+<li><p>进程优先级导致的进程中断</p>
+</li>
+<li><p>进程本身自愿释放对处理器的控制</p>
+</li>
+</ul>
+</li>
+<li><p>运行——&gt;阻塞：进程请求它必须等待的某些事项</p>
+</li>
+<li><p>阻塞——&gt;就绪：等待事件发生</p>
+</li>
+<li><p>就绪——&gt;退出：父进程可在任何时刻终止一个子进程；父进程终止，子进程终止</p>
+</li>
+<li><p>阻塞——&gt;退出：原因同上</p>
+</li>
+</ul>
+</li>
+<li><p>上课研讨例子：操作系统从操作系统、应用程序、cpu的三个角度看流程的不同</p>
+<ul>
+<li><p>CPU：CPU根据PC的值来获取并执行内存中的指令，遇到分支指令会在用户程序执行，当超时等中断产生时会到操作系统中取址执行</p>
+</li>
+<li><p>OS：通过将CPU的控制权分配给不同程序来实现多个程序之间的交替执行，负责管理程序的执行顺序及进程状态转化</p>
+</li>
+<li><p>某一程序：程序本身不会意识到其他程序存在，以为自己一直占有CPU</p>
+</li>
+</ul>
+</li>
+<li><p>系统控制的创建流程：linux的fork，一次调用两次返回的本质（画图？）</p>
+<ul>
+<li><p>由于在复制时复制了父进程的堆栈段，所以两个进程都停留在fork函数中等待返回，因此fork函数会返回两次，一次是在父进程中返回，另一次是在子进程中返回，这两次的返回值是不一样的。</p>
+</li>
+<li><p>三种不同的返回值</p>
+<ul>
+<li><p>父进程中，fork返回新创建子进程的进程ID</p>
+</li>
+<li><p>在子进程中，fork返回0</p>
+</li>
+<li><p>如果出现错误，fork返回一个负值</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>chap04</p>
+<ul>
+<li><p>线程的概念、产生背景，进程和线程的关系与异同</p>
+<ul>
+<li><p>线程是一种轻量级的进程，在单个进程内执行不同的路径</p>
+</li>
+<li><p>产生背景：需要并发执行、支持并发操作、提供性能和资源利用率</p>
+</li>
+<li><p>线程是进程中的实际运作单位；进程中的多个线程共享进程资源</p>
+</li>
+<li><p>异同</p>
+<ul>
+<li><p>资源占用：进程拥有独立内存空间、多个线程共享进程资源</p>
+</li>
+<li><p>调度和切换：进程是系统进行资源分配和调度的基本单位，进程之间的切换开销较大；线程是进程内调度的基本单位，线程的切换开销较小。</p>
+</li>
+<li><p>通信和同步：进程之间通信需要使用一些机制，如管道、消息队列、共享内存等。线程之间通信可以直接读写共享变量，也可以使用线程间的同步机制，如互斥锁、条件变量</p>
+</li>
+<li><p>容错性：一个进程的崩溃通常不会影响其他进程。而线程是共享进程的资源，一个线程的崩溃可能导致整个进程的崩溃。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>线程的实现方法（UTL、KLT、混合）</p>
+<ul>
+<li><p>内核级线程KLT：线程管理工作全部由内核完成，应用级只有一个到内核线程设施的APL</p>
+</li>
+<li><p>用户级线程ULT：线程的管理等工作全部由应用程序完成，内核意识不到线程的存在</p>
+</li>
+<li><p>混合方法</p>
+</li>
+</ul>
+</li>
+<li><p>各自的优缺点</p>
+<ul>
+<li><p>KTL优点：保证每个轻量级进程都成为一个独立的调度单元，避免一个阻塞而影响整个进程工作</p>
+</li>
+<li><p>KTL缺点：系统调用代价高，需要在用户态和内核态来回切换；需要消耗一定的内核资源，支持轻量级进程数量有限</p>
+</li>
+<li><p>ULT优点：不需要切换内核态，效率高且低消耗；可以为应用程序量身定制调度算法；UTL可以在任何操作系统中运行；可以支持规模更大的线程数量</p>
+</li>
+<li><p>ULT缺点：无系统内核支援，处理阻塞问题困难；一个进程只有一个线程可执行</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>chap05（重点）</p>
+<ul>
+<li><p>并发的主要解决了哪四个问题：</p>
+<ul>
+<li><p>同步：多个并发执行的进程之间相互协调和合作，以保证它们按照一定的顺序和时间间隔执行</p>
+</li>
+<li><p>互斥：在并发执行的过程中，确保同一时刻只有一个进程能够访问某个资源，其他进程需要等待</p>
+</li>
+<li><p>死锁：两个或多个进程因为彼此持有的资源而相互等待，导致无法继续执行的状态</p>
+</li>
+<li><p>饥饿：一个进程因为无法获得所需的资源而无法继续执行的情况</p>
+</li>
+</ul>
+</li>
+<li><p>条件竞争的含义，并举例子描述</p>
+<ul>
+<li><p>发生在多个进程或线程读写数据时，其最终结果取决于多个线程的指令执行顺序</p>
+</li>
+<li><p>eg两进程共享全局变量a，并竞争更新该变量</p>
+</li>
+</ul>
+</li>
+<li><p>进程间的关系有几种，举例子</p>
+<ul>
+<li><p>竞争：进程之间互相不知对方存在，两个无关应用程序都想访问一个磁盘</p>
+</li>
+<li><p>通过共享合作：进程间间接知道对方存在，（如共享对象）</p>
+</li>
+<li><p>通过通信合作：进程间直接知道对方存在（它们有可用的通信原语）</p>
+</li>
+</ul>
+</li>
+<li><p>为了解决同步和互斥，我们一共有几类方法</p>
+<ul>
+<li><p>软件类：让并发执行的进程来担负该责任，在两进程之间实现互斥<br>迪克、皮特森算法</p>
+</li>
+<li><p>硬件类：中断屏蔽、专用机器指令</p>
+</li>
+<li><p>操作系统类：信号量、管程、消息队列</p>
+</li>
+</ul>
+</li>
+<li><p>关于信号量和管程的概念及其异同</p>
+<ul>
+<li><p>信号量是用于进程间传递信号的一个整数值；管程定义了一组局部数据和内部操作，访问管程的进程通过内部操作访问或修改内容数据。</p>
+</li>
+<li><p>管程所有同步机制都被限定在了管程内部，易于验证同步的正确性并检测错误</p>
+</li>
+<li><p>相对于信号量，若一个管程被正确编写，则所有进程对于受保护资源的访问都是正确的</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>chap06</p>
+<ul>
+<li><p>什么叫死锁？死锁的概念并简单举例描述（代码或伪代码？十字路问题也可以）</p>
+<ul>
+<li>死锁概念：两个及以上的进程由于相互占有着对方所需要的资源而不能继续执行的状态</li>
+</ul>
+</li>
+<li><p>举例</p>
+<ul>
+<li>独木桥。A，B都要过独木桥，但是互不退让，僵死。</li>
+<li>十字路口。A，B，C，D四辆车各占据一个资源，且由于所需要的第二个资源被另一辆汽车占有，因此他们都不能通行。</li>
+</ul>
+</li>
+<li><p>死锁的条件（注意审题：必要条件条件3个，充要条件4个）</p>
+<ul>
+<li><p>互斥：一次只有一个进程可以使用一个资源，其他进程不能访问已分配给其他进程的资源</p>
+</li>
+<li><p>占有且等待：当一个进程等待其他进程时，继续占有已分配的资源</p>
+</li>
+<li><p>不可抢占：不能强行抢占进程已占有的资源</p>
+</li>
+<li><p>循环等待（充要附加）：存在一个闭合的进程链，每个进程至少占有此链中下一个进程所需的一个资源</p>
+</li>
+</ul>
+</li>
+<li><p>关于死锁的解决方法（书上4大类）</p>
+<ul>
+<li>死锁预防：消除死锁的四个成因之一<ul>
+<li>间接预防方法：<ul>
+<li>互斥—-&gt;无法避免</li>
+<li>占有且等待—-&gt;开始前一次性申请，否则阻塞进程：低效 &amp; 不现实</li>
+<li>非抢占—-&gt;让权等待&#x2F;设置优先级进行抢占</li>
+</ul>
+</li>
+<li>直接预防方法：<ul>
+<li>循环等待—-&gt;设定资源类型申请优先级：低效</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>死锁避免：进程启动拒绝、资源分配拒绝（银行家算法）</li>
+<li>死锁检测与恢复：操作系统周期性的执行算法检测“循环等待”条件，检测到死锁再以某种策略进行恢复</li>
+<li>综合方法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>chap07</p>
+<ul>
+<li><p>七种方法的归纳总结，联系和区别，历史发展从全部下载到化整为零（教材表7.1）</p>
+<ul>
+<li><p>全部加载且连续</p>
+<ul>
+<li><p>固定分区：分区大小预先设定，产生内部碎片</p>
+</li>
+<li><p>动态分区：分区大小在进程装入内存时按需分配，产生外部碎片</p>
+</li>
+</ul>
+</li>
+<li><p>全部加载不连续</p>
+<ul>
+<li><p>简单分页：内存分成固定大小页框，进程分成等大的页，运行前全部载入页框，会产生较小的内部碎片；可能使程序载入不连续……</p>
+</li>
+<li><p>简单分段：程序分成多个大小不同的段载入内存，载入内存时可以不连续，会产生较小的外部碎片</p>
+</li>
+</ul>
+</li>
+<li><p>部分加载且不连续</p>
+<ul>
+<li><p>虚存分页：将虚拟内存和物理内存划分为固定大小的页，地址之间通过页表来映射；产生内部碎片</p>
+</li>
+<li><p>虚存分段：段的大小不等且为动态的，通过段表实现地址转换；支持共享和保护；产生外部碎片</p>
+</li>
+<li><p>虚拟段页式：用户的地址空间被程序员划分为许多段，每段划分为固定大小的页</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>存储管理的需求</p>
+<ul>
+<li><p>重定位</p>
+</li>
+<li><p>逻辑</p>
+</li>
+<li><p>保护</p>
+</li>
+<li><p>物理组织</p>
+</li>
+<li><p>共享</p>
+</li>
+</ul>
+</li>
+<li><p>固定分区和分页的相同和不同；动态分区和分段的相同和不同</p>
+<ul>
+<li><p>固定分区与分页</p>
+<ul>
+<li><p>简单分页是将内存划分为页，而固定分区是将内存划分为分区。</p>
+</li>
+<li><p>简单分页的页大小是固定的，而固定分区的分区大小可以不同。</p>
+</li>
+<li><p>简单分页的地址转换是通过页表进行的，而固定分区的地址转换是通过分区表进行的。</p>
+</li>
+</ul>
+</li>
+<li><p>分段没有内部碎片但有外部碎片</p>
+</li>
+<li><p>固定分区是全部加载，其他是化整为零</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>chap08</p>
+<ul>
+<li><p>访问序列（计算？）</p>
+</li>
+<li><p>虚拟存储器的概念</p>
+</li>
+<li><p>页故障的概念及其处理流程</p>
+</li>
+<li><p>缺页率和页尺寸、页框的关系</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>问答和计算</p>
+</li>
+<li><p>非标：教材的点评</p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://hozenghan.github.io/blog">Hozenghan</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://hozenghan.github.io/blog/2024/06/30/scu/2023-2024%E5%AD%A6%E5%B9%B4_%E6%98%A5/os%E7%AE%80%E7%AD%94%E9%A2%98%E6%8F%90%E7%BA%B2/">http://hozenghan.github.io/blog/2024/06/30/scu/2023-2024%E5%AD%A6%E5%B9%B4_%E6%98%A5/os%E7%AE%80%E7%AD%94%E9%A2%98%E6%8F%90%E7%BA%B2/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://hozenghan.github.io/blog" target="_blank">Hozenghan的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/blog/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a><a class="post-meta__tags" href="/blog/tags/scu/">scu</a><a class="post-meta__tags" href="/blog/tags/%E4%B8%93%E4%B8%9A%E8%AF%BE/">专业课</a></div><div class="post-share"><div class="social-share" data-image="/blog/coverImages/scu_23-24_os-1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/blog/2024/06/30/scu/2023-2024%E5%AD%A6%E5%B9%B4_%E6%98%A5/os%E7%AE%80%E7%AD%94%E9%A2%98%E6%95%B4%E7%90%86/" title="scu操作系统期末简答题整理"><img class="cover" src="/blog/coverImages/scu_23-24_os-2.jpg" onerror="onerror=null;src='/blog/images/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">scu操作系统期末简答题整理</div></div><div class="info-2"><div class="info-item-1">重点梳理，对scu_ccs的os有较大帮助</div></div></div></a><a class="pagination-related" href="/blog/2024/06/30/scu/2023-2024%E5%AD%A6%E5%B9%B4_%E6%98%A5/%E5%BA%94%E7%94%A8%E5%AF%86%E7%A0%81%E5%AD%A6%E6%8F%90%E7%BA%B2/" title="scu应用密码学期末简答题提纲"><img class="cover" src="/blog/coverImages/scu_23-24_yymmx.jpg" onerror="onerror=null;src='/blog/images/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">scu应用密码学期末简答题提纲</div></div><div class="info-2"><div class="info-item-1">仅记录了任课老师课堂提示的重点提纲，对scu_ccs有较大帮助</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/blog/2025/01/16/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%9C%9F%E6%9C%AB%E9%87%8D%E7%82%B9/" title="网络攻防技术期末重点"><img class="cover" src="/blog/coverImages/scu_24-25_gf-2.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="info-item-2">网络攻防技术期末重点</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a><a class="pagination-related" href="/blog/2025/01/16/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93/" title="网络攻防技术实验总结"><img class="cover" src="/blog/coverImages/scu_24-25_gf-1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="info-item-2">网络攻防技术实验总结</div></div><div class="info-2"><div class="info-item-1">基本情况 从实验中选考试内容，重点关注：shellcode、缓冲区溢出、xss攻击、tcp（ip欺骗）、dns  题型：  选择题（基本概念） 简答题 综合分析题（出自实验）     注意ppt里的颜色，注意实验！  Lab2-端口扫描见理论 Lab3-MD5碰撞md5collgen工具 由前缀生成MD5碰撞，即返回两个md5值相同的文件，但是内容不完全相同，为前缀+128字节填充（不同出现在128字节的填充部分） 实验a Q1.If the length of your prefix file is not multiple of 64, what is going to happen?  可以得出结论：如果前缀文件大小不是64bytes的倍数，那么md5collgen将会自动用 00(hex) 将其补充 至64bytes的倍数。  前64bytes：我们指定的前缀+ 00(hex)...</div></div></div></a><a class="pagination-related" href="/blog/2025/01/16/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF_final/" title="网络空间安全技术期末整理"><img class="cover" src="/blog/coverImages/scu_24-25_js.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="info-item-2">网络空间安全技术期末整理</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a><a class="pagination-related" href="/blog/2024/06/30/scu/2023-2024%E5%AD%A6%E5%B9%B4_%E6%98%A5/%E5%BA%94%E7%94%A8%E5%AF%86%E7%A0%81%E5%AD%A6%E6%8F%90%E7%BA%B2/" title="scu应用密码学期末简答题提纲"><img class="cover" src="/blog/coverImages/scu_23-24_yymmx.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-30</div><div class="info-item-2">scu应用密码学期末简答题提纲</div></div><div class="info-2"><div class="info-item-1">仅记录了任课老师课堂提示的重点提纲，对scu_ccs有较大帮助</div></div></div></a><a class="pagination-related" href="/blog/2024/06/30/scu/2023-2024%E5%AD%A6%E5%B9%B4_%E6%98%A5/os%E7%AE%80%E7%AD%94%E9%A2%98%E6%95%B4%E7%90%86/" title="scu操作系统期末简答题整理"><img class="cover" src="/blog/coverImages/scu_23-24_os-2.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-30</div><div class="info-item-2">scu操作系统期末简答题整理</div></div><div class="info-2"><div class="info-item-1">重点梳理，对scu_ccs的os有较大帮助</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/blog/images/profile.jpg" onerror="this.onerror=null;this.src='/blog/images/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Hozenghan</div><div class="author-info-description">📷   🖥️   📖  💤   🛵</div><div class="site-data"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">13</div></a><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Hozenghan"><i class="fab fa-github"></i><span>Follow Me!</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Hozenghan" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/blog/QQ" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:wuzhenghannnnnn@163.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a><a class="social-icon" href="https://hozenghan.github.io" target="_blank" title=""><i class="fas fa-home"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">无限进步！建议挂上梯子，不然有些图片可能会加载不出来。天天开心哦🥰</div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/01/18/coding/python/python/" title="Python"><img src="/blog/coverImages/code_python.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="Python"/></a><div class="content"><a class="title" href="/blog/2025/01/18/coding/python/python/" title="Python">Python</a><time datetime="2025-01-18T15:59:59.000Z" title="发表于 2025-01-18 23:59:59">2025-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/01/18/coding/c/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" title="C语言基础"><img src="/blog/coverImages/code_c.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="C语言基础"/></a><div class="content"><a class="title" href="/blog/2025/01/18/coding/c/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" title="C语言基础">C语言基础</a><time datetime="2025-01-18T15:59:58.000Z" title="发表于 2025-01-18 23:59:58">2025-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/" title="Hozenghan的Memoji"><img src="/blog/coverImages/memoji.png" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="Hozenghan的Memoji"/></a><div class="content"><a class="title" href="/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/" title="Hozenghan的Memoji">Hozenghan的Memoji</a><time datetime="2025-01-17T15:59:59.000Z" title="发表于 2025-01-17 23:59:59">2025-01-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/" title="博客主题配置">博客主题配置</a><time datetime="2025-01-17T15:59:59.000Z" title="发表于 2025-01-17 23:59:59">2025-01-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/blog/2025/01/16/Hexo/Hexo%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89HTML%E9%A1%B5%E9%9D%A2/" title="Hexo添加自定义HTML页面">Hexo添加自定义HTML页面</a><time datetime="2025-01-16T15:59:59.000Z" title="发表于 2025-01-16 23:59:59">2025-01-16</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(20deg, #003366, #0066cc, #3399ff, #66ccff);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Hozenghan</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hey you, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js"></script><script src="/blog/js/main.js"></script><script src="/blog/js/tw_cn.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
