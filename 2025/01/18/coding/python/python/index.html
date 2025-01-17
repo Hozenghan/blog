@@ -1,0 +1,195 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Python | Hozenghan的博客</title><meta name="author" content="Hozenghan"><meta name="copyright" content="Hozenghan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="关于Python的常用命令">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python">
+<meta property="og:url" content="http://hozenghan.github.io/blog/2025/01/18/coding/python/python/index.html">
+<meta property="og:site_name" content="Hozenghan的博客">
+<meta property="og:description" content="关于Python的常用命令">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hozenghan.github.io/blog/coverImages/code_python.jpg">
+<meta property="article:published_time" content="2025-01-18T15:59:59.000Z">
+<meta property="article:modified_time" content="2025-01-17T16:12:37.336Z">
+<meta property="article:author" content="Hozenghan">
+<meta property="article:tag" content="coding">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hozenghan.github.io/blog/coverImages/code_python.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Python",
+  "url": "http://hozenghan.github.io/blog/2025/01/18/coding/python/python/",
+  "image": "http://hozenghan.github.io/blog/coverImages/code_python.jpg",
+  "datePublished": "2025-01-18T15:59:59.000Z",
+  "dateModified": "2025-01-17T16:12:37.336Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Hozenghan",
+      "url": "http://hozenghan.github.io/blog/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/blog/images/sun.png"><link rel="canonical" href="http://hozenghan.github.io/blog/2025/01/18/coding/python/python/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/blog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/blog/images/profile.jpg" onerror="this.onerror=null;this.src='/blog/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> 博客首页</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/blog/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/blog/shuoshuo/"><i class="fa-fw fa fa-comments"></i><span> 分享</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-camera"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://hozenghan.github.io"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/blog/"><img class="site-icon" src="/blog/images/sun.png" alt="Logo"><span class="site-name">Hozenghan的博客</span></a><a class="nav-page-title" href="/blog/"><span class="site-name">Python</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> 博客首页</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/blog/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/blog/shuoshuo/"><i class="fa-fw fa fa-comments"></i><span> 分享</span></a></li><li><a class="site-page child" href="/blog/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/blog/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/blog/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-camera"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://hozenghan.github.io"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">Python</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-18T15:59:59.000Z" title="发表于 2025-01-18 23:59:59">2025-01-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-01-17T16:12:37.336Z" title="更新于 2025-01-18 00:12:37">2025-01-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/Coding/">Coding</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/Coding/Python/">Python</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><h2 id="python-pip换源"><a href="#python-pip换源" class="headerlink" title="python-pip换源"></a>python-pip换源</h2><p>比如安装 PyQt6,需要加镜像参数 ：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple PyQt6</span><br></pre></td></tr></table></figure>
+
+<p>可靠的国内源</p>
+<figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">清华大学：https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">阿里云：http://mirrors.aliyun.com/pypi/simple</span><br><span class="line">豆瓣：http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure>
+
+<h2 id="python-虚拟环境配置"><a href="#python-虚拟环境配置" class="headerlink" title="python 虚拟环境配置"></a>python 虚拟环境配置</h2><h3 id="conda环境"><a href="#conda环境" class="headerlink" title="conda环境"></a>conda环境</h3><p>使用conda搭建虚拟环境</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda create -n env_name python=3.xx</span><br><span class="line"></span><br><span class="line">conda activate env_name</span><br></pre></td></tr></table></figure>
+<p>进入虚拟环境后的包安装</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda install xxx</span><br></pre></td></tr></table></figure>
+<p>删除conda环境</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda remove -n xxx --all</span><br></pre></td></tr></table></figure>
+
+<p>参考网址<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/NBDwo/article/details/121456958">https://blog.csdn.net/NBDwo/article/details/121456958</a></p>
+<h3 id="venv虚拟环境"><a href="#venv虚拟环境" class="headerlink" title="venv虚拟环境"></a>venv虚拟环境</h3><p>对于 Windows，使用以下代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python -m venv myenv python=3.X</span><br><span class="line">myenv\Scripts\activate</span><br></pre></td></tr></table></figure>
+
+<p>对于 UNIX，使用以下代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 -m venv myenv python=3.X</span><br><span class="line"><span class="built_in">source</span> myenv/bin/activate</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="生成requirement-txt文件的方法"><a href="#生成requirement-txt文件的方法" class="headerlink" title="生成requirement.txt文件的方法"></a>生成requirement.txt文件的方法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure>
+
+<h2 id="requirements-txt文件的用法"><a href="#requirements-txt文件的用法" class="headerlink" title="requirements.txt文件的用法"></a>requirements.txt文件的用法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+<p>mac&#x2F;linux用户需将pip切换成pip3</p>
+<h2 id="MacOS安装tensorflow"><a href="#MacOS安装tensorflow" class="headerlink" title="MacOS安装tensorflow"></a>MacOS安装tensorflow</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 -m venv ./venv</span><br><span class="line"><span class="built_in">source</span> ./venv/bin/activate</span><br><span class="line">python -m pip install -U pip</span><br><span class="line"></span><br><span class="line">python -m pip install tensorflow</span><br><span class="line"></span><br><span class="line"><span class="comment">#下面的其实可以不用</span></span><br><span class="line">python -m pip install --user tensorflow-metal</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="服务器后台运行"><a href="#服务器后台运行" class="headerlink" title="服务器后台运行"></a>服务器后台运行</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">nohup</span> python test.py &gt; test.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">nohup</span> python test.py &gt; test.log &amp;</span><br></pre></td></tr></table></figure>
+<p>使用上述命令，按下Ctrl+C或者关闭终端，程序都仍然运行，需要通过kill来终止进程</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://hozenghan.github.io/blog">Hozenghan</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://hozenghan.github.io/blog/2025/01/18/coding/python/python/">http://hozenghan.github.io/blog/2025/01/18/coding/python/python/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://hozenghan.github.io/blog" target="_blank">Hozenghan的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/blog/tags/coding/">coding</a><a class="post-meta__tags" href="/blog/tags/Python/">Python</a></div><div class="post-share"><div class="social-share" data-image="/blog/coverImages/code_python.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/blog/2025/01/18/coding/c/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" title="C语言基础"><img class="cover" src="/blog/coverImages/code_c.jpg" onerror="onerror=null;src='/blog/images/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">C语言基础</div></div><div class="info-2"><div class="info-item-1">关于C语言指针与引用</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/blog/2025/01/18/coding/c/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" title="C语言基础"><img class="cover" src="/blog/coverImages/code_c.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-18</div><div class="info-item-2">C语言基础</div></div><div class="info-2"><div class="info-item-1">关于C语言指针与引用</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/blog/images/profile.jpg" onerror="this.onerror=null;this.src='/blog/images/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Hozenghan</div><div class="author-info-description">📷   🖥️   📖  💤   🛵</div><div class="site-data"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">8</div></a><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Hozenghan"><i class="fab fa-github"></i><span>Follow Me!</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Hozenghan" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/blog/QQ" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:wuzhenghannnnnn@163.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a><a class="social-icon" href="https://hozenghan.github.io" target="_blank" title=""><i class="fas fa-home"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">无限进步！建议挂上梯子，不然有些图片可能会加载不出来。天天开心哦🥰</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#python-pip%E6%8D%A2%E6%BA%90"><span class="toc-number">1.</span> <span class="toc-text">python-pip换源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#python-%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-number">2.</span> <span class="toc-text">python 虚拟环境配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#conda%E7%8E%AF%E5%A2%83"><span class="toc-number">2.1.</span> <span class="toc-text">conda环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#venv%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="toc-number">2.2.</span> <span class="toc-text">venv虚拟环境</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%9F%E6%88%90requirement-txt%E6%96%87%E4%BB%B6%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">生成requirement.txt文件的方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#requirements-txt%E6%96%87%E4%BB%B6%E7%9A%84%E7%94%A8%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">requirements.txt文件的用法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MacOS%E5%AE%89%E8%A3%85tensorflow"><span class="toc-number">5.</span> <span class="toc-text">MacOS安装tensorflow</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C"><span class="toc-number">6.</span> <span class="toc-text">服务器后台运行</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/01/18/coding/python/python/" title="Python"><img src="/blog/coverImages/code_python.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="Python"/></a><div class="content"><a class="title" href="/blog/2025/01/18/coding/python/python/" title="Python">Python</a><time datetime="2025-01-18T15:59:59.000Z" title="发表于 2025-01-18 23:59:59">2025-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/01/18/coding/c/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" title="C语言基础"><img src="/blog/coverImages/code_c.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="C语言基础"/></a><div class="content"><a class="title" href="/blog/2025/01/18/coding/c/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" title="C语言基础">C语言基础</a><time datetime="2025-01-18T15:59:58.000Z" title="发表于 2025-01-18 23:59:58">2025-01-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/" title="Hozenghan的Memoji"><img src="/blog/coverImages/memoji.png" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="Hozenghan的Memoji"/></a><div class="content"><a class="title" href="/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/" title="Hozenghan的Memoji">Hozenghan的Memoji</a><time datetime="2025-01-17T15:59:59.000Z" title="发表于 2025-01-17 23:59:59">2025-01-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/blog/2025/01/17/Hexo/Hexo%E7%BE%8E%E5%8C%96/" title="Hexo美化">Hexo美化</a><time datetime="2025-01-17T15:59:59.000Z" title="发表于 2025-01-17 23:59:59">2025-01-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/blog/2025/01/16/Hexo/Hexo%E6%B7%BB%E5%8A%A0%E8%87%AA%E5%AE%9A%E4%B9%89HTML%E9%A1%B5%E9%9D%A2/" title="Hexo添加自定义HTML页面">Hexo添加自定义HTML页面</a><time datetime="2025-01-16T15:59:59.000Z" title="发表于 2025-01-16 23:59:59">2025-01-16</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(20deg, #003366, #0066cc, #3399ff, #66ccff);"><div id="footer-wrap"><div class="copyright">&copy;2025 By Hozenghan</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hi, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js"></script><script src="/blog/js/main.js"></script><script src="/blog/js/tw_cn.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
