@@ -8,7 +8,7 @@
       <link href="/blog/2025/02/11/cad:cg/Bezier%E4%BA%A4Bezier%E6%80%9D%E8%B7%AF-%E5%A4%84%E7%90%86%E7%9B%B8%E5%88%87/"/>
       <url>/blog/2025/02/11/cad:cg/Bezier%E4%BA%A4Bezier%E6%80%9D%E8%B7%AF-%E5%A4%84%E7%90%86%E7%9B%B8%E5%88%87/</url>
       
-        <content type="html"><![CDATA[<h1 id="处理错误样例"><a href="#处理错误样例" class="headerlink" title="处理错误样例"></a>处理错误样例</h1><h2 id="相切问题"><a href="#相切问题" class="headerlink" title="相切问题"></a>相切问题</h2><p>相切时如果使用常规的一阶泰勒展开来做，会因为迭代过程中雅可比矩阵奇异问题导致交点精度无法提升，即无法求出容差范围内的交点坐标。</p><h2 id="关于分式插值近似迭代"><a href="#关于分式插值近似迭代" class="headerlink" title="关于分式插值近似迭代"></a>关于分式插值近似迭代</h2><blockquote><ul><li><p>$X(t,s)&#x3D;x_1(t)-x_2(s)$</p></li><li><p>$Y(t,s)&#x3D;y_1(t)-y_2(s)$</p></li></ul><p>牛顿法（一阶泰勒展开，二元泰勒即$x_i(t)$和$y_i(t)$各自的泰勒展开）</p><ul><li><p>$X(t,s) \approx X(t_0,s_0)+X_t’(t_0,s_0)<em>(t-t_0)+X_s’(t_0,s_0)</em>(s-s_0)&#x3D;0$</p></li><li><p>$Y(t,s)\approx Y(t_0,s_0)+Y_t’(t_0,s_0)<em>(t-t_0)+Y_s’(t_0,s_0)</em>(s-s_0)&#x3D;0$</p></li></ul></blockquote><p>故尝试使用分式插值近似的方式迭代求精。<br>$$<br>X(t,s)\approx \frac {a + b(t-t_0)+c(s-s_0)}{1+A(t-t_0)+B(s-s_0)+C(t-t_0)(s-s_0)}&#x3D;0<br>$$</p><p>经过实验尝试，选取的六个插值点为：$(t_0, s_0)$，$(t_0 + \delta, s_0 - \delta)$，$(t_0, s_0 - \delta)$，$(t_0, s_0 + \delta)$，$(t_0 - \delta, s_0)$，$(t_0 + \delta, s_0)$，关于插值点的$\delta$的选择，$\delta&#x3D;1e-6$。</p><blockquote><p>（共有9个候选插值点）</p><p>$(t_0 - \delta, s_0 \pm \delta),\ (t_0 + \delta, s_0 \pm \delta),\ (t_0, s_0 \pm \delta),\ (t_0 \pm \delta, s_0),(t_0 , s_0 )$</p></blockquote><p>通过插值点求出$6$个系数$a,b,c,A,B,C$，<br>$$<br>\frac {a + b(t-t_0)+c(s-s_0)}{1+A(t-t_0)+B(s-s_0)+C(t-t_0)(s-s_0)}&#x3D;0<br>$$<br>上述分式为$0$即分子式为$0$，故对于$x$和$y$分别得到下式：<br>$$<br>a_X + b_X(t - t_0) + c_X(s - s_0) &#x3D; 0<br>$$<br>$$<br>a_Y + b_Y(t - t_0) + c_Y(s - s_0) &#x3D; 0<br>$$<br>将方程组改写为矩阵形式：<br>$$<br>\begin{bmatrix}<br>b_X &amp; c_X \<br>b_Y &amp; c_Y<br>\end{bmatrix}<br>\begin{bmatrix}<br>t - t_0 \<br>s - s_0<br>\end{bmatrix}<br>&#x3D; -<br>\begin{bmatrix}<br>a_X \<br>a_Y<br>\end{bmatrix}<br>$$</p><p>$$<br>\left[\begin{array}{c}<br>t_{k+1}\<br>s_{k+1}<br>\end{array}\right]&#x3D;<br>\left[\begin{array}{c}<br>t_k\<br>s_k<br>\end{array}\right]-<br>\left[\begin{array}{cc}<br>b_X &amp; c_X\<br>b_Y &amp; c_Y<br>\end{array}\right]^{-1}<br>\left[\begin{array}{c}<br>a_X\<br>a_Y<br>\end{array}\right]<br>$$</p><h2 id="分式插值近似迭代与一阶泰勒展开迭代的对比"><a href="#分式插值近似迭代与一阶泰勒展开迭代的对比" class="headerlink" title="分式插值近似迭代与一阶泰勒展开迭代的对比"></a>分式插值近似迭代与一阶泰勒展开迭代的对比</h2><p>本对比重点聚焦于曲线相切时的情况，下面例举出两个例子。</p><h4 id="相切例一"><a href="#相切例一" class="headerlink" title="相切例一"></a>相切例一</h4><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/截屏2025-02-11 20.36.03.png" alt="截屏2025-02-11 20.36.03" style="zoom:33%;" /><p>对于这种情况，常规一阶泰勒展开的迭代方法在<u>迭代误差</u><strong>已经达到</strong><u>误差精度要求</u>时，实际交点的精确度仍然没有达到要求。</p><p>如下图所示，<code>gme_int</code>变量内存储的值可以看出，即使迭代误差已经小于$1e-6$，交点坐标的误差仍然大于$1e-6$。从而一阶泰勒展开会导致在相切的情况下迭代求精失败。</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211202749162.png" alt="image-20250211202749162" style="zoom:75%;" /><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211203729489.png" alt="image-20250211203729489" style="zoom:75%;" /><p>如果使用分式插值迭代，则结果如下，能够将交点坐标求精到容差要求，且收敛阶为$2$。</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211211331087.png" alt="image-20250211211331087" style="zoom:75%;" /><p>更换取插值点时的$\delta$为$1e-4$时收敛阶为$3$，如下图。</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211203743439.png" alt="image-20250211203743439" style="zoom:75%;" /><h4 id="相切例二"><a href="#相切例二" class="headerlink" title="相切例二"></a>相切例二</h4><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/截屏2025-02-11 20.24.03.png" alt="截屏2025-02-11 20.24.03" style="zoom:33%;" /><p>与例一一致。见下图，即使迭代误差已经小于$1e-6$，交点坐标的误差仍然大于$1e-6$。从而使用一阶泰勒展开会导致在相切的情况下迭代求精失败。</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211212353658.png" alt="image-20250211212353658" style="zoom:75%;" /><p>用分式插值近似的结果为，</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211213748391.png" alt="image-20250211213748391" style="zoom:75%;" /><h4 id="非相切情况"><a href="#非相切情况" class="headerlink" title="非相切情况"></a>非相切情况</h4><p>用一阶泰勒展开时收敛阶近似为$2$，如下图，</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211212909904.png" alt="image-20250211212909904" style="zoom:75%;" /><p>用分式近似时收敛阶也近似为$2$，如下图，</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211211656798.png" alt="image-20250211211656798" style="zoom:75%;" />]]></content>
+        <content type="html"><![CDATA[<h1 id="处理错误样例"><a href="#处理错误样例" class="headerlink" title="处理错误样例"></a>处理错误样例</h1><h2 id="相切问题"><a href="#相切问题" class="headerlink" title="相切问题"></a>相切问题</h2><p>相切时如果使用常规的一阶泰勒展开来做，会因为迭代过程中雅可比矩阵奇异问题导致交点精度无法提升，即无法求出容差范围内的交点坐标。</p><h2 id="关于分式插值近似迭代"><a href="#关于分式插值近似迭代" class="headerlink" title="关于分式插值近似迭代"></a>关于分式插值近似迭代</h2><blockquote><ul><li><p>$X(t,s)&#x3D;x_1(t)-x_2(s)$</p></li><li><p>$Y(t,s)&#x3D;y_1(t)-y_2(s)$</p></li></ul><p>牛顿法（一阶泰勒展开，二元泰勒即$x_i(t)$和$y_i(t)$各自的泰勒展开）</p><ul><li><p>$X(t,s) \approx X(t_0,s_0)+X_t’(t_0,s_0)<em>(t-t_0)+X_s’(t_0,s_0)</em>(s-s_0)&#x3D;0$</p></li><li><p>$Y(t,s)\approx Y(t_0,s_0)+Y_t’(t_0,s_0)<em>(t-t_0)+Y_s’(t_0,s_0)</em>(s-s_0)&#x3D;0$</p></li></ul></blockquote><p>故尝试使用分式插值近似的方式迭代求精。<br>$$<br>X(t,s)\approx \frac {a + b(t-t_0)+c(s-s_0)}{1+A(t-t_0)+B(s-s_0)+C(t-t_0)(s-s_0)}&#x3D;0<br>$$</p><p>经过实验尝试，选取的六个插值点为：$(t_0, s_0)$，$(t_0 + \delta, s_0 - \delta)$，$(t_0, s_0 - \delta)$，$(t_0, s_0 + \delta)$，$(t_0 - \delta, s_0)$，$(t_0 + \delta, s_0)$，关于插值点的$\delta$的选择，$\delta&#x3D;1e-6$。</p><blockquote><p>（共有9个候选插值点）</p><p>$(t_0 - \delta, s_0 \pm \delta),\ (t_0 + \delta, s_0 \pm \delta),\ (t_0, s_0 \pm \delta),\ (t_0 \pm \delta, s_0),(t_0 , s_0 )$</p></blockquote><p>通过插值点求出$6$个系数$a,b,c,A,B,C$，<br>$$<br>\frac {a + b(t-t_0)+c(s-s_0)}{1+A(t-t_0)+B(s-s_0)+C(t-t_0)(s-s_0)}&#x3D;0<br>$$<br>上述分式为$0$即分子式为$0$，故对于$x$和$y$分别得到下式：<br>$$<br>a_X + b_X(t - t_0) + c_X(s - s_0) &#x3D; 0<br>$$<br>$$<br>a_Y + b_Y(t - t_0) + c_Y(s - s_0) &#x3D; 0<br>$$<br>将方程组改写为矩阵形式：</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg%2526cad_images/%E6%88%AA%E5%B1%8F2025-02-11%2022.28.34.png" style="zoom:50%;" /><h2 id="分式插值近似迭代与一阶泰勒展开迭代的对比"><a href="#分式插值近似迭代与一阶泰勒展开迭代的对比" class="headerlink" title="分式插值近似迭代与一阶泰勒展开迭代的对比"></a>分式插值近似迭代与一阶泰勒展开迭代的对比</h2><p>本对比重点聚焦于曲线相切时的情况，下面例举出两个例子。</p><h4 id="相切例一"><a href="#相切例一" class="headerlink" title="相切例一"></a>相切例一</h4><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/截屏2025-02-11 20.36.03.png" alt="截屏2025-02-11 20.36.03" style="zoom:33%;" /><p>对于这种情况，常规一阶泰勒展开的迭代方法在<u>迭代误差</u><strong>已经达到</strong><u>误差精度要求</u>时，实际交点的精确度仍然没有达到要求。</p><p>如下图所示，<code>gme_int</code>变量内存储的值可以看出，即使迭代误差已经小于$1e-6$，交点坐标的误差仍然大于$1e-6$。从而一阶泰勒展开会导致在相切的情况下迭代求精失败。</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211202749162.png" alt="image-20250211202749162" style="zoom:75%;" /><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211203729489.png" alt="image-20250211203729489" style="zoom:75%;" /><p>如果使用分式插值迭代，则结果如下，能够将交点坐标求精到容差要求，且收敛阶为$2$。</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211211331087.png" alt="image-20250211211331087" style="zoom:75%;" /><p>更换取插值点时的$\delta$为$1e-4$时收敛阶为$3$，如下图。</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211203743439.png" alt="image-20250211203743439" style="zoom:75%;" /><h4 id="相切例二"><a href="#相切例二" class="headerlink" title="相切例二"></a>相切例二</h4><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/截屏2025-02-11 20.24.03.png" alt="截屏2025-02-11 20.24.03" style="zoom:33%;" /><p>与例一一致。见下图，即使迭代误差已经小于$1e-6$，交点坐标的误差仍然大于$1e-6$。从而使用一阶泰勒展开会导致在相切的情况下迭代求精失败。</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211212353658.png" alt="image-20250211212353658" style="zoom:75%;" /><p>用分式插值近似的结果为，</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211213748391.png" alt="image-20250211213748391" style="zoom:75%;" /><h4 id="非相切情况"><a href="#非相切情况" class="headerlink" title="非相切情况"></a>非相切情况</h4><p>用一阶泰勒展开时收敛阶近似为$2$，如下图，</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211212909904.png" alt="image-20250211212909904" style="zoom:75%;" /><p>用分式近似时收敛阶也近似为$2$，如下图，</p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/cg&cad_images/image-20250211211656798.png" alt="image-20250211211656798" style="zoom:75%;" />]]></content>
       
       
       <categories>
@@ -20,13 +20,13 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
+            
+            <tag> 笔记 </tag>
             
         </tags>
       
@@ -51,13 +51,13 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
+            
+            <tag> 笔记 </tag>
             
         </tags>
       
@@ -82,13 +82,13 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
+            
+            <tag> 笔记 </tag>
             
         </tags>
       
@@ -171,13 +171,13 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
+            
+            <tag> 笔记 </tag>
             
         </tags>
       
@@ -233,13 +233,13 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
+            
+            <tag> 笔记 </tag>
             
         </tags>
       
@@ -571,9 +571,9 @@
       
         <tags>
             
-            <tag> MachineLearning </tag>
-            
             <tag> 笔记 </tag>
+            
+            <tag> MachineLearning </tag>
             
             <tag> MacOS </tag>
             
@@ -602,11 +602,11 @@
       
         <tags>
             
+            <tag> 笔记 </tag>
+            
             <tag> MachineLearning </tag>
             
             <tag> pytorch </tag>
-            
-            <tag> 笔记 </tag>
             
             <tag> MacOS </tag>
             
