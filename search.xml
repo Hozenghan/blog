@@ -47,13 +47,13 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
+            
+            <tag> 笔记 </tag>
             
         </tags>
       
@@ -78,13 +78,13 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
+            
+            <tag> 笔记 </tag>
             
         </tags>
       
@@ -109,13 +109,13 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
+            
+            <tag> 笔记 </tag>
             
         </tags>
       
@@ -198,13 +198,13 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
+            
+            <tag> 笔记 </tag>
             
         </tags>
       
@@ -260,13 +260,42 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MySQL</title>
+      <link href="/blog/2025/01/18/coding/mysql/1-MySQL/"/>
+      <url>/blog/2025/01/18/coding/mysql/1-MySQL/</url>
+      
+        <content type="html"><![CDATA[<h2 id="1-1-基础命令"><a href="#1-1-基础命令" class="headerlink" title="1.1. 基础命令"></a>1.1. 基础命令</h2><table><thead><tr><th>操作</th><th>命令</th></tr></thead><tbody><tr><td>连接到 MySQL 数据库</td><td><code>mysql -u 用户名 -p</code></td></tr><tr><td>查看所有数据库</td><td><code>SHOW DATABASES;</code></td></tr><tr><td>选择一个数据库</td><td><code>USE 数据库名;</code></td></tr><tr><td>查看所有表</td><td><code>SHOW TABLES;</code></td></tr><tr><td>查看表结构</td><td><code>DESCRIBE 表名;</code> 或 <code>SHOW COLUMNS FROM 表名;</code></td></tr><tr><td>创建一个新数据库</td><td><code>CREATE DATABASE 数据库名;</code></td></tr><tr><td>删除一个数据库</td><td><code>DROP DATABASE 数据库名;</code></td></tr><tr><td>创建一个新表</td><td><code>CREATE TABLE 表名 (列名1 数据类型 [约束], 列名2 数据类型 [约束], …);</code></td></tr><tr><td>删除一个表</td><td><code>DROP TABLE 表名;</code></td></tr><tr><td>插入数据</td><td><code>INSERT INTO 表名 (列1, 列2, …) VALUES (值1, 值2, …);</code></td></tr><tr><td>查询数据</td><td><code>SELECT 列1, 列2, … FROM 表名 WHERE 条件;</code></td></tr><tr><td>更新数据</td><td><code>UPDATE 表名 SET 列1 = 值1, 列2 = 值2, … WHERE 条件;</code></td></tr><tr><td>删除数据</td><td><code>DELETE FROM 表名 WHERE 条件;</code></td></tr><tr><td>创建用户</td><td><code>CREATE USER &#39;用户名&#39;@&#39;主机&#39; IDENTIFIED BY &#39;密码&#39;;</code></td></tr><tr><td>授权用户</td><td><code>GRANT 权限 ON 数据库名.* TO &#39;用户名&#39;@&#39;主机&#39;;</code></td></tr><tr><td>刷新权限</td><td><code>FLUSH PRIVILEGES;</code></td></tr><tr><td>查看当前用户</td><td><code>SELECT USER();</code></td></tr><tr><td>退出 MySQL</td><td><code>EXIT;</code></td></tr></tbody></table><h2 id="1-2-数据库相关命令"><a href="#1-2-数据库相关命令" class="headerlink" title="1.2. 数据库相关命令"></a>1.2. 数据库相关命令</h2><table><thead><tr><th>操作</th><th>命令</th></tr></thead><tbody><tr><td>创建数据库</td><td><code>CREATE DATABASE 数据库名;</code></td></tr><tr><td>删除数据库</td><td><code>DROP DATABASE 数据库名;</code></td></tr><tr><td>修改数据库编码格式和排序规则</td><td><code>ALTER DATABASE 数据库名 DEFAULT CHARACTER SET 编码格式 DEFAULT COLLATE 排序规则;</code></td></tr><tr><td>查看所有数据库</td><td><code>SHOW DATABASES;</code></td></tr><tr><td>查看数据库详细信息</td><td><code>SHOW CREATE DATABASE 数据库名;</code></td></tr><tr><td>查看数据库的状态信息</td><td><code>SHOW STATUS;</code></td></tr><tr><td>查看数据库的错误信息</td><td><code>SHOW ERRORS;</code></td></tr><tr><td>查看数据库的警告信息</td><td><code>SHOW WARNINGS;</code></td></tr><tr><td>查看数据库的表</td><td><code>SHOW TABLES;</code></td></tr><tr><td>查看表的结构</td><td><code>DESC 表名;</code> 或 <code>DESCRIBE 表名;</code> 或 <code>SHOW COLUMNS FROM 表名;</code> 或 <code>EXPLAIN 表名;</code></td></tr><tr><td>创建表</td><td><code>CREATE TABLE 表名 (列名1 数据类型 [约束], 列名2 数据类型 [约束], …);</code></td></tr><tr><td>删除表</td><td><code>DROP TABLE 表名;</code></td></tr><tr><td>修改表结构</td><td><code>ALTER TABLE 表名 ADD 列名 数据类型 [约束];</code> 或 <code>ALTER TABLE 表名 DROP 列名;</code> 或 <code>ALTER TABLE 表名 MODIFY 列名 数据类型 [约束];</code></td></tr><tr><td>查看表的创建 SQL</td><td><code>SHOW CREATE TABLE 表名;</code></td></tr></tbody></table><h2 id="1-3-数据表相关命令"><a href="#1-3-数据表相关命令" class="headerlink" title="1.3. 数据表相关命令"></a>1.3. 数据表相关命令</h2><table><thead><tr><th>操作</th><th>命令</th></tr></thead><tbody><tr><td>创建表</td><td><code>CREATE TABLE 表名 (列名1 数据类型 [约束], 列名2 数据类型 [约束], …);</code></td></tr><tr><td>删除表</td><td><code>DROP TABLE 表名;</code></td></tr><tr><td>修改表结构</td><td>添加列：<code>ALTER TABLE 表名 ADD 列名 数据类型 [约束];</code><br>删除列：<code>ALTER TABLE 表名 DROP 列名;</code><br>修改列：<code>ALTER TABLE 表名 MODIFY 列名 数据类型 [约束];</code><br>重命名列：<code>ALTER TABLE 表名 CHANGE 旧列名 新列名 数据类型 [约束];</code></td></tr><tr><td>查看表结构</td><td><code>DESC 表名;</code> 或 <code>DESCRIBE 表名;</code> 或 <code>SHOW COLUMNS FROM 表名;</code> 或 <code>EXPLAIN 表名;</code></td></tr><tr><td>查看表的创建 SQL</td><td><code>SHOW CREATE TABLE 表名;</code></td></tr><tr><td>查看表中的所有数据</td><td><code>SELECT * FROM 表名;</code></td></tr><tr><td>插入数据</td><td><code>INSERT INTO 表名 (列1, 列2, …) VALUES (值1, 值2, …);</code></td></tr><tr><td>更新数据</td><td><code>UPDATE 表名 SET 列1 = 值1, 列2 = 值2, … WHERE 条件;</code></td></tr><tr><td>删除数据</td><td><code>DELETE FROM 表名 WHERE 条件;</code></td></tr><tr><td>查看表的索引</td><td><code>SHOW INDEX FROM 表名;</code></td></tr><tr><td>创建索引</td><td><code>CREATE INDEX 索引名 ON 表名 (列名);</code></td></tr><tr><td>删除索引</td><td><code>DROP INDEX 索引名 ON 表名;</code></td></tr><tr><td>查看表的约束</td><td><code>SHOW CREATE TABLE 表名;</code> (约束信息会包含在创建表的 SQL 中)</td></tr><tr><td>查看表的统计信息</td><td><code>SHOW TABLE STATUS LIKE &#39;表名&#39;;</code></td></tr></tbody></table><hr><p>以上是 MySQL 常用命令的 Markdown 表格版本，希望对您有帮助！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Coding </category>
+          
+          <category> MySQL </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> coding </tag>
+            
+            <tag> MySQL </tag>
             
         </tags>
       
@@ -279,7 +308,7 @@
       <link href="/blog/2025/01/18/coding/python/python/"/>
       <url>/blog/2025/01/18/coding/python/python/</url>
       
-        <content type="html"><![CDATA[<h2 id="python-pip换源"><a href="#python-pip换源" class="headerlink" title="python-pip换源"></a>python-pip换源</h2><p>比如安装 PyQt6,需要加镜像参数 ：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple PyQt6</span><br></pre></td></tr></table></figure><p>可靠的国内源</p><figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">清华大学：https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">阿里云：http://mirrors.aliyun.com/pypi/simple</span><br><span class="line">豆瓣：http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure><h2 id="python-虚拟环境配置"><a href="#python-虚拟环境配置" class="headerlink" title="python 虚拟环境配置"></a>python 虚拟环境配置</h2><h3 id="conda环境"><a href="#conda环境" class="headerlink" title="conda环境"></a>conda环境</h3><p>使用conda搭建虚拟环境</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda create -n env_name python=3.xx</span><br><span class="line"></span><br><span class="line">conda activate env_name</span><br></pre></td></tr></table></figure><p>进入虚拟环境后的包安装</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda install xxx</span><br></pre></td></tr></table></figure><p>删除conda环境</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda remove -n xxx --all</span><br></pre></td></tr></table></figure><p>参考网址<br><a href="https://blog.csdn.net/NBDwo/article/details/121456958">https://blog.csdn.net/NBDwo/article/details/121456958</a></p><h3 id="venv虚拟环境"><a href="#venv虚拟环境" class="headerlink" title="venv虚拟环境"></a>venv虚拟环境</h3><p>对于 Windows，使用以下代码：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python -m venv myenv</span><br><span class="line">myenv\Scripts\activate</span><br></pre></td></tr></table></figure><p>对于 UNIX，使用以下代码：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 -m venv myenv</span><br><span class="line"><span class="built_in">source</span> myenv/bin/activate</span><br></pre></td></tr></table></figure><h2 id="生成requirement-txt文件的方法"><a href="#生成requirement-txt文件的方法" class="headerlink" title="生成requirement.txt文件的方法"></a>生成requirement.txt文件的方法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure><h2 id="requirements-txt文件的用法"><a href="#requirements-txt文件的用法" class="headerlink" title="requirements.txt文件的用法"></a>requirements.txt文件的用法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure><p>mac&#x2F;linux用户需将pip切换成pip3</p><h2 id="服务器后台运行"><a href="#服务器后台运行" class="headerlink" title="服务器后台运行"></a>服务器后台运行</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">nohup</span> python test.py &gt; test.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">nohup</span> python test.py &gt; test.log &amp;</span><br></pre></td></tr></table></figure><p>使用上述命令，按下Ctrl+C或者关闭终端，程序都仍然运行，需要通过kill来终止进程</p><h2 id="如何安装-whl包"><a href="#如何安装-whl包" class="headerlink" title="如何安装.whl包"></a>如何安装.whl包</h2><p> whl是一种预编译的二进制包文件，它主要用于安装python库。简单来讲whl就是一种已经编译好的python库文件。我们可以使用whl包来安装python库。</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install [包名]</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install ./pygame-2.6.0-cp312-cp312-win32.whl</span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<h2 id="python-pip换源"><a href="#python-pip换源" class="headerlink" title="python-pip换源"></a>python-pip换源</h2><p>比如安装 PyQt6,需要加镜像参数 ：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -i https://pypi.tuna.tsinghua.edu.cn/simple PyQt6</span><br></pre></td></tr></table></figure><p>可靠的国内源</p><figure class="highlight txt"><table><tr><td class="code"><pre><span class="line">清华大学：https://pypi.tuna.tsinghua.edu.cn/simple</span><br><span class="line">阿里云：http://mirrors.aliyun.com/pypi/simple</span><br><span class="line">豆瓣：http://pypi.douban.com/simple</span><br></pre></td></tr></table></figure><h2 id="python-虚拟环境配置"><a href="#python-虚拟环境配置" class="headerlink" title="python 虚拟环境配置"></a>python 虚拟环境配置</h2><h3 id="conda环境"><a href="#conda环境" class="headerlink" title="conda环境"></a>conda环境</h3><p>使用conda搭建虚拟环境</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda create -n env_name python=3.xx</span><br><span class="line"></span><br><span class="line">conda activate env_name</span><br></pre></td></tr></table></figure><p>进入虚拟环境后的包安装</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda install xxx</span><br></pre></td></tr></table></figure><p>删除conda环境</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda remove -n xxx --all</span><br></pre></td></tr></table></figure><p>参考网址<br><a href="https://blog.csdn.net/NBDwo/article/details/121456958">https://blog.csdn.net/NBDwo/article/details/121456958</a></p><h3 id="venv虚拟环境"><a href="#venv虚拟环境" class="headerlink" title="venv虚拟环境"></a>venv虚拟环境</h3><p>对于 Windows，使用以下代码：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python -m venv myenv</span><br><span class="line">myenv\Scripts\activate</span><br></pre></td></tr></table></figure><p>对于 UNIX，</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3 -m venv myenv</span><br><span class="line"><span class="built_in">source</span> myenv/bin/activate</span><br></pre></td></tr></table></figure><p>在MacOS环境下，若要制定虚拟环境的python版本，则使用如下命令（示例代码指定python版本为3.12），</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">python3.12 -m venv myenv &amp;&amp; <span class="built_in">source</span> myenv/bin/activate</span><br></pre></td></tr></table></figure><h2 id="生成requirement-txt文件的方法"><a href="#生成requirement-txt文件的方法" class="headerlink" title="生成requirement.txt文件的方法"></a>生成requirement.txt文件的方法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure><h2 id="requirements-txt文件的用法"><a href="#requirements-txt文件的用法" class="headerlink" title="requirements.txt文件的用法"></a>requirements.txt文件的用法</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure><p>mac&#x2F;linux用户需将pip切换成pip3</p><h2 id="服务器后台运行"><a href="#服务器后台运行" class="headerlink" title="服务器后台运行"></a>服务器后台运行</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">nohup</span> python test.py &gt; test.log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">nohup</span> python test.py &gt; test.log &amp;</span><br></pre></td></tr></table></figure><p>使用上述命令，按下Ctrl+C或者关闭终端，程序都仍然运行，需要通过kill来终止进程</p><h2 id="如何安装-whl包"><a href="#如何安装-whl包" class="headerlink" title="如何安装.whl包"></a>如何安装.whl包</h2><p> whl是一种预编译的二进制包文件，它主要用于安装python库。简单来讲whl就是一种已经编译好的python库文件。我们可以使用whl包来安装python库。</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install [包名]</span><br></pre></td></tr></table></figure><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">pip install ./pygame-2.6.0-cp312-cp312-win32.whl</span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -598,9 +627,9 @@
       
         <tags>
             
-            <tag> MachineLearning </tag>
-            
             <tag> 笔记 </tag>
+            
+            <tag> MachineLearning </tag>
             
             <tag> MacOS </tag>
             
@@ -629,11 +658,11 @@
       
         <tags>
             
+            <tag> 笔记 </tag>
+            
             <tag> MachineLearning </tag>
             
             <tag> pytorch </tag>
-            
-            <tag> 笔记 </tag>
             
             <tag> MacOS </tag>
             
