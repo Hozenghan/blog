@@ -4,7 +4,38 @@
   
     
     <entry>
-      <title>【论文复现】Eyes Tell All_Irregular Pupil Shapes Reveal GAN-generated Faces.md</title>
+      <title>【CAD/CG笔记】关于Bezier曲面</title>
+      <link href="/blog/2025/03/03/cad:cg/Bezier%E6%9B%B2%E9%9D%A2/"/>
+      <url>/blog/2025/03/03/cad:cg/Bezier%E6%9B%B2%E9%9D%A2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Bezier曲面相关知识"><a href="#Bezier曲面相关知识" class="headerlink" title="Bezier曲面相关知识"></a>Bezier曲面相关知识</h1><blockquote><p>参考博客：<a href="https://zhuanlan.zhihu.com/p/366678047">https://zhuanlan.zhihu.com/p/366678047</a></p></blockquote><h2 id="贝塞尔曲面-Bezier-Surfaces"><a href="#贝塞尔曲面-Bezier-Surfaces" class="headerlink" title="贝塞尔曲面(Bézier Surfaces)"></a><strong>贝塞尔曲面(Bézier Surfaces)</strong></h2><p>以16个控制点组成的控制网格为例。</p><img src="./attachments/v2-1c7b63501741bee61934d27e833f991b_1440w.jpg" alt="img" style="zoom: 50%;" /><p>其实在理解了贝塞尔曲线之后，贝塞尔曲面的原理也是十分容易理解的了，无非是一个从2维到3维的过渡。</p><p>如果说对于曲线来说只有一个参数 t∈[0,1]那么对于一个面来说，就应该有两个参数，分别设$ u∈[0,1]$，$v∈[0,1]$，具体过程如下图所示</p><img src="./attachments/v2-cbe5f7054203ce2e7625068524c1ad2c_1440w.jpg" alt="img" style="zoom:50%;" /><p>首先规定一共4x4 &#x3D; 16个控制点，其水平面位置如图中16个黑点所示(并未表示出高度，防止图形太乱)，将这16个点分成4列，图中红色圈中的为一列的具体例子。</p><ul><li>第1步 在这4个控制点之下利用第一个参数 u 运用第一章的计算贝塞尔曲线的方法得到蓝色点，因为有4列，所以一共可以得到如图所示的4个蓝色点。(灰色曲线分别为每列4个点所对应的贝塞尔曲线)</li><li>第2步 在得到4个蓝色顶点之后，在这四个蓝色顶点的基础之下利用第二个参数 v 便可以成功得出贝塞尔曲面上的正确一点</li><li>第3步 遍历所有的 u，v值就可以成功得到一个贝塞尔曲面</li></ul><h2 id="矩形域贝塞尔曲面"><a href="#矩形域贝塞尔曲面" class="headerlink" title="矩形域贝塞尔曲面"></a>矩形域贝塞尔曲面</h2><blockquote><p>先用一组贝塞尔曲线在$ t_1$ 位置得到一组对应在曲线上的点，然后将这些点再作为控制点来做曲线，所有的曲线组合起来，即可得到一个光滑的贝塞尔曲面。</p></blockquote><img src="./attachments/v2-3fc838ab0c6600d6d6e49482f6bdf521_b.gif" alt="动图" style="zoom:67%;" /><h3 id="贝塞尔曲面上的任意一点"><a href="#贝塞尔曲面上的任意一点" class="headerlink" title="贝塞尔曲面上的任意一点"></a>贝塞尔曲面上的任意一点</h3><p>有一个 $n$ 阶的贝塞尔曲线，给它复制 $m+1$ 份，那么在每个贝塞尔曲线的 $t_1$ 位置，我们可以得到 $m+1$ 个曲线上的点。我们再把这些点作为控制点，可以得到一个 $m$ 阶的贝塞尔曲线，而这个贝塞尔曲线就是最终贝塞尔曲面上的一条线，因此该曲线 $t_2$ 位置上的点就是贝塞尔曲面上的点。其中 $t_1$ 和 $t_2$ 通常会使用 $u$ 和 $v$ 来代替，它们的取值范围自然都是$0$到$1$，那么对应贝塞尔曲面上的任意一点，我们就可以用 $P(u,v)$ 来表示。</p><p>对于上面这种描述得到的曲面，我们称之为 $m<em>n$ 阶的贝塞尔曲面，即有 $m+1$ 条 $n$ 阶的贝塞尔曲线，一共会得到 $(n+1)</em>(m+1)$ 个顶点，这里我们定义第一个 $n$ 阶的贝塞尔曲线的第一个控制点为 $P_{0,0}$ ，该曲线往后的控制点为 $P_{0,1} \ldots P_{0,n}$ ，那么第 $i$ 条 $n$ 阶的贝塞尔曲线的第 $j$ 个顶点就是 $P_{i,j}$ ，最后一条的最后一个顶点自然是 $P_{m,n}$ 了。</p><p>要求贝塞尔曲面上的一点，先来回来贝塞尔曲线上一点的公式</p><p>$$<br>P(t) &#x3D; \sum_{i&#x3D;0}^{n} P_{i} B_{i}^{n}(t)<br>$$<br>那么第 $i$ 条 $n$ 阶的贝塞尔曲线上的点 $P(u)$ 即为：</p><p>$$<br>P(u) &#x3D; \sum_{j&#x3D;0}^{n} P_{ij} B_{j}^{n}(u)<br>$$<br>那么我们就可以得到 $m$ 个 $P(u)$，我们可以标记为 $P(u)<em>{0} \ldots P(u)</em>{m}$ ，这些 $P(u)$ 会再形成贝塞尔曲线，也就是曲面上的曲线，那么该曲线上的点 $P(v)$ 即为：</p><p>$$<br>P(v) &#x3D; \sum_{i&#x3D;0}^{m} P(u)<em>{i} B</em>{i}^{m}(v)<br>$$<br>那么两个公式合起来，就是我们求贝塞尔曲面上任意点 $P(u,v)$ 的公式了：</p><p>$$<br>P(u, v) &#x3D; \sum_{i&#x3D;0}^{m} \sum_{j&#x3D;0}^{n} P_{ij} B_{j}^{n}(u) B_{i}^{m}(v)<br>$$</p><p>此外，我们还可以用矩阵的形式来表示，如下：</p><p>$$<br>P(u, v) &#x3D; \left[ B_{0}^{n}(u) \quad B_{1}^{n}(u) \quad \ldots \quad B_{n}^{n}(u) \right]<br>\left[ \begin{matrix} P_{0,0} &amp; P_{0,1} &amp; \ldots &amp; P_{0,m} \ P_{1,0} &amp; P_{1,1} &amp; \ldots &amp; P_{1,m} \ \ldots &amp; \ldots &amp; \ldots &amp; \ldots \ P_{n,0} &amp; P_{n,1} &amp; \ldots &amp; P_{n,m} \end{matrix} \right] \left[ \begin{matrix} B_{0}^{m}(v) \ B_{1}^{m}(v) \ \ldots \ B_{m}^{m}(v) \end{matrix} \right]<br>$$</p><p>简单的解读下，首先是 $1*(n+1)$ 的矩阵乘以 $(n+1)<em>(m+1)$ 的矩阵，得到的结果是 $1</em>(m+1)$ 的矩阵，这一步其实就是在求 $m+1$ 条贝塞尔曲线 $u$ 位置的顶点。然后把 $1*(m+1)$ 的矩阵再乘以 $(m+1)*1$ 的矩阵，得到的结果就是一个值，这一步就是求新的曲线在 $v$ 位置上的点。</p><p>当然了，同样的，我们也可以用<code>de Casteljau</code>算法来算曲面上的任意一点的坐标。</p><h3 id="端点性质"><a href="#端点性质" class="headerlink" title="端点性质"></a>端点性质</h3><p>控制网格的四个顶点同样是贝塞尔曲面的顶点，即：</p><p>$$<br>\begin{align*}<br>P(0,0) &amp;&#x3D; P_{0,0} \<br>P(1,0) &amp;&#x3D; P_{m,0} \<br>P(0,1) &amp;&#x3D; P_{0,n} \<br>P(1,1) &amp;&#x3D; P_{1,1}<br>\end{align*}<br>$$</p><h3 id="切平面"><a href="#切平面" class="headerlink" title="切平面"></a>切平面</h3><p>以下三角形指定了贝塞尔曲面四个角的切平面：</p><p>$$<br>\begin{align*}<br>&amp; P_{0,0} P_{1,0} P_{0,1} \<br>&amp; P_{0,n} P_{1,n} P_{0,n-1} \<br>&amp; P_{m,n} P_{m-1,n} P_{m,n-1} \<br>&amp; P_{m,0} P_{m,1} P_{m-1,0}<br>\end{align*}<br>$$<br><img src="./attachments/v2-2223eb2dabb0c6ed8c65ba47a21e8129_1440w.jpg" alt="img" style="zoom:33%;" /></p><p>此外，贝塞尔曲线带有的凸包性，对称性，几何不变性，在贝塞尔曲面中也都有这些性质。</p><h2 id="三角域Bezier曲面"><a href="#三角域Bezier曲面" class="headerlink" title="三角域Bezier曲面"></a>三角域Bezier曲面</h2><p>前面介绍的贝塞尔曲面我们称之为<strong>矩形域贝塞尔曲面</strong>，u 和 v 都是 0 到 1，定义在矩形上。定义在三角形上的贝塞尔曲面，也就是<strong>三角域贝塞尔曲面</strong>。</p><blockquote><p>详细介绍见博客：<a href="https://zhuanlan.zhihu.com/p/366678047">https://zhuanlan.zhihu.com/p/366678047</a></p></blockquote><p><video src="https://vdn6.vzuu.com/SD/669b5ed6-a3f6-11eb-9003-4e13ceafadd1.mp4?pkey=AAU4lErvFJ_EAyNYml55t0avpt_syW2ZRllivT1PQba7Gj0uZkTig2v4atCMtRANbuIUiNnDlcxk0D9fdA6dIod1&bu=078babd7&c=avc.0.0&expiration=1740999462&f=mp4&pu=078babd7&v=ks6"></video></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> CAD &amp; CG </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机图形学 </tag>
+            
+            <tag> CG </tag>
+            
+            <tag> CAD </tag>
+            
+            <tag> 笔记 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【论文复现】Eyes Tell All_Irregular Pupil Shapes Reveal GAN-generated Faces</title>
       <link href="/blog/2025/03/02/paper/%E3%80%90%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0%E3%80%91Eyes%20Tell%20All_Irregular%20Pupil%20Shapes%20Reveal%20GAN-generated%20Faces/"/>
       <url>/blog/2025/03/02/paper/%E3%80%90%E8%AE%BA%E6%96%87%E5%A4%8D%E7%8E%B0%E3%80%91Eyes%20Tell%20All_Irregular%20Pupil%20Shapes%20Reveal%20GAN-generated%20Faces/</url>
       
@@ -424,6 +455,31 @@
     
     
     <entry>
+      <title>【Hexo】博客主题配置（持续更新）</title>
+      <link href="/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/"/>
+      <url>/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Hexo-Butterfly-主题文章置顶"><a href="#Hexo-Butterfly-主题文章置顶" class="headerlink" title="Hexo Butterfly 主题文章置顶"></a>Hexo Butterfly 主题文章置顶</h1><p>卸载 hexo-generator-index，然后安装 hexo-generator-index-pin-top</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure><h2 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h2><p>在需要置顶的文章的 Front-matter 中加上 top: true &#x2F; 数字即可，  </p><p>数字越大，文章越靠前。  </p><p><strong>例如</strong></p><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">cover:</span> </span><br><span class="line"><span class="attr">top:</span> <span class="number">1</span> <span class="comment">#这里加一个top就行</span></span><br><span class="line"><span class="attr">abbrlink:</span> <span class="string">1d5436e1</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2023-01-06 17:32:05</span></span><br></pre></td></tr></table></figure><blockquote><p>本文引用自：<a href="https://blog.aiheadn.cn/archives/1b4c065d.html">https://blog.aiheadn.cn/archives/1b4c065d.html</a></p></blockquote><h1 id="Hexo-Butterfly主题首页增加字数总计-阅读时间"><a href="#Hexo-Butterfly主题首页增加字数总计-阅读时间" class="headerlink" title="Hexo Butterfly主题首页增加字数总计&amp;阅读时间"></a>Hexo Butterfly主题首页增加字数总计&amp;阅读时间</h1><p>开启字数统计功能，需要安装<code>hexo-wordcount</code>插件</p><p>在 hexo 工作目录下运行<code>npm install hexo-wordcount --save</code>or<code> yarn add hexo-wordcount</code></p><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Need to install the hexo-wordcount plugin</span></span><br><span class="line"><span class="attr">wordcount:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the word count of the article in post meta</span></span><br><span class="line">  <span class="attr">post_wordcount:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the time to read the article in post meta</span></span><br><span class="line">  <span class="attr">min2read:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the total word count of the website in aside&#x27;s webinfo</span></span><br><span class="line">  <span class="attr">total_wordcount:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure><table><thead><tr><th>参数</th><th>解释</th></tr></thead><tbody><tr><td>post_wordcount</td><td>在文章页面显示字数</td></tr><tr><td>min2read</td><td>在文章页面显示阅读时间</td></tr><tr><td>total_wordcount</td><td>在侧边栏显示网站总字数</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hozenghan的Memoji</title>
       <link href="/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/"/>
       <url>/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/</url>
@@ -443,31 +499,6 @@
             <tag> top </tag>
             
             <tag> 我的 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>【Hexo】博客主题配置（持续更新）</title>
-      <link href="/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/"/>
-      <url>/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Hexo-Butterfly-主题文章置顶"><a href="#Hexo-Butterfly-主题文章置顶" class="headerlink" title="Hexo Butterfly 主题文章置顶"></a>Hexo Butterfly 主题文章置顶</h1><p>卸载 hexo-generator-index，然后安装 hexo-generator-index-pin-top</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure><h2 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h2><p>在需要置顶的文章的 Front-matter 中加上 top: true &#x2F; 数字即可，  </p><p>数字越大，文章越靠前。  </p><p><strong>例如</strong></p><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">cover:</span> </span><br><span class="line"><span class="attr">top:</span> <span class="number">1</span> <span class="comment">#这里加一个top就行</span></span><br><span class="line"><span class="attr">abbrlink:</span> <span class="string">1d5436e1</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2023-01-06 17:32:05</span></span><br></pre></td></tr></table></figure><blockquote><p>本文引用自：<a href="https://blog.aiheadn.cn/archives/1b4c065d.html">https://blog.aiheadn.cn/archives/1b4c065d.html</a></p></blockquote><h1 id="Hexo-Butterfly主题首页增加字数总计-阅读时间"><a href="#Hexo-Butterfly主题首页增加字数总计-阅读时间" class="headerlink" title="Hexo Butterfly主题首页增加字数总计&amp;阅读时间"></a>Hexo Butterfly主题首页增加字数总计&amp;阅读时间</h1><p>开启字数统计功能，需要安装<code>hexo-wordcount</code>插件</p><p>在 hexo 工作目录下运行<code>npm install hexo-wordcount --save</code>or<code> yarn add hexo-wordcount</code></p><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Need to install the hexo-wordcount plugin</span></span><br><span class="line"><span class="attr">wordcount:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the word count of the article in post meta</span></span><br><span class="line">  <span class="attr">post_wordcount:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the time to read the article in post meta</span></span><br><span class="line">  <span class="attr">min2read:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the total word count of the website in aside&#x27;s webinfo</span></span><br><span class="line">  <span class="attr">total_wordcount:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure><table><thead><tr><th>参数</th><th>解释</th></tr></thead><tbody><tr><td>post_wordcount</td><td>在文章页面显示字数</td></tr><tr><td>min2read</td><td>在文章页面显示阅读时间</td></tr><tr><td>total_wordcount</td><td>在侧边栏显示网站总字数</td></tr></tbody></table>]]></content>
-      
-      
-      <categories>
-          
-          <category> Hexo </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Hexo </tag>
             
         </tags>
       
