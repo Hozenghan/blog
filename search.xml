@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>【开发】python并发编程-多进程</title>
+      <link href="/blog/2025/03/22/development/%E3%80%90%E5%BC%80%E5%8F%91%E3%80%91python%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E5%A4%9A%E8%BF%9B%E7%A8%8B/"/>
+      <url>/blog/2025/03/22/development/%E3%80%90%E5%BC%80%E5%8F%91%E3%80%91python%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E5%A4%9A%E8%BF%9B%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>参考博客：<a href="https://blog.csdn.net/u013066730/article/details/105821979">https://blog.csdn.net/u013066730/article/details/105821979</a></p></blockquote><blockquote><p>信安赛以前没试过这样的开发，这次信安赛的作品涉及并发编程，就记录记录呢。<br>大体逻辑是：主进程运行Flask框架，子进程跑检测数字人的模型，子进程的参数应该传递到主进程中才能实时显示到前端<br>还学了怎么在浏览器的控制台debug前端JS脚本hhh</p></blockquote><h3 id="1-关于进程里的全局变量"><a href="#1-关于进程里的全局变量" class="headerlink" title="1.关于进程里的全局变量"></a>1.关于进程里的全局变量</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> multiprocessing</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">list1=[]  <span class="comment">#list1是一个全局变量</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">write</span>():</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        list1.append(i)</span><br><span class="line">        time.sleep(<span class="number">1</span>)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">read</span>():</span><br><span class="line">    <span class="built_in">print</span>(list1)</span><br><span class="line"><span class="keyword">if</span> __name__==<span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    t1=multiprocessing.Process(target=write)</span><br><span class="line">    t2=multiprocessing.Process(target=read)</span><br><span class="line">    t1.start()</span><br><span class="line">    t1.join   <span class="comment">#让t1运行完在运行t2</span></span><br><span class="line">    t2.start()</span><br></pre></td></tr></table></figure><p>执行上述进程可以看到<code>t1</code>列表中有值，而<code>t2</code>列表还是一个空值列表，所以由此可见<strong>在不同的进程中</strong>它们是不共享全局变量的，只有<strong>在线程中</strong>才共享全局变量。</p><h3 id="2-多进程通信"><a href="#2-多进程通信" class="headerlink" title="2.多进程通信"></a>2.多进程通信</h3><p>一个demo：</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process, Manager</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">kkk</span>(<span class="params">a_list, number</span>):</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">    a_list.append(np.array([i]))</span><br><span class="line">    time.sleep(random.randrange(<span class="number">2</span>))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;这是进程&#123;&#125; &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(number, a_list))</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;这是进程&#123;&#125; &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(number, a_list))</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">jjj</span>(<span class="params">a_list</span>):</span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">2</span>):</span><br><span class="line">    process = Process(target=kkk, args=(a_list, i))</span><br><span class="line">    process.start()</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">  manager = Manager()</span><br><span class="line">  a_list = manager.<span class="built_in">list</span>()</span><br><span class="line">  <span class="comment"># a_list = []</span></span><br><span class="line">  process_0 = Process(target=jjj, args=(a_list,))</span><br><span class="line">  process_0.start()</span><br><span class="line">  process_0.join()</span><br><span class="line">  <span class="built_in">print</span>(a_list)</span><br><span class="line">  <span class="built_in">print</span>(<span class="built_in">len</span>(a_list))</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">&#x27;it\&#x27;s ok&#x27;</span>)</span><br></pre></td></tr></table></figure><blockquote><p>由于进程之间数据是不共享的，所以不会出现多线程GIL带来的问题。多进程之间的通信通过Queue()或Pipe()来实现</p></blockquote><h4 id="2-1-1-Queue"><a href="#2-1-1-Queue" class="headerlink" title="2.1.1.Queue()"></a>2.1.1.Queue()</h4><p>使用方法跟threading里的queue差不多</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process, Queue</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">q</span>):</span><br><span class="line">    q.put([<span class="number">42</span>, <span class="literal">None</span>, <span class="string">&#x27;hello&#x27;</span>])</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    q = Queue()</span><br><span class="line">    p = Process(target=f, args=(q,))</span><br><span class="line">    p.start()</span><br><span class="line">    <span class="built_in">print</span>(q.get())    <span class="comment"># prints &quot;[42, None, &#x27;hello&#x27;]&quot;</span></span><br><span class="line">    p.join()</span><br></pre></td></tr></table></figure><h4 id="2-1-2-Pipe"><a href="#2-1-2-Pipe" class="headerlink" title="2.1.2.Pipe()"></a>2.1.2.Pipe()</h4><p>Pipe的本质是进程之间的数据传递，而不是数据共享，这和socket有点像。pipe()返回两个连接对象分别表示管道的两端，每端都有send()和recv()方法。如果两个进程试图在同一时间的同一端进行读取和写入那么，这可能会损坏管道中的数据。</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process, Pipe</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">conn</span>):</span><br><span class="line">    conn.send([<span class="number">42</span>, <span class="literal">None</span>, <span class="string">&#x27;hello&#x27;</span>])</span><br><span class="line">    conn.close()</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    parent_conn, child_conn = Pipe() </span><br><span class="line">    p = Process(target=f, args=(child_conn,))</span><br><span class="line">    p.start()</span><br><span class="line">    <span class="built_in">print</span>(parent_conn.recv())   <span class="comment"># prints &quot;[42, None, &#x27;hello&#x27;]&quot;</span></span><br><span class="line">    p.join()</span><br></pre></td></tr></table></figure><h4 id="2-2-Manager"><a href="#2-2-Manager" class="headerlink" title="2.2 Manager"></a>2.2 Manager</h4><p>通过Manager可实现进程间数据的共享。Manager()返回的manager对象会通过一个服务进程，来使其他进程通过代理的方式操作python对象。manager对象支持 <code>list</code>, <code>dict</code>, <code>Namespace</code>, <code>Lock</code>, <code>RLock</code>, <code>Semaphore</code>, <code>BoundedSemaphore</code>, <code>Condition</code>, <code>Event</code>, <code>Barrier</code>, <code>Queue</code>, <code>Value</code> ,<code>Array</code>.</p><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process, Manager</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">f</span>(<span class="params">d, l</span>):</span><br><span class="line">    d[<span class="number">1</span>] = <span class="string">&#x27;1&#x27;</span></span><br><span class="line">    d[<span class="string">&#x27;2&#x27;</span>] = <span class="number">2</span></span><br><span class="line">    d[<span class="number">0.25</span>] = <span class="literal">None</span></span><br><span class="line">    l.append(<span class="number">1</span>)</span><br><span class="line">    <span class="built_in">print</span>(l)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">with</span> Manager() <span class="keyword">as</span> manager:</span><br><span class="line">        d = manager.<span class="built_in">dict</span>()</span><br><span class="line"> </span><br><span class="line">        l = manager.<span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">5</span>))</span><br><span class="line">        p_list = []</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>):</span><br><span class="line">            p = Process(target=f, args=(d, l))</span><br><span class="line">            p.start()</span><br><span class="line">            p_list.append(p)</span><br><span class="line">        <span class="keyword">for</span> res <span class="keyword">in</span> p_list:</span><br><span class="line">            res.join()</span><br><span class="line"> </span><br><span class="line">        <span class="built_in">print</span>(d)</span><br><span class="line">        <span class="built_in">print</span>(l)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> 并发编程 </tag>
+            
+            <tag> 开发 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>deepseek+volcengine</title>
       <link href="/blog/2025/03/18/%E5%85%B6%E4%BB%96/deepseek+volcengine/"/>
       <url>/blog/2025/03/18/%E5%85%B6%E4%BB%96/deepseek+volcengine/</url>
@@ -49,15 +78,15 @@
       
         <tags>
             
+            <tag> 笔记 </tag>
+            
+            <tag> 科研 </tag>
+            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
-            
-            <tag> 笔记 </tag>
-            
-            <tag> 科研 </tag>
             
         </tags>
       
@@ -142,15 +171,15 @@
       
         <tags>
             
+            <tag> 笔记 </tag>
+            
+            <tag> 科研 </tag>
+            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
-            
-            <tag> 笔记 </tag>
-            
-            <tag> 科研 </tag>
             
         </tags>
       
@@ -175,11 +204,11 @@
       
         <tags>
             
+            <tag> MachineLearning </tag>
+            
             <tag> 笔记 </tag>
             
             <tag> 科研 </tag>
-            
-            <tag> MachineLearning </tag>
             
         </tags>
       
@@ -204,15 +233,15 @@
       
         <tags>
             
+            <tag> 笔记 </tag>
+            
+            <tag> 科研 </tag>
+            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
-            
-            <tag> 笔记 </tag>
-            
-            <tag> 科研 </tag>
             
         </tags>
       
@@ -297,15 +326,15 @@
       
         <tags>
             
+            <tag> 笔记 </tag>
+            
+            <tag> 科研 </tag>
+            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
-            
-            <tag> 笔记 </tag>
-            
-            <tag> 科研 </tag>
             
         </tags>
       
@@ -330,15 +359,15 @@
       
         <tags>
             
+            <tag> 笔记 </tag>
+            
+            <tag> 科研 </tag>
+            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
-            
-            <tag> 笔记 </tag>
-            
-            <tag> 科研 </tag>
             
         </tags>
       
@@ -363,15 +392,15 @@
       
         <tags>
             
+            <tag> 笔记 </tag>
+            
+            <tag> 科研 </tag>
+            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
-            
-            <tag> 笔记 </tag>
-            
-            <tag> 科研 </tag>
             
         </tags>
       
@@ -483,15 +512,15 @@
       
         <tags>
             
+            <tag> 笔记 </tag>
+            
+            <tag> 科研 </tag>
+            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
-            
-            <tag> 笔记 </tag>
-            
-            <tag> 科研 </tag>
             
         </tags>
       
@@ -547,15 +576,15 @@
       
         <tags>
             
+            <tag> 笔记 </tag>
+            
+            <tag> 科研 </tag>
+            
             <tag> 计算机图形学 </tag>
             
             <tag> CG </tag>
             
             <tag> CAD </tag>
-            
-            <tag> 笔记 </tag>
-            
-            <tag> 科研 </tag>
             
         </tags>
       
@@ -651,31 +680,6 @@
     
     
     <entry>
-      <title>【Hexo】博客主题配置（持续更新）</title>
-      <link href="/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/"/>
-      <url>/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Hexo-Butterfly-主题文章置顶"><a href="#Hexo-Butterfly-主题文章置顶" class="headerlink" title="Hexo Butterfly 主题文章置顶"></a>Hexo Butterfly 主题文章置顶</h1><p>卸载 hexo-generator-index，然后安装 hexo-generator-index-pin-top</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure><h2 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h2><p>在需要置顶的文章的 Front-matter 中加上 top: true &#x2F; 数字即可，  </p><p>数字越大，文章越靠前。  </p><p><strong>例如</strong></p><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">cover:</span> </span><br><span class="line"><span class="attr">top:</span> <span class="number">1</span> <span class="comment">#这里加一个top就行</span></span><br><span class="line"><span class="attr">abbrlink:</span> <span class="string">1d5436e1</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2023-01-06 17:32:05</span></span><br></pre></td></tr></table></figure><blockquote><p>本文引用自：<a href="https://blog.aiheadn.cn/archives/1b4c065d.html">https://blog.aiheadn.cn/archives/1b4c065d.html</a></p></blockquote><h1 id="Hexo-Butterfly主题首页增加字数总计-阅读时间"><a href="#Hexo-Butterfly主题首页增加字数总计-阅读时间" class="headerlink" title="Hexo Butterfly主题首页增加字数总计&amp;阅读时间"></a>Hexo Butterfly主题首页增加字数总计&amp;阅读时间</h1><p>开启字数统计功能，需要安装<code>hexo-wordcount</code>插件</p><p>在 hexo 工作目录下运行<code>npm install hexo-wordcount --save</code>or<code> yarn add hexo-wordcount</code></p><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Need to install the hexo-wordcount plugin</span></span><br><span class="line"><span class="attr">wordcount:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the word count of the article in post meta</span></span><br><span class="line">  <span class="attr">post_wordcount:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the time to read the article in post meta</span></span><br><span class="line">  <span class="attr">min2read:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the total word count of the website in aside&#x27;s webinfo</span></span><br><span class="line">  <span class="attr">total_wordcount:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure><table><thead><tr><th>参数</th><th>解释</th></tr></thead><tbody><tr><td>post_wordcount</td><td>在文章页面显示字数</td></tr><tr><td>min2read</td><td>在文章页面显示阅读时间</td></tr><tr><td>total_wordcount</td><td>在侧边栏显示网站总字数</td></tr></tbody></table>]]></content>
-      
-      
-      <categories>
-          
-          <category> Hexo </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Hexo </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Hozenghan的Memoji</title>
       <link href="/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/"/>
       <url>/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/</url>
@@ -695,6 +699,31 @@
             <tag> 我的 </tag>
             
             <tag> top </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>【Hexo】博客主题配置（持续更新）</title>
+      <link href="/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/"/>
+      <url>/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Hexo-Butterfly-主题文章置顶"><a href="#Hexo-Butterfly-主题文章置顶" class="headerlink" title="Hexo Butterfly 主题文章置顶"></a>Hexo Butterfly 主题文章置顶</h1><p>卸载 hexo-generator-index，然后安装 hexo-generator-index-pin-top</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure><h2 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h2><p>在需要置顶的文章的 Front-matter 中加上 top: true &#x2F; 数字即可，  </p><p>数字越大，文章越靠前。  </p><p><strong>例如</strong></p><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">cover:</span> </span><br><span class="line"><span class="attr">top:</span> <span class="number">1</span> <span class="comment">#这里加一个top就行</span></span><br><span class="line"><span class="attr">abbrlink:</span> <span class="string">1d5436e1</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2023-01-06 17:32:05</span></span><br></pre></td></tr></table></figure><blockquote><p>本文引用自：<a href="https://blog.aiheadn.cn/archives/1b4c065d.html">https://blog.aiheadn.cn/archives/1b4c065d.html</a></p></blockquote><h1 id="Hexo-Butterfly主题首页增加字数总计-阅读时间"><a href="#Hexo-Butterfly主题首页增加字数总计-阅读时间" class="headerlink" title="Hexo Butterfly主题首页增加字数总计&amp;阅读时间"></a>Hexo Butterfly主题首页增加字数总计&amp;阅读时间</h1><p>开启字数统计功能，需要安装<code>hexo-wordcount</code>插件</p><p>在 hexo 工作目录下运行<code>npm install hexo-wordcount --save</code>or<code> yarn add hexo-wordcount</code></p><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Need to install the hexo-wordcount plugin</span></span><br><span class="line"><span class="attr">wordcount:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the word count of the article in post meta</span></span><br><span class="line">  <span class="attr">post_wordcount:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the time to read the article in post meta</span></span><br><span class="line">  <span class="attr">min2read:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the total word count of the website in aside&#x27;s webinfo</span></span><br><span class="line">  <span class="attr">total_wordcount:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure><table><thead><tr><th>参数</th><th>解释</th></tr></thead><tbody><tr><td>post_wordcount</td><td>在文章页面显示字数</td></tr><tr><td>min2read</td><td>在文章页面显示阅读时间</td></tr><tr><td>total_wordcount</td><td>在侧边栏显示网站总字数</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
             
         </tags>
       
@@ -945,9 +974,9 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> MachineLearning </tag>
+            
+            <tag> 笔记 </tag>
             
             <tag> MacOS </tag>
             
@@ -976,11 +1005,11 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> MachineLearning </tag>
             
             <tag> pytorch </tag>
+            
+            <tag> 笔记 </tag>
             
             <tag> MacOS </tag>
             
