@@ -1,0 +1,221 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>C语言基础 | Hozenghan的博客</title><meta name="author" content="Hozenghan"><meta name="copyright" content="Hozenghan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="关于C语言指针与引用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言基础">
+<meta property="og:url" content="http://hozenghan.github.io/blog/2025/01/18/code/c/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="Hozenghan的博客">
+<meta property="og:description" content="关于C语言指针与引用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hozenghan.github.io/blog/coverImages/code_c.jpg">
+<meta property="article:published_time" content="2025-01-18T15:59:48.000Z">
+<meta property="article:modified_time" content="2025-03-26T09:10:54.293Z">
+<meta property="article:author" content="Hozenghan">
+<meta property="article:tag" content="code">
+<meta property="article:tag" content="C语言">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hozenghan.github.io/blog/coverImages/code_c.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "C语言基础",
+  "url": "http://hozenghan.github.io/blog/2025/01/18/code/c/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/",
+  "image": "http://hozenghan.github.io/blog/coverImages/code_c.jpg",
+  "datePublished": "2025-01-18T15:59:48.000Z",
+  "dateModified": "2025-03-26T09:10:54.293Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Hozenghan",
+      "url": "http://hozenghan.github.io/blog/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/blog/images/sun.png"><link rel="canonical" href="http://hozenghan.github.io/blog/2025/01/18/code/c/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/blog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: {"path":"/blog/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'C语言基础',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/blog/images/profile.jpg" onerror="this.onerror=null;this.src='/blog/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> 博客首页</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/blog/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-camera"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://hozenghan.github.io"><i class="fa-fw fas fa-home"></i><span> 个人主页</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/blog/"><img class="site-icon" src="/blog/images/sun.png" alt="Logo"><span class="site-name">Hozenghan的博客</span></a><a class="nav-page-title" href="/blog/"><span class="site-name">C语言基础</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> 博客首页</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/blog/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-camera"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://hozenghan.github.io"><i class="fa-fw fas fa-home"></i><span> 个人主页</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">C语言基础</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-01-18T15:59:48.000Z" title="发表于 2025-01-18 23:59:48">2025-01-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-03-26T09:10:54.293Z" title="更新于 2025-03-26 17:10:54">2025-03-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/code/">code</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/code/C%E8%AF%AD%E8%A8%80/">C语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-03-26 17:10:54&quot;}" hidden></div><blockquote>
+<p>最近在写C语言，指针忘得干干净净，理一篇博客回忆一下咯。</p>
+</blockquote>
+<h2 id="关于指针"><a href="#关于指针" class="headerlink" title="关于指针"></a>关于指针</h2><ul>
+<li><code>int a</code> ：一个int类型，名称叫a  </li>
+<li><code>int* a</code>：一个整形的指针，名称叫a  </li>
+<li><code>int *a</code>：一个指向整型的地址，名称叫a（一级指针，表示a所指向的地址里面存放的是一个int类型的值）  </li>
+<li><code>int **a</code> ：二级指针，表示a所指向的地址里面存放的是一个指向int类型的指针（即a指向的地址里面存放的是一个指向int的一级指针）  </li>
+<li><code>int &amp; a</code>：声明一个int引用类型，名称叫a</li>
+</ul>
+<h3 id="C语言中int-a与int-a的区别："><a href="#C语言中int-a与int-a的区别：" class="headerlink" title="C语言中int *a与int* a的区别："></a>C语言中<code>int *a</code>与<code>int* a</code>的区别：</h3><p>用法上没有区别，理解上有区别。前者表示a地址指向的类型是整形，后者表示a是个整形的指针。</p>
+<h3 id="int-p-与-int-p-之区别："><a href="#int-p-与-int-p-之区别：" class="headerlink" title="int *p 与 int **p 之区别："></a><code>int *p </code>与 <code>int **p </code>之区别：</h3><p>一级指针存放变量的地址，指向的值是变量的内容。如<code>int* p=&#123;1,2,3&#125;</code>， p&#x3D;数组的首地址，<code>*p</code>&#x3D;数组的第一个值；<br>二级指针存放一级指针的地址，指向一级指针。如<code>int*p =&#123;1,2,3&#125;</code>，<code> int**pp=&amp;p</code>，pp&#x3D;指针p的首地址，<code>*pp</code>&#x3D;数组的首地址，<code>**pp</code>&#x3D;数组第一个值1。</p>
+<h3 id="int"><a href="#int" class="headerlink" title="int &amp;"></a><code>int &amp;</code></h3><h4 id="a-声明引用时必须指定它代表的是哪一个变量，即对它初始化。"><a href="#a-声明引用时必须指定它代表的是哪一个变量，即对它初始化。" class="headerlink" title="a)  声明引用时必须指定它代表的是哪一个变量，即对它初始化。"></a>a)  声明引用时必须指定它代表的是哪一个变量，即对它初始化。</h4><p><code>int &amp;a=b;</code>这样是声明a是变量b的引用  </p>
+<p>如果是<code>int &amp;a;</code>这样就是错的，没有指定a代表哪一个变量。  </p>
+<h4 id="b-引用与其所代表的变量共享同一内存单元，系统并不为引用另外分配存储单元；"><a href="#b-引用与其所代表的变量共享同一内存单元，系统并不为引用另外分配存储单元；" class="headerlink" title="b)  引用与其所代表的变量共享同一内存单元，系统并不为引用另外分配存储单元；"></a>b)  引用与其所代表的变量共享同一内存单元，系统并不为引用另外分配存储单元；</h4><p>这个应该好理解；就像前面所说的，张三和三娃子都是同一个人，三娃子只是张三的别名。  </p>
+<p>因此，对于 int &amp;a&#x3D;b;这个例子来说，要输出a和b 的地址，肯定是相同的。  </p>
+<h4 id="c-怎样区分-是引用还是取地址符呢？"><a href="#c-怎样区分-是引用还是取地址符呢？" class="headerlink" title="c)  怎样区分&amp;是引用还是取地址符呢？"></a>c)  怎样区分&amp;是引用还是取地址符呢？</h4><p>方法是：判断&amp;a这样的形式前是否有类型符即<code>int &amp;a=b;</code></p>
+<p>如果有类型符(int)则是引用，否则是取地址运算符。  </p>
+<h4 id="d-对引用的初始化，可以是一个变量名，也可以是另一个引用。"><a href="#d-对引用的初始化，可以是一个变量名，也可以是另一个引用。" class="headerlink" title="d)  对引用的初始化，可以是一个变量名，也可以是另一个引用。"></a>d)  对引用的初始化，可以是一个变量名，也可以是另一个引用。</h4><blockquote>
+<p>换句话说：张三的别名可以是三娃子，三小子……及其他多个别名  </p>
+<p>而三娃子也可以有其他的别名，比如说：老三，小三等  </p>
+</blockquote>
+<p>用程序可以这样：  </p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> a=<span class="number">1</span>; <span class="comment">//这里是定义一个整形变量  </span></span><br><span class="line"><span class="type">int</span> &amp;b=a;<span class="comment">//声明b是整型变量a的别名  </span></span><br><span class="line"><span class="type">int</span> &amp;c=b;<span class="comment">//声明c是整型引用变量b的别名  </span></span><br><span class="line"><span class="type">int</span> &amp;d=a;<span class="comment">//声明d是整型变量a的别名  </span></span><br></pre></td></tr></table></figure>
+
+<h4 id="e-引用初始化后不能再被重新声明为另一变量的别名"><a href="#e-引用初始化后不能再被重新声明为另一变量的别名" class="headerlink" title="e)  引用初始化后不能再被重新声明为另一变量的别名"></a>e)  引用初始化后不能再被重新声明为另一变量的别名</h4><p>即三娃子既然是指张三这个人，就不能让其他人也叫三娃子  </p>
+<p>即一个别名只能对应一个原始变量，但是一个原始变量可以有多个别名，而且别名也可以由自己的别名。  </p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> &amp;b=a;<span class="comment">//这个声明语句中的&amp;是一个引用  </span></span><br><span class="line"><span class="type">int</span> *p=&amp;b;<span class="comment">//这个指针初始化语句中的&amp;是取地址运算符 </span></span><br></pre></td></tr></table></figure>
+
+<h2 id="const-和-const"><a href="#const-和-const" class="headerlink" title="const*和*const"></a><code>const*</code>和<code>*const</code></h2><p>比如<code>int const*a</code>;，实际上可以看成是<code>int const (*a)</code>，这表示指针a所指向的地址可以变，但是所指向的那个值不能变。<br>而<code>int *const a</code>;，可以看成<code>int* (const a)</code>;，我们都知道a的值其实是一个地址，这就表示a所保存的地址是不可以变的，但是这个地址对应的值是可以变的。</p>
+<p>举个<code>*const</code>的例子：</p>
+<pre><code>int b = 3, c = 5;
+int *const a = &amp;b;
+//a = &amp;c;		这一句是错的，因为a所指向的地址是不能变的
+cout&lt;&lt;*a&lt;&lt;endl;     // 3
+b = 6;
+cout&lt;&lt;*a&lt;&lt;endl;     // 6
+</code></pre>
+<p>再比如<code>const*</code>的例子：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> b = <span class="number">3</span>, c = <span class="number">5</span>;</span><br><span class="line"><span class="type">int</span> <span class="type">const</span> *a = &amp;b;</span><br><span class="line">cout&lt;&lt;*a&lt;&lt;endl;     <span class="comment">// 3</span></span><br><span class="line"><span class="comment">//*a = 6;       不能对*a进行修改，因为其值为const不可变</span></span><br><span class="line">b = <span class="number">6</span>;          <span class="comment">//但是可以用b来修改</span></span><br><span class="line">cout&lt;&lt;*a&lt;&lt;endl;     <span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
+
+<p>还有一种情况，指向常量的常指针，既不能改地址，也不能改值</p>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> b = <span class="number">3</span>, c = <span class="number">5</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span> * <span class="type">const</span> a = &amp;b;</span><br><span class="line"><span class="comment">// a = &amp;c;</span></span><br><span class="line"><span class="comment">// *a = 6;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="const-和取地址操作"><a href="#const-和取地址操作" class="headerlink" title="const 和取地址操作"></a>const 和取地址操作</h2><p>在C++中，‘const’ 关键字用于修饰变量，使其成为常量不可修改。在对 ‘const’ 类型的对象取地址时，会有一些特殊的考虑，特别是在使用重载运算符时。</p>
+<ol>
+<li><p>取 const 对象的地址</p>
+<p>cpp复制</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">int</span> b = <span class="number">20</span>;</span><br><span class="line"><span class="type">const</span> <span class="type">int</span>* ptrB = &amp;b; <span class="comment">// ptrB 是指向 b 的常量指针</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>const 引用</p>
+<p>如果你使用 const 引用作为参数传递，可以确保函数内不会修改该引用的值。</p>
+<p>cpp复制</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">Print</span><span class="params">(<span class="type">const</span> <span class="type">int</span>&amp; num)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; num &lt;&lt; std::endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> value = <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">Print</span>(value); <span class="comment">// 传递的是 value 的地址</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="C-引用调用"><a href="#C-引用调用" class="headerlink" title="C++ 引用调用"></a>C++ 引用调用</h2><p>向函数传递参数的<strong>引用调用</strong>方法，把引用的地址复制给形式参数。在函数内，该引用用于访问调用中要用到的实际参数。这意味着，修改形式参数会影响实际参数。</p>
+<p>按引用传递值，参数引用被传递给函数，就像传递其他值给函数一样。因此相应地，在下面的函数 <strong>swap()</strong> 中，您需要声明函数参数为引用类型，该函数用于交换参数所指向的两个整数变量的值。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 函数定义</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">swap</span><span class="params">(<span class="type">int</span> &amp;x, <span class="type">int</span> &amp;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">   <span class="type">int</span> temp;</span><br><span class="line">   temp = x; <span class="comment">/* 保存地址 x 的值 */</span></span><br><span class="line">   x = y;    <span class="comment">/* 把 y 赋值给 x */</span></span><br><span class="line">   y = temp; <span class="comment">/* 把 x 赋值给 y  */</span></span><br><span class="line"></span><br><span class="line">   <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://hozenghan.github.io/blog">Hozenghan</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://hozenghan.github.io/blog/2025/01/18/code/c/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">http://hozenghan.github.io/blog/2025/01/18/code/c/C%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://hozenghan.github.io/blog" target="_blank">Hozenghan的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/blog/tags/code/">code</a><a class="post-meta__tags" href="/blog/tags/C%E8%AF%AD%E8%A8%80/">C语言</a></div><div class="post-share"><div class="social-share" data-image="/blog/coverImages/code_c.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/" title="Hozenghan的Memoji"><img class="cover" src="/blog/coverImages/memoji.png" onerror="onerror=null;src='/blog/images/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">Hozenghan的Memoji</div></div><div class="info-2"><div class="info-item-1">一些拟我表情和AI生成的图片</div></div></div></a><a class="pagination-related" href="/blog/2025/01/18/cad:cg/Bezier_B-Spline_NURBS-%E7%9F%A5%E8%AF%86%E6%80%BB%E7%BB%93/" title="【CAD/CG笔记】求交自由曲线和自由曲线求交"><img class="cover" src="/blog/coverImages/cg&amp;cad_bezier.jpg" onerror="onerror=null;src='/blog/images/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">【CAD/CG笔记】求交自由曲线和自由曲线求交</div></div><div class="info-2"><div class="info-item-1">Bezier曲线、B样条曲线和NURBS曲线的概念；容差</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/blog/2025/03/17/code/c/C%E8%AF%AD%E8%A8%80%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/" title="C语言安装第三方库"><img class="cover" src="/blog/coverImages/code_c-1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-17</div><div class="info-item-2">C语言安装第三方库</div></div><div class="info-2"><div class="info-item-1">MacOS下如何安装C的第三方库</div></div></div></a><a class="pagination-related" href="/blog/2025/03/26/code/latex/latex/" title="LaTeX常用网址"><img class="cover" src="/blog/coverImages/code_latex.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-26</div><div class="info-item-2">LaTeX常用网址</div></div><div class="info-2"><div class="info-item-1">常用latex</div></div></div></a><a class="pagination-related" href="/blog/2025/03/17/code/matlab/1-matlab/" title="matlab"><img class="cover" src="/blog/coverImages/code_matlab.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-17</div><div class="info-item-2">matlab</div></div><div class="info-2"><div class="info-item-1">关于matlab</div></div></div></a><a class="pagination-related" href="/blog/2025/01/18/code/nodejs/node_uninstall/" title="MacOS上完全卸载node.js"><img class="cover" src="/blog/coverImages/code_node.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-18</div><div class="info-item-2">MacOS上完全卸载node.js</div></div><div class="info-2"><div class="info-item-1">如何在Mac电脑上完全卸载node.js1.brew的安装方式直接通过一条命令 brew uninstall nodejs  2.官网下载pkg安装包的通过这条命令 sudo rm -rf /usr/local/&#123;bin/&#123;node,npm&#125;,lib/node_modules/npm,lib/node,share/man/*/node.*&#125;  3.通过脚本的形式编写一个脚本，例如叫：uninstallNodejs.sh 添加下面的内容：#!/bin/bashlsbom -f -l -s -pf /var/db/receipts/org.nodejs.pkg.bom \| while read i; do  sudo rm /usr/local/$&#123;i&#125;donesudo rm -rf /usr/local/lib/node \     /usr/local/lib/node_modules \     /var/db/receipts/org.nodejs.*12345678  对文件进行授权 chmod 777...</div></div></div></a><a class="pagination-related" href="/blog/2025/01/18/code/python/python/" title="Python"><img class="cover" src="/blog/coverImages/code_python.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-18</div><div class="info-item-2">Python</div></div><div class="info-2"><div class="info-item-1">关于Python的常用命令</div></div></div></a><a class="pagination-related" href="/blog/2025/01/18/code/mysql/1-MySQL/" title="MySQL"><img class="cover" src="/blog/coverImages/code_mysql.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-18</div><div class="info-item-2">MySQL</div></div><div class="info-2"><div class="info-item-1">关于MySQL的常用命令</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/blog/images/profile.jpg" onerror="this.onerror=null;this.src='/blog/images/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Hozenghan</div><div class="author-info-description">📷   🖥️   📖  💤   🛵</div><div class="site-data"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">39</div></a><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Hozenghan"><i class="fab fa-github"></i><span>Follow Me!</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Hozenghan" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/blog/QQ" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:wuzhenghannnnnn@163.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a><a class="social-icon" href="https://hozenghan.github.io" target="_blank" title=""><i class="fas fa-home"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">无限进步！建议挂上梯子，不然有些图片可能会加载不出来。天天开心哦🥰</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88"><span class="toc-number">1.</span> <span class="toc-text">关于指针</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#C%E8%AF%AD%E8%A8%80%E4%B8%ADint-a%E4%B8%8Eint-a%E7%9A%84%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">C语言中int *a与int* a的区别：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int-p-%E4%B8%8E-int-p-%E4%B9%8B%E5%8C%BA%E5%88%AB%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">int *p 与 int **p 之区别：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#int"><span class="toc-number">1.3.</span> <span class="toc-text">int &amp;</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#a-%E5%A3%B0%E6%98%8E%E5%BC%95%E7%94%A8%E6%97%B6%E5%BF%85%E9%A1%BB%E6%8C%87%E5%AE%9A%E5%AE%83%E4%BB%A3%E8%A1%A8%E7%9A%84%E6%98%AF%E5%93%AA%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F%EF%BC%8C%E5%8D%B3%E5%AF%B9%E5%AE%83%E5%88%9D%E5%A7%8B%E5%8C%96%E3%80%82"><span class="toc-number">1.3.1.</span> <span class="toc-text">a)  声明引用时必须指定它代表的是哪一个变量，即对它初始化。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#b-%E5%BC%95%E7%94%A8%E4%B8%8E%E5%85%B6%E6%89%80%E4%BB%A3%E8%A1%A8%E7%9A%84%E5%8F%98%E9%87%8F%E5%85%B1%E4%BA%AB%E5%90%8C%E4%B8%80%E5%86%85%E5%AD%98%E5%8D%95%E5%85%83%EF%BC%8C%E7%B3%BB%E7%BB%9F%E5%B9%B6%E4%B8%8D%E4%B8%BA%E5%BC%95%E7%94%A8%E5%8F%A6%E5%A4%96%E5%88%86%E9%85%8D%E5%AD%98%E5%82%A8%E5%8D%95%E5%85%83%EF%BC%9B"><span class="toc-number">1.3.2.</span> <span class="toc-text">b)  引用与其所代表的变量共享同一内存单元，系统并不为引用另外分配存储单元；</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#c-%E6%80%8E%E6%A0%B7%E5%8C%BA%E5%88%86-%E6%98%AF%E5%BC%95%E7%94%A8%E8%BF%98%E6%98%AF%E5%8F%96%E5%9C%B0%E5%9D%80%E7%AC%A6%E5%91%A2%EF%BC%9F"><span class="toc-number">1.3.3.</span> <span class="toc-text">c)  怎样区分&amp;是引用还是取地址符呢？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#d-%E5%AF%B9%E5%BC%95%E7%94%A8%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%98%AF%E4%B8%80%E4%B8%AA%E5%8F%98%E9%87%8F%E5%90%8D%EF%BC%8C%E4%B9%9F%E5%8F%AF%E4%BB%A5%E6%98%AF%E5%8F%A6%E4%B8%80%E4%B8%AA%E5%BC%95%E7%94%A8%E3%80%82"><span class="toc-number">1.3.4.</span> <span class="toc-text">d)  对引用的初始化，可以是一个变量名，也可以是另一个引用。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#e-%E5%BC%95%E7%94%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E5%90%8E%E4%B8%8D%E8%83%BD%E5%86%8D%E8%A2%AB%E9%87%8D%E6%96%B0%E5%A3%B0%E6%98%8E%E4%B8%BA%E5%8F%A6%E4%B8%80%E5%8F%98%E9%87%8F%E7%9A%84%E5%88%AB%E5%90%8D"><span class="toc-number">1.3.5.</span> <span class="toc-text">e)  引用初始化后不能再被重新声明为另一变量的别名</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const-%E5%92%8C-const"><span class="toc-number">2.</span> <span class="toc-text">const*和*const</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#const-%E5%92%8C%E5%8F%96%E5%9C%B0%E5%9D%80%E6%93%8D%E4%BD%9C"><span class="toc-number">3.</span> <span class="toc-text">const 和取地址操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#C-%E5%BC%95%E7%94%A8%E8%B0%83%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">C++ 引用调用</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/03/26/code/latex/latex/" title="LaTeX常用网址"><img src="/blog/coverImages/code_latex.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="LaTeX常用网址"/></a><div class="content"><a class="title" href="/blog/2025/03/26/code/latex/latex/" title="LaTeX常用网址">LaTeX常用网址</a><time datetime="2025-03-26T15:59:50.000Z" title="发表于 2025-03-26 23:59:50">2025-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/03/24/algorithm/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" title="【算法笔记】基础算法"><img src="/blog/coverImages/algorithm-1.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="【算法笔记】基础算法"/></a><div class="content"><a class="title" href="/blog/2025/03/24/algorithm/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" title="【算法笔记】基础算法">【算法笔记】基础算法</a><time datetime="2025-03-24T15:59:51.000Z" title="发表于 2025-03-24 23:59:51">2025-03-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/03/22/development/%E3%80%90%E5%BC%80%E5%8F%91%E3%80%91python%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E5%A4%9A%E8%BF%9B%E7%A8%8B/" title="【开发】python并发编程-多进程"><img src="/blog/coverImages/develop-python.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="【开发】python并发编程-多进程"/></a><div class="content"><a class="title" href="/blog/2025/03/22/development/%E3%80%90%E5%BC%80%E5%8F%91%E3%80%91python%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B-%E5%A4%9A%E8%BF%9B%E7%A8%8B/" title="【开发】python并发编程-多进程">【开发】python并发编程-多进程</a><time datetime="2025-03-22T15:59:50.000Z" title="发表于 2025-03-22 23:59:50">2025-03-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/03/18/%E5%85%B6%E4%BB%96/deepseek+volcengine/" title="deepseek+volcengine"><img src="/blog/coverImages/deepseek-volcengine.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="deepseek+volcengine"/></a><div class="content"><a class="title" href="/blog/2025/03/18/%E5%85%B6%E4%BB%96/deepseek+volcengine/" title="deepseek+volcengine">deepseek+volcengine</a><time datetime="2025-03-18T15:59:59.000Z" title="发表于 2025-03-18 23:59:59">2025-03-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/03/17/cad:cg/%E6%B1%82%E6%8E%A7%E5%88%B6%E7%82%B9Pi%E5%AF%B9%E5%BA%94%E5%9C%A8B-Spline%E4%B8%8A%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1/" title="【CAD/CG笔记】求控制点对应在B-Spline上的参数估计"><img src="/blog/coverImages/cg&amp;cad_b-spline-1.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="【CAD/CG笔记】求控制点对应在B-Spline上的参数估计"/></a><div class="content"><a class="title" href="/blog/2025/03/17/cad:cg/%E6%B1%82%E6%8E%A7%E5%88%B6%E7%82%B9Pi%E5%AF%B9%E5%BA%94%E5%9C%A8B-Spline%E4%B8%8A%E7%9A%84%E5%8F%82%E6%95%B0%E4%BC%B0%E8%AE%A1/" title="【CAD/CG笔记】求控制点对应在B-Spline上的参数估计">【CAD/CG笔记】求控制点对应在B-Spline上的参数估计</a><time datetime="2025-03-17T15:59:51.000Z" title="发表于 2025-03-17 23:59:51">2025-03-17</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(20deg, #003366, #0066cc, #3399ff, #66ccff);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Hozenghan</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hey you, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js"></script><script src="/blog/js/main.js"></script><script src="/blog/js/tw_cn.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/blog/js/search/local-search.js"></script></div></div></body></html>
