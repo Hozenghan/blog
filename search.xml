@@ -8,7 +8,7 @@
       <link href="/blog/2025/05/04/math/%E3%80%90%E6%95%B0%E5%AD%A6%E4%B8%8E%E8%AE%A1%E7%AE%97%E3%80%91Maple%E6%8E%A8%E5%AF%BC%E5%85%AC%E5%BC%8F%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
       <url>/blog/2025/05/04/math/%E3%80%90%E6%95%B0%E5%AD%A6%E4%B8%8E%E8%AE%A1%E7%AE%97%E3%80%91Maple%E6%8E%A8%E5%AF%BC%E5%85%AC%E5%BC%8F%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>参考博客：<a href="https://zhuanlan.zhihu.com/p/578591315">https://zhuanlan.zhihu.com/p/578591315</a><br>官方中文手册：<a href="https://www.maplesoft.com.cn/support/documentation/PDF/maple2020/Maple2020%E4%B8%AD%E6%96%87%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C.pdf">https://www.maplesoft.com.cn/support/documentation/PDF/maple2020/Maple2020%E4%B8%AD%E6%96%87%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C.pdf</a></p></blockquote><h2 id="collect，提取因式"><a href="#collect，提取因式" class="headerlink" title="collect，提取因式"></a>collect，提取因式</h2><p><strong>例一：</strong><br>$$<br>f :&#x3D; a \ln(x) - \ln(x) x - x<br>$$</p><blockquote><p>collect(f, ln(x))</p></blockquote><p>$$<br>(a - x) \ln(x) - x<br>$$</p><p><strong>例二：</strong><br>$$<br>g :&#x3D; \text{int}(x^2 (\exp(x) + \exp(-x)), x)<br>$$</p><p>即<br>$$<br>g :&#x3D; -\frac{x^2}{e^x} - \frac{2x}{e^x} - \frac{2}{e^x} + x^2 e^x - 2x e^x + 2e^x<br>$$</p><blockquote><p>collect(g, exp(x))</p></blockquote><p>$$<br>(x^2 - 2x + 2)e^x + \frac{2x^2 + 2x + 2}{e^x}<br>$$</p><p><strong>例三：</strong><br>$$<br>f :&#x3D; a^3 x - x + a^3 + a<br>$$</p><p>$$<br>f :&#x3D; a^3 x + a^3 + a - x<br>$$</p><blockquote><p>collect(f, x)</p></blockquote><p>$$<br>(a^3 - 1)x + a^3 + a<br>$$</p><blockquote><p>collect(f, x, factor)</p></blockquote><p>$$<br>(a - 1)(a^2 + a + 1)x + a(a^2 + 1)<br>$$</p><blockquote><ol><li><strong>合并同类项</strong>：将表达式 <code>f</code> 中所有关于变量 <code>x</code> 的项合并在一起。这意味着它会将所有包含 <code>x</code> 的项放在一起，并将常数项放在一起。</li><li><strong>因式分解</strong>：在合并同类项之后，<code>factor</code> 选项会进一步对合并后的表达式进行因式分解。因式分解是将一个多项式表示为几个多项式的乘积的过程。</li></ol></blockquote><h2 id="combine"><a href="#combine" class="headerlink" title="combine"></a>combine</h2><blockquote><p>combine(abs(x^2) abs(y + 1), abs)</p></blockquote><p>$$<br>|x|^2|y + 1|<br>$$</p><blockquote><p>f1 :&#x3D; sqrt(3) sqrt(2) + sqrt(y) sqrt(x^2 - 1)</p></blockquote><p>$$<br>f1 :&#x3D; \sqrt{3}\sqrt{2} + \sqrt{y}\sqrt{x^2 - 1}<br>$$</p><blockquote><p>combine(f1, radical)</p></blockquote><p>$$<br>\sqrt{6} + \sqrt{y}\sqrt{x^2 - 1}<br>$$</p><blockquote><p>combine(f1, radical, symbolic)</p></blockquote><p>$$<br>\sqrt{6} + \sqrt{y(x^2 - 1)}<br>$$</p><blockquote><p>combine(4 sin(x)^3, trig)</p></blockquote><p>$$<br>-\sin(3x) + 3\sin(x)<br>$$</p><blockquote><p>combine((exp(x))^2 exp(y), exp)</p></blockquote><p>$$<br>e^{2x + y}<br>$$</p><blockquote><p>combine(exp(sin(a) cos(b)) exp(cos(a) sin(b)), [trig, exp])</p></blockquote><p>$$<br>e^{\sin(a + b)}<br>$$</p><blockquote><p>combine([2 sin(x) cos(x), 2 cos(x)^2 - 1], trig)</p></blockquote><p>$$<br>[\sin(2x), \cos(2x)]<br>$$</p><h3 id="combine-可以积化和差"><a href="#combine-可以积化和差" class="headerlink" title="combine 可以积化和差"></a>combine 可以积化和差</h3><blockquote><p>combine(sin(x)*sin(y))</p></blockquote><p>$$<br>\frac{\cos(x - y)}{2} - \frac{\cos(x + y)}{2}<br>$$</p><table><thead><tr><th>mode</th><th>功能</th></tr></thead><tbody><tr><td><code>abs</code></td><td>合并多个绝对值为一个整体绝对值</td></tr><tr><td><code>radical</code></td><td>合并多个根号表达式，如 $\sqrt{a}\sqrt{b} \to \sqrt{ab}$</td></tr><tr><td><code>symbolic</code></td><td>启用更激进的代数变换（假设符号满足一些约束）</td></tr><tr><td><code>trig</code></td><td>应用三角恒等式，进行合并或化简</td></tr><tr><td><code>exp</code></td><td>合并指数函数，例如 $e^x e^y &#x3D; e^{x + y}$</td></tr><tr><td><code>[trig, exp]</code></td><td>依次应用三角与指数合并规则</td></tr></tbody></table><h2 id="factor-分解因式，变成连乘"><a href="#factor-分解因式，变成连乘" class="headerlink" title="factor 分解因式，变成连乘"></a>factor 分解因式，变成连乘</h2><blockquote><p>factor(6 x^2 + 18 x - 24)</p></blockquote><p>$$<br>6(x + 4)(x - 1)<br>$$</p><blockquote><p>factor(6)</p></blockquote><p>$$<br>6<br>$$</p><blockquote><p>ifactor(6)</p></blockquote><p>$$<br>(2)(3)<br>$$</p><blockquote><p>factor($(x^3 - y^3)&#x2F;(x^4 - y^4)$)</p></blockquote><p>$$<br>\frac{x^2 + xy + y^2}{(x + y)(x^2 + y^2)}<br>$$</p><blockquote><p>factor($1&#x2F;(x^2 - 1) + 1&#x2F;(x^2 + 3 x + 2)$)</p></blockquote><p>$$<br>\frac{2x + 1}{(x + 2)(x + 1)(x - 1)}<br>$$</p><blockquote><p>factor($x^3 + 5$)</p></blockquote><p>$$<br>x^3 + 5<br>$$</p><p>也可以指定因子，例如：</p><blockquote><p>factor($x^3 + 5$, $5^{1&#x2F;3}$)</p></blockquote><p>$$<br>(5^{2&#x2F;3} - 5^{1&#x2F;3}x + x^2)(x + 5^{1&#x2F;3})<br>$$</p><blockquote><p>factor($x^3 + 5$, {$1&#x2F;5^{1&#x2F;3}, (-3)^{1&#x2F;2}$})</p></blockquote><p>$$<br>-\frac{(5^{1&#x2F;3}\sqrt{-3} + 5^{1&#x2F;3} - 2x)(5^{1&#x2F;3}\sqrt{3} + 5^{1&#x2F;3} + 2x)}{4}<br>$$</p><table><thead><tr><th>指定参数</th><th>含义</th><th>分解效果</th></tr></thead><tbody><tr><td><code>factor(expr)</code></td><td>默认：只在实数或有理数域中分解</td><td>给出最多实根或不可约因子形式</td></tr><tr><td><code>factor(expr, 1/3)</code></td><td>允许立方根（扩展代数域）</td><td>使用 $\sqrt[3]{5}$ 等因子分解</td></tr><tr><td><code>factor(expr, &#123;1/3, √-3&#125;)</code></td><td>允许立方根和虚数参与</td><td>给出完全复数因式分解结果</td></tr></tbody></table><h2 id="expand-展开：乘法到加减"><a href="#expand-展开：乘法到加减" class="headerlink" title="expand 展开：乘法到加减"></a>expand 展开：乘法到加减</h2><blockquote><p>expand((x + 1) (x + 2))<br>$$<br>x^2 + 3x + 2<br>$$</p></blockquote><blockquote><p>expand((x + 1) &#x2F; (x + 2))<br>$$<br>\frac{x}{x + 2} + \frac{1}{x + 2}<br>$$</p></blockquote><blockquote><p>expand(1 &#x2F; ((x + 1) x))<br>$$<br>\frac{1}{(x + 1)x}<br>$$</p></blockquote><blockquote><p>expand(sin(x + y)) 和差化积<br>$$<br>\sin(x)\cos(y) + \cos(x)\sin(y)<br>$$</p></blockquote><blockquote><p>expand(cos(2 x))<br>$$<br>2\cos(x)^2 - 1<br>$$</p></blockquote><blockquote><p>expand(exp(a + ln(b)))<br>$$<br>e^{a}b<br>$$</p></blockquote><blockquote><p>expand((x + 1) (y + z))<br>$$<br>xy + xz + y + z<br>$$</p></blockquote><p>不完全展开</p><blockquote><p>expand((x + 1) (y + z), x + 1)<br>$$<br>(x + 1)y + (x + 1)z<br>$$</p></blockquote><blockquote><p>ee :&#x3D; (a + b) z + sin(a + b) + exp(a + b)<br>默认情况下，乘积和函数会被展开。<br>expand(ee)<br>$$<br>za + zb + \sin(a)\cos(b) + \cos(a)\sin(b) + e^{a}e^{b}<br>$$</p></blockquote><p>避免展开 sin(a + b)</p><blockquote><p>expand(ee, sin(a + b))</p></blockquote><p>$$<br>za + zb + \sin(a + b) + e^{a}e^{b}<br>$$</p><h2 id="algsubs-subs-代换"><a href="#algsubs-subs-代换" class="headerlink" title="algsubs, subs 代换"></a>algsubs, subs 代换</h2><blockquote><p>subs(x&#x3D;2, x^2 + x + 1)<br>$$<br>7<br>$$</p></blockquote><blockquote><p>subs(x&#x3D;r^(1&#x2F;3), 3 x ln(x^2))<br>$$<br>3r^{1&#x2F;3}\ln(r)<br>$$</p></blockquote><blockquote><p>subs(sin(x)&#x3D;y, sin(x)&#x2F;sqrt(1 - sin(x)^2))<br>$$<br>\frac{y}{\sqrt{1 - y^2}}<br>$$</p></blockquote><p>以下示例展示了 subs 和 algsubs 之间的区别，其中 algsubs 命令将子表达式代入到表达式中。</p><blockquote><p>subs(a + b &#x3D; y, (a + b + c)^2)<br>$$<br>(a + b + c)^2<br>$$</p></blockquote><blockquote><p>algsubs(a + b &#x3D; y, (a + b + c)^2)<br>$$<br>(y + c)^2<br>$$</p></blockquote><blockquote><p>subs(a^2 &#x3D; x, a^3)<br>$$<br>a^3<br>$$</p></blockquote><blockquote><p>algsubs(a^2 &#x3D; y, a^3)</p></blockquote><p>$$<br>ya<br>$$</p><h2 id="simplify"><a href="#simplify" class="headerlink" title="simplify"></a>simplify</h2><p><strong>simplify 可以无脑使用的化简同时可以嵌套前面的化简表达式。</strong><br>简单示例</p><blockquote><p>simplify(1&#x2F;(4^2 + 3))<br>$$<br>5<br>$$</p></blockquote><p>化简三角表达式</p><blockquote><p>e :&#x3D; cos(x)^5 + sin(x)^4 + 2 cos(x)^2 - 2 sin(x)^2 - cos(2 x) :<br>simplify(e)<br>$$<br>\cos(x)^4(\cos(x) + 1)<br>$$</p></blockquote><p>化简指数和对数</p><blockquote><p>simplify(exp(a + ln(b exp(c))))<br>$$<br>b e^{a}<br>$$</p></blockquote><p>控制化简规则</p><blockquote><p>simplify(sin(x)^2 + ln(2 x) + cos(x)^2)<br>$$<br>\ln(2) + \ln(x) + 1<br>$$</p></blockquote><blockquote><p>simplify(sin(x)^2 + ln(2 x) + cos(x)^2, trig)<br>$$<br>\ln(2x) + 1<br>$$</p></blockquote><blockquote><p>simplify(sin(x)^2 + ln(2 x) + cos(x)^2, ln)</p></blockquote><p>$$<br>\sin(x)^2 + \ln(2) + \ln(x) + \cos(x)^2<br>$$</p>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>参考博客：<a href="https://zhuanlan.zhihu.com/p/578591315">https://zhuanlan.zhihu.com/p/578591315</a><br>官方中文手册：<a href="https://www.maplesoft.com.cn/support/documentation/PDF/maple2020/Maple2020%E4%B8%AD%E6%96%87%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C.pdf">https://www.maplesoft.com.cn/support/documentation/PDF/maple2020/Maple2020%E4%B8%AD%E6%96%87%E7%94%A8%E6%88%B7%E6%89%8B%E5%86%8C.pdf</a></p></blockquote><h2 id="collect，提取因式"><a href="#collect，提取因式" class="headerlink" title="collect，提取因式"></a>collect，提取因式</h2><p><strong>例一：</strong><br>$$<br>f :&#x3D; a \ln(x) - \ln(x) x - x<br>$$</p><blockquote><p>collect(f, ln(x))</p></blockquote><p>$$<br>(a - x) \ln(x) - x<br>$$</p><p><strong>例二：</strong><br>$$<br>g :&#x3D; \text{int}(x^2 (\exp(x) + \exp(-x)), x)<br>$$</p><p>即<br>$$<br>g :&#x3D; -\frac{x^2}{e^x} - \frac{2x}{e^x} - \frac{2}{e^x} + x^2 e^x - 2x e^x + 2e^x<br>$$</p><blockquote><p>collect(g, exp(x))</p></blockquote><p>$$<br>(x^2 - 2x + 2)e^x + \frac{2x^2 + 2x + 2}{e^x}<br>$$</p><p><strong>例三：</strong><br>$$<br>f :&#x3D; a^3 x - x + a^3 + a<br>$$</p><p>$$<br>f :&#x3D; a^3 x + a^3 + a - x<br>$$</p><blockquote><p>collect(f, x)</p></blockquote><p>$$<br>(a^3 - 1)x + a^3 + a<br>$$</p><blockquote><p>collect(f, x, factor)</p></blockquote><p>$$<br>(a - 1)(a^2 + a + 1)x + a(a^2 + 1)<br>$$</p><blockquote><ol><li><strong>合并同类项</strong>：将表达式 <code>f</code> 中所有关于变量 <code>x</code> 的项合并在一起。这意味着它会将所有包含 <code>x</code> 的项放在一起，并将常数项放在一起。</li><li><strong>因式分解</strong>：在合并同类项之后，<code>factor</code> 选项会进一步对合并后的表达式进行因式分解。因式分解是将一个多项式表示为几个多项式的乘积的过程。</li></ol></blockquote><h2 id="combine"><a href="#combine" class="headerlink" title="combine"></a>combine</h2><blockquote><p>combine(abs(x^2) abs(y + 1), abs)</p></blockquote><p>$$<br>|x|^2|y + 1|<br>$$</p><blockquote><p>f1 :&#x3D; sqrt(3) sqrt(2) + sqrt(y) sqrt(x^2 - 1)</p></blockquote><p>$$<br>f1 :&#x3D; \sqrt{3}\sqrt{2} + \sqrt{y}\sqrt{x^2 - 1}<br>$$</p><blockquote><p>combine(f1, radical)</p></blockquote><p>$$<br>\sqrt{6} + \sqrt{y}\sqrt{x^2 - 1}<br>$$</p><blockquote><p>combine(f1, radical, symbolic)</p></blockquote><p>$$<br>\sqrt{6} + \sqrt{y(x^2 - 1)}<br>$$</p><blockquote><p>combine(4 sin(x)^3, trig)</p></blockquote><p>$$<br>-\sin(3x) + 3\sin(x)<br>$$</p><blockquote><p>combine((exp(x))^2 exp(y), exp)</p></blockquote><p>$$<br>e^{2x + y}<br>$$</p><blockquote><p>combine(exp(sin(a) cos(b)) exp(cos(a) sin(b)), [trig, exp])</p></blockquote><p>$$<br>e^{\sin(a + b)}<br>$$</p><blockquote><p>combine([2 sin(x) cos(x), 2 cos(x)^2 - 1], trig)</p></blockquote><p>$$<br>[\sin(2x), \cos(2x)]<br>$$</p><h3 id="combine-可以积化和差"><a href="#combine-可以积化和差" class="headerlink" title="combine 可以积化和差"></a>combine 可以积化和差</h3><blockquote><p>combine(sin(x)*sin(y))</p></blockquote><p>$$<br>\frac{\cos(x - y)}{2} - \frac{\cos(x + y)}{2}<br>$$</p><table><thead><tr><th>mode</th><th>功能</th></tr></thead><tbody><tr><td><code>abs</code></td><td>合并多个绝对值为一个整体绝对值</td></tr><tr><td><code>radical</code></td><td>合并多个根号表达式，如 $\sqrt{a}\sqrt{b} \to \sqrt{ab}$</td></tr><tr><td><code>symbolic</code></td><td>启用更激进的代数变换（假设符号满足一些约束）</td></tr><tr><td><code>trig</code></td><td>应用三角恒等式，进行合并或化简</td></tr><tr><td><code>exp</code></td><td>合并指数函数，例如 $e^x e^y &#x3D; e^{x + y}$</td></tr><tr><td><code>[trig, exp]</code></td><td>依次应用三角与指数合并规则</td></tr></tbody></table><h2 id="factor-分解因式，变成连乘"><a href="#factor-分解因式，变成连乘" class="headerlink" title="factor 分解因式，变成连乘"></a>factor 分解因式，变成连乘</h2><blockquote><p>factor(6 x^2 + 18 x - 24)</p></blockquote><p>$$<br>6(x + 4)(x - 1)<br>$$</p><blockquote><p>factor(6)</p></blockquote><p>$$<br>6<br>$$</p><blockquote><p>ifactor(6)</p></blockquote><p>$$<br>(2)(3)<br>$$</p><blockquote><p>factor($(x^3 - y^3)&#x2F;(x^4 - y^4)$)</p></blockquote><p>$$<br>\frac{x^2 + xy + y^2}{(x + y)(x^2 + y^2)}<br>$$</p><blockquote><p>factor($1&#x2F;(x^2 - 1) + 1&#x2F;(x^2 + 3 x + 2)$)</p></blockquote><p>$$<br>\frac{2x + 1}{(x + 2)(x + 1)(x - 1)}<br>$$</p><blockquote><p>factor($x^3 + 5$)</p></blockquote><p>$$<br>x^3 + 5<br>$$</p><p>也可以指定因子，例如：</p><blockquote><p>factor($x^3 + 5$, $5^{1&#x2F;3}$)</p></blockquote><p>$$<br>(5^{2&#x2F;3} - 5^{1&#x2F;3}x + x^2)(x + 5^{1&#x2F;3})<br>$$</p><blockquote><p>factor($x^3 + 5$, {$1&#x2F;5^{1&#x2F;3}, (-3)^{1&#x2F;2}$})</p></blockquote><p>$$<br>-\frac{(5^{1&#x2F;3}\sqrt{-3} + 5^{1&#x2F;3} - 2x)(5^{1&#x2F;3}\sqrt{3} + 5^{1&#x2F;3} + 2x)}{4}<br>$$</p><table><thead><tr><th>指定参数</th><th>含义</th><th>分解效果</th></tr></thead><tbody><tr><td><code>factor(expr)</code></td><td>默认：只在实数或有理数域中分解</td><td>给出最多实根或不可约因子形式</td></tr><tr><td><code>factor(expr, 1/3)</code></td><td>允许立方根（扩展代数域）</td><td>使用 $\sqrt[3]{5}$ 等因子分解</td></tr><tr><td><code>factor(expr, &#123;1/3, √-3&#125;)</code></td><td>允许立方根和虚数参与</td><td>给出完全复数因式分解结果</td></tr></tbody></table><h2 id="expand-展开：乘法到加减"><a href="#expand-展开：乘法到加减" class="headerlink" title="expand 展开：乘法到加减"></a>expand 展开：乘法到加减</h2><blockquote><p>expand((x + 1) (x + 2))</p></blockquote><p>$$<br>x^2 + 3x + 2<br>$$</p><blockquote><p>expand((x + 1) &#x2F; (x + 2))</p></blockquote><p>$$<br>\frac{x}{x + 2} + \frac{1}{x + 2}<br>$$</p><blockquote><p>expand(1 &#x2F; ((x + 1) x))</p></blockquote><p>$$<br>\frac{1}{(x + 1)x}<br>$$</p><blockquote><p>expand(sin(x + y)) 和差化积</p></blockquote><p>$$<br>\sin(x)\cos(y) + \cos(x)\sin(y)<br>$$</p><blockquote><p>expand(cos(2 x))</p></blockquote><p>$$<br>2\cos(x)^2 - 1<br>$$</p><blockquote><p>expand(exp(a + ln(b)))</p></blockquote><p>$$<br>e^{a}b<br>$$</p><blockquote><p>expand((x + 1) (y + z))</p></blockquote><p>$$<br>xy + xz + y + z<br>$$</p><p>不完全展开</p><blockquote><p>expand((x + 1) (y + z), x + 1)</p></blockquote><p>$$<br>(x + 1)y + (x + 1)z<br>$$</p><blockquote><p>ee :&#x3D; (a + b) z + sin(a + b) + exp(a + b)<br>默认情况下，乘积和函数会被展开。<br>expand(ee)</p></blockquote><p>$$<br>za + zb + \sin(a)\cos(b) + \cos(a)\sin(b) + e^{a}e^{b}<br>$$</p><p>避免展开 sin(a + b)</p><blockquote><p>expand(ee, sin(a + b))</p></blockquote><p>$$<br>za + zb + \sin(a + b) + e^{a}e^{b}<br>$$</p><h2 id="algsubs-subs-代换"><a href="#algsubs-subs-代换" class="headerlink" title="algsubs, subs 代换"></a>algsubs, subs 代换</h2><blockquote><p>subs(x&#x3D;2, x^2 + x + 1)</p></blockquote><p>$$<br>7<br>$$</p><blockquote><p>subs(x&#x3D;r^(1&#x2F;3), 3 x ln(x^2))</p></blockquote><p>$$<br>3r^{1&#x2F;3}\ln(r)<br>$$</p><blockquote><p>subs(sin(x)&#x3D;y, sin(x)&#x2F;sqrt(1 - sin(x)^2))</p></blockquote><p>$$<br>\frac{y}{\sqrt{1 - y^2}}<br>$$</p><p>以下示例展示了 subs 和 algsubs 之间的区别，其中 algsubs 命令将子表达式代入到表达式中。</p><blockquote><p>subs(a + b &#x3D; y, (a + b + c)^2)</p></blockquote><p>$$<br>(a + b + c)^2<br>$$</p><blockquote><p>algsubs(a + b &#x3D; y, (a + b + c)^2)</p></blockquote><p>$$<br>(y + c)^2<br>$$</p><blockquote><p>subs(a^2 &#x3D; x, a^3)</p></blockquote><p>$$<br>a^3<br>$$</p><blockquote><p>algsubs(a^2 &#x3D; y, a^3)</p></blockquote><p>$$<br>ya<br>$$</p><h2 id="simplify"><a href="#simplify" class="headerlink" title="simplify"></a>simplify</h2><p><strong>simplify 可以无脑使用的化简同时可以嵌套前面的化简表达式。</strong><br>简单示例</p><blockquote><p>simplify(1&#x2F;(4^2 + 3))</p></blockquote><p>$$<br>5<br>$$</p><p>化简三角表达式</p><blockquote><p>e :&#x3D; cos(x)^5 + sin(x)^4 + 2 cos(x)^2 - 2 sin(x)^2 - cos(2 x) :<br>simplify(e)</p></blockquote><p>$$<br>\cos(x)^4(\cos(x) + 1)<br>$$</p><p>化简指数和对数</p><blockquote><p>simplify(exp(a + ln(b exp(c))))</p></blockquote><p>$$<br>b e^{a}<br>$$</p><p>控制化简规则</p><blockquote><p>simplify(sin(x)^2 + ln(2 x) + cos(x)^2)</p></blockquote><p>$$<br>\ln(2) + \ln(x) + 1<br>$$</p><blockquote><p>simplify(sin(x)^2 + ln(2 x) + cos(x)^2, trig)</p></blockquote><p>$$<br>\ln(2x) + 1<br>$$</p><blockquote><p>simplify(sin(x)^2 + ln(2 x) + cos(x)^2, ln)</p></blockquote><p>$$<br>\sin(x)^2 + \ln(2) + \ln(x) + \cos(x)^2<br>$$</p>]]></content>
       
       
       <categories>
@@ -167,11 +167,11 @@
       
         <tags>
             
+            <tag> 我的 </tag>
+            
             <tag> 其他 </tag>
             
             <tag> AI </tag>
-            
-            <tag> 我的 </tag>
             
         </tags>
       
@@ -213,6 +213,35 @@
     
     
     <entry>
+      <title>matlab</title>
+      <link href="/blog/2025/03/17/code/matlab/1-matlab/"/>
+      <url>/blog/2025/03/17/code/matlab/1-matlab/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Matlab清除命令，清空工作区代码，关闭所有窗口"><a href="#Matlab清除命令，清空工作区代码，关闭所有窗口" class="headerlink" title="Matlab清除命令，清空工作区代码，关闭所有窗口"></a>Matlab清除命令，清空工作区代码，关闭所有窗口</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clc,clear,close all; </span><br><span class="line"><span class="comment">%清除命令，清空工作区，关闭所有窗口</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> code </category>
+          
+          <category> matlab </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> code </tag>
+            
+            <tag> matlab </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C语言安装第三方库</title>
       <link href="/blog/2025/03/17/code/c/C%E8%AF%AD%E8%A8%80%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
       <url>/blog/2025/03/17/code/c/C%E8%AF%AD%E8%A8%80%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/</url>
@@ -236,35 +265,6 @@
             <tag> code </tag>
             
             <tag> C语言 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>matlab</title>
-      <link href="/blog/2025/03/17/code/matlab/1-matlab/"/>
-      <url>/blog/2025/03/17/code/matlab/1-matlab/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Matlab清除命令，清空工作区代码，关闭所有窗口"><a href="#Matlab清除命令，清空工作区代码，关闭所有窗口" class="headerlink" title="Matlab清除命令，清空工作区代码，关闭所有窗口"></a>Matlab清除命令，清空工作区代码，关闭所有窗口</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clc,clear,close all; </span><br><span class="line"><span class="comment">%清除命令，清空工作区，关闭所有窗口</span></span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> code </category>
-          
-          <category> matlab </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> code </tag>
-            
-            <tag> matlab </tag>
             
         </tags>
       
@@ -417,9 +417,9 @@
       
         <tags>
             
-            <tag> 我的 </tag>
-            
             <tag> top </tag>
+            
+            <tag> 我的 </tag>
             
         </tags>
       
@@ -556,35 +556,6 @@
     
     
     <entry>
-      <title>MacOS下的环境变量配置</title>
-      <link href="/blog/2025/01/27/tools/macos/MacOS%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/"/>
-      <url>/blog/2025/01/27/tools/macos/MacOS%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</url>
-      
-        <content type="html"><![CDATA[<h1 id="设置用户环境变量"><a href="#设置用户环境变量" class="headerlink" title="设置用户环境变量"></a>设置用户环境变量</h1><p>用户环境变量可以在<code>~/.bash_profile</code>文件内配置。</p><p>在命令终端使用 vim 编辑文件：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure><blockquote><p>也可以使用 macOS 内置的编辑器打开文件，在命令终端输入：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">open -e ~/.bash_profile</span><br></pre></td></tr></table></figure></blockquote><p>下述命令使配置立即生效，</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure><blockquote><p>参考博客：<a href="https://blog.csdn.net/liaowenxiong/article/details/112180532">https://blog.csdn.net/liaowenxiong/article/details/112180532</a></p></blockquote><h1 id="zsh环境变量失效问题"><a href="#zsh环境变量失效问题" class="headerlink" title="zsh环境变量失效问题"></a>zsh环境变量失效问题</h1><p>在 Mac 自带的终端中使用 <code>mkvirtualenv --python=/usr/bin/python py2</code> 创建虚拟环境是没问题的，但是到<code> oh-my-zsh</code>下就会提示 <code>ERROR: virtualenvwrapper could not find virtualenv in your path</code>，</p><ul><li>原因是 oh-my-zsh 的配置文件中 <code>~/.zshrc</code> 没有继承 原始终端配置文件 <code>~/.bash_profile</code> 中的配置，</li></ul><p>新版的zsh在登录的时候默认只会加载~&#x2F;.zshrc的配置文件，以前配置的环境变量会无效，尝试网上的各种方法均无效发现配置文件有这样一条说明<code>If you come from bash you might have to change your $PATH.</code></p><p>于是简单粗暴的解决方案：编辑~&#x2F;.zshrc文件<br> 解决方法如下：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#在开头添加一下配置</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$HOME</span>/bin:/usr/local/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">source</span> <span class="variable">$HOME</span>/.bashrc </span><br><span class="line"><span class="built_in">source</span> <span class="variable">$HOME</span>/.bash_profile</span><br></pre></td></tr></table></figure><p>仅添加下述也可</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> <span class="variable">$HOME</span>/.bash_profile</span><br></pre></td></tr></table></figure><blockquote><p>参考博客：<a href="https://www.jianshu.com/p/b25f9a165406">https://www.jianshu.com/p/b25f9a165406</a></p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> tools </category>
-          
-          <category> Macos </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> MacOS </tag>
-            
-            <tag> 系统配置 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>【转载】Linux常见运维命令</title>
       <link href="/blog/2025/01/27/tools/linux/Linux%E5%B8%B8%E8%A7%81%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4/"/>
       <url>/blog/2025/01/27/tools/linux/Linux%E5%B8%B8%E8%A7%81%E8%BF%90%E7%BB%B4%E5%91%BD%E4%BB%A4/</url>
@@ -606,6 +577,35 @@
             <tag> 系统配置 </tag>
             
             <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MacOS下的环境变量配置</title>
+      <link href="/blog/2025/01/27/tools/macos/MacOS%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/"/>
+      <url>/blog/2025/01/27/tools/macos/MacOS%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="设置用户环境变量"><a href="#设置用户环境变量" class="headerlink" title="设置用户环境变量"></a>设置用户环境变量</h1><p>用户环境变量可以在<code>~/.bash_profile</code>文件内配置。</p><p>在命令终端使用 vim 编辑文件：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br></pre></td></tr></table></figure><blockquote><p>也可以使用 macOS 内置的编辑器打开文件，在命令终端输入：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">open -e ~/.bash_profile</span><br></pre></td></tr></table></figure></blockquote><p>下述命令使配置立即生效，</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> ~/.bash_profile</span><br></pre></td></tr></table></figure><blockquote><p>参考博客：<a href="https://blog.csdn.net/liaowenxiong/article/details/112180532">https://blog.csdn.net/liaowenxiong/article/details/112180532</a></p></blockquote><h1 id="zsh环境变量失效问题"><a href="#zsh环境变量失效问题" class="headerlink" title="zsh环境变量失效问题"></a>zsh环境变量失效问题</h1><p>在 Mac 自带的终端中使用 <code>mkvirtualenv --python=/usr/bin/python py2</code> 创建虚拟环境是没问题的，但是到<code> oh-my-zsh</code>下就会提示 <code>ERROR: virtualenvwrapper could not find virtualenv in your path</code>，</p><ul><li>原因是 oh-my-zsh 的配置文件中 <code>~/.zshrc</code> 没有继承 原始终端配置文件 <code>~/.bash_profile</code> 中的配置，</li></ul><p>新版的zsh在登录的时候默认只会加载~&#x2F;.zshrc的配置文件，以前配置的环境变量会无效，尝试网上的各种方法均无效发现配置文件有这样一条说明<code>If you come from bash you might have to change your $PATH.</code></p><p>于是简单粗暴的解决方案：编辑~&#x2F;.zshrc文件<br> 解决方法如下：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment">#在开头添加一下配置</span></span><br><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$HOME</span>/bin:/usr/local/bin:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">source</span> <span class="variable">$HOME</span>/.bashrc </span><br><span class="line"><span class="built_in">source</span> <span class="variable">$HOME</span>/.bash_profile</span><br></pre></td></tr></table></figure><p>仅添加下述也可</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">source</span> <span class="variable">$HOME</span>/.bash_profile</span><br></pre></td></tr></table></figure><blockquote><p>参考博客：<a href="https://www.jianshu.com/p/b25f9a165406">https://www.jianshu.com/p/b25f9a165406</a></p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> tools </category>
+          
+          <category> Macos </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> MacOS </tag>
+            
+            <tag> 系统配置 </tag>
             
         </tags>
       
@@ -800,33 +800,6 @@
     
     
     <entry>
-      <title>Hozenghan的Memoji</title>
-      <link href="/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/"/>
-      <url>/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/</url>
-      
-        <content type="html"><![CDATA[<div class="gallery-container" data-type="data" data-button="" data-limit="10" data-first="10">    <div class="gallery-items">[{"url":"/blog/images/postMemoji/1.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/2.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/3.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/4.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/5.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/ai-1.png","alt":"2","title":""}]</div>  </div>]]></content>
-      
-      
-      <categories>
-          
-          <category> 其他 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 我的 </tag>
-            
-            <tag> top </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>【Hexo】博客主题配置（持续更新）</title>
       <link href="/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/"/>
       <url>/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</url>
@@ -844,6 +817,33 @@
         <tags>
             
             <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Hozenghan的Memoji</title>
+      <link href="/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/"/>
+      <url>/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/</url>
+      
+        <content type="html"><![CDATA[<div class="gallery-container" data-type="data" data-button="" data-limit="10" data-first="10">    <div class="gallery-items">[{"url":"/blog/images/postMemoji/1.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/2.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/3.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/4.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/5.jpg","alt":"2","title":""},{"url":"/blog/images/postMemoji/ai-1.png","alt":"2","title":""}]</div>  </div>]]></content>
+      
+      
+      <categories>
+          
+          <category> 其他 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> top </tag>
+            
+            <tag> 我的 </tag>
             
         </tags>
       
