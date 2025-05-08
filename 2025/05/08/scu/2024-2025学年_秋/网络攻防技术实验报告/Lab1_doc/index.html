@@ -1,0 +1,360 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>【网络攻防技术实验报告】实验1：域名信息收集工具 | Hozenghan的博客</title><meta name="author" content="Hozenghan"><meta name="copyright" content="Hozenghan"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="网络攻防技术实验报告-实验1：域名信息收集工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【网络攻防技术实验报告】实验1：域名信息收集工具">
+<meta property="og:url" content="http://hozenghan.github.io/blog/2025/05/08/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/Lab1_doc/index.html">
+<meta property="og:site_name" content="Hozenghan的博客">
+<meta property="og:description" content="网络攻防技术实验报告-实验1：域名信息收集工具">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hozenghan.github.io/blog/coverImages/scu_24-25_gf-lab1.jpg">
+<meta property="article:published_time" content="2025-05-08T15:59:50.000Z">
+<meta property="article:modified_time" content="2025-05-08T08:07:35.012Z">
+<meta property="article:author" content="Hozenghan">
+<meta property="article:tag" content="网络安全">
+<meta property="article:tag" content="scu">
+<meta property="article:tag" content="专业课">
+<meta property="article:tag" content="网络攻防技术">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hozenghan.github.io/blog/coverImages/scu_24-25_gf-lab1.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "【网络攻防技术实验报告】实验1：域名信息收集工具",
+  "url": "http://hozenghan.github.io/blog/2025/05/08/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/Lab1_doc/",
+  "image": "http://hozenghan.github.io/blog/coverImages/scu_24-25_gf-lab1.jpg",
+  "datePublished": "2025-05-08T15:59:50.000Z",
+  "dateModified": "2025-05-08T08:07:35.012Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Hozenghan",
+      "url": "http://hozenghan.github.io/blog/"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/blog/images/sun.png"><link rel="canonical" href="http://hozenghan.github.io/blog/2025/05/08/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/Lab1_doc/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/blog/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/blog/',
+  algolia: undefined,
+  localSearch: {"path":"/blog/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"未找到符合您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":true},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '【网络攻防技术实验报告】实验1：域名信息收集工具',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/blog/images/profile.jpg" onerror="this.onerror=null;this.src='/blog/images/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">42</div></a><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">43</div></a><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">27</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> 博客首页</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/blog/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-camera"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://hozenghan.github.io"><i class="fa-fw fas fa-home"></i><span> 个人主页</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/blog/"><img class="site-icon" src="/blog/images/sun.png" alt="Logo"><span class="site-name">Hozenghan的博客</span></a><a class="nav-page-title" href="/blog/"><span class="site-name">【网络攻防技术实验报告】实验1：域名信息收集工具</span></a></span><div id="menus"><div id="search-button"><span class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/blog/"><i class="fa-fw fas fa-home"></i><span> 博客首页</span></a></div><div class="menus_item"><a class="site-page" href="/blog/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/blog/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/blog/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/blog/link/"><i class="fa-fw fa fa-link"></i><span> 链接</span></a></div><div class="menus_item"><a class="site-page" href="/blog/about/"><i class="fa-fw fas fa-camera"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="https://hozenghan.github.io"><i class="fa-fw fas fa-home"></i><span> 个人主页</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><h1 class="post-title">【网络攻防技术实验报告】实验1：域名信息收集工具</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-05-08T15:59:50.000Z" title="发表于 2025-05-08 23:59:50">2025-05-08</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-05-08T08:07:35.012Z" title="更新于 2025-05-08 16:07:35">2025-05-08</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/SCU/">SCU</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/SCU/2024-2025%E5%AD%A6%E5%B9%B4-%E7%A7%8B/">2024-2025学年_秋</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/blog/categories/SCU/2024-2025%E5%AD%A6%E5%B9%B4-%E7%A7%8B/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/">网络攻防技术</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">3.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>13分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div><article class="container post-content" id="article-container"><div id="post-outdate-notice" data="{&quot;limitDay&quot;:365,&quot;messagePrev&quot;:&quot;It has been&quot;,&quot;messageNext&quot;:&quot;days since the last update, the content of the article may be outdated.&quot;,&quot;postUpdate&quot;:&quot;2025-05-08 16:07:35&quot;}" hidden></div><h1 id="作业题目"><a href="#作业题目" class="headerlink" title="作业题目"></a>作业题目</h1><p><strong>实验1：域名信息收集工具</strong></p>
+<p><strong>时间</strong>：第2周</p>
+<p><strong>地点及方式</strong>：教室</p>
+<p><strong>人员</strong>：全体学生</p>
+<p><strong>实验内容</strong>：本次实验主要考察大家的编程能力及子域名的信息收集方法，在文件夹“Lab1_code”提供了使用Bing搜索引擎的域名收集功能。请对该代码进行扩展，使其可支持百度搜索引擎的域名收集功能。需要实现如下功能：</p>
+<ul>
+<li><p>a) 支持百度搜索引擎的域名提取，其中从百度搜索引擎提取的域名需为真实域名，而非百度的域名跳转链接；</p>
+</li>
+<li><p>b) 可扩充其他功能，比如域名所在的标题等信息。</p>
+</li>
+</ul>
+<p>**实验报告：**需要提交一份详细的实验报告和截图，来描述做了什么和观察到了什么。还需要对有趣或令人惊讶的观察结果进行解释。还请列出重要的代码片段，然后进行解释。仅附加代码而不作任何解释将不得分。</p>
+<p><strong>评分要点</strong>：</p>
+<ul>
+<li><p>a) 功能完成情况：60%；</p>
+</li>
+<li><p>b) 代码规范性：20%；</p>
+</li>
+<li><p>c) 报告质量：20%</p>
+</li>
+</ul>
+<p><strong>提交方式</strong>：</p>
+<p>请在学习通作业模块提交，选择对应的作业编号进行提交，请注意：</p>
+<ul>
+<li><p>代码命名为：<code>Lab1_code_学号_姓名.zip</code></p>
+</li>
+<li><p>文档命名为：<code>Lab1_doc_学号_姓名.pdf</code></p>
+</li>
+</ul>
+<h1 id="实验步骤及结果"><a href="#实验步骤及结果" class="headerlink" title="实验步骤及结果"></a>实验步骤及结果</h1><p>原始代码使用bing搜索引擎的输出结果如下（原始代码的输出），</p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919131024039.png" alt="image-20240919131024039" style="zoom:67%;" />
+
+<p>下面介绍拓展的代码部分。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 本次实验内容主要为：收集baidu.com域名下的子域名，</span></span><br><span class="line"><span class="comment"># 收集方法为使用baidu搜索引擎，采用爬手段，爬取搜索到的域名</span></span><br><span class="line"><span class="comment"># baidu搜索引擎搜索子域名的语法为：domain:[域名]</span></span><br><span class="line"><span class="keyword">import</span> requests  <span class="comment"># 用于请求网页</span></span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup  <span class="comment"># 用于处理获取的到的网页源码数据</span></span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlparse  <span class="comment"># 用于处理url</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个采用baidu搜索的方法</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">baidu_search</span>():</span><br><span class="line">    Subdomain = []  <span class="comment"># 定义一个空列表用于存储收集到的子域名</span></span><br><span class="line">    <span class="comment"># 定义请求头，绕过反爬机制</span></span><br><span class="line">    hearders = &#123;</span><br><span class="line">        <span class="string">&#x27;user-agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;accept&#x27;</span>: <span class="string">&#x27;*/*&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;referer&#x27;</span>: <span class="string">&#x27;https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;rsv_idx=1&amp;tn=88093251_127_hao_pg&amp;wd=domain%3Aqq.com&amp;fenlei=256&amp;rsv_pq=0xb0ebef1b003e0b45&amp;rsv_t=d009FrprT0AQBXEwtq7%2BuwLwPJN20YC0pdaQfo%2FkzU11n0FQHpr2B30OiGht&amp;rqlang=en&amp;rsv_enter=0&amp;rsv_dl=tb&amp;rsv_n=2&amp;rsv_sug3=1&amp;rsv_btype=i&amp;inputT=2684&amp;rsv_sug4=2685&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;cookie&#x27;</span>: <span class="string">&#x27;BIDUPSID=BF430F96E98BBB72838AA2BE75F2E4AB&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment"># 定义请求url</span></span><br><span class="line">    url = <span class="string">&quot;https://www.baidu.com/s?wd=domain%3Aqq.com&amp;rsv_spt=1&amp;rsv_iqid=0xeb03ce41011d24b6&amp;issp=1&amp;f=8&amp;rsv_bp=1&amp;rsv_idx=2&amp;ie=utf-8&amp;rqlang=cn&amp;tn=baiduhome_pg&amp;rsv_enter=1&amp;rsv_dl=tb&amp;oq=domain%253Aqq.com&amp;rsv_btype=t&amp;inputT=2766&amp;rsv_t=22aeYjLLjiQ%2BLdr1%2FTZRucxkBo8gYnEgOvRpHAvCgn1YTTMy2SYkC5XbeSxnJ%2F8x1FNx&amp;rsv_pq=dee5f54704fc63ba&amp;rsv_sug3=15&amp;rsv_n=2&amp;rsv_sug2=0&amp;rsv_sug4=2766&quot;</span></span><br><span class="line"></span><br><span class="line">    resp = requests.get(url, headers=hearders)  <span class="comment"># 访问url，获取网页源码</span></span><br><span class="line"></span><br><span class="line">    soup = BeautifulSoup(resp.content,</span><br><span class="line">                         <span class="string">&#x27;html.parser&#x27;</span>)  <span class="comment"># 创建一个BeautifulSoup对象，第一个参数是网页源码，第二个参数是Beautiful Soup 使用的 HTML 解析器，</span></span><br><span class="line">    <span class="comment"># 定位每一条搜索结果</span></span><br><span class="line">    job_bt = soup.find_all(<span class="string">&#x27;div&#x27;</span>, class_=<span class="string">&#x27;result c-container xpath-log new-pmd&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> job_bt:</span><br><span class="line">        link = i.get(<span class="string">&#x27;mu&#x27;</span>)  <span class="comment"># 循环获取&#x27;href&#x27;的内容</span></span><br><span class="line">        <span class="comment"># urlparse是一个解析url的工具，scheme获取url的协议名，netLoc获取url的网络位置</span></span><br><span class="line">        name = i.find(<span class="string">&#x27;h3&#x27;</span>).find(<span class="string">&#x27;a&#x27;</span>).getText()</span><br><span class="line">        domain = <span class="built_in">str</span>(urlparse(link).scheme + <span class="string">&quot;://&quot;</span> + urlparse(link).netloc)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&quot;.qq.com&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> domain:				<span class="comment"># 防止非qq.com的子域名出现在输出栏中，百度搜索引擎即使附加了限定条件也会显示一些非目标的url</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">if</span> domain <span class="keyword">in</span> Subdomain:  <span class="comment"># 如果解析后的domain存在于Subdomain中则跳过，否则将domain存入子域名表中pass</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            Subdomain.append(domain)</span><br><span class="line">            <span class="built_in">print</span>(domain + <span class="string">&#x27;\t&#x27;</span> + name)</span><br><span class="line"></span><br><span class="line">baidu_search()</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="step1"><a href="#step1" class="headerlink" title="step1"></a>step1</h4><p> 首先需要导入必要的包，代码如下。</p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919131045272.png" alt="image-20240919131045272" style="zoom:75%;" />
+
+
+
+<h4 id="step2"><a href="#step2" class="headerlink" title="step2"></a>step2</h4><p>下一步，使用百度搜索引擎，在输入框内输入domain:qq.com，观察网络请求和响应的具体情况，结果如下所示。</p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/图片1.png" alt="图片1" style="zoom:67%;" /> 
+
+
+
+<h4 id="step3"><a href="#step3" class="headerlink" title="step3"></a>step3</h4><p>百度服务器会通过对请求头的分析来判断是否为爬虫程序，因此需要伪造请求头；此外还要加入<code>user-agent，accept，referer，cookie</code>字段，这些可以从自己的浏览器获取。</p>
+<p>进入浏览器，配置搜索引擎为百度，然后按下f12，查看网络数据，根据网络包的请求头修改headers和url，</p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/图片2.png" alt="图片2" style="zoom:67%;" /> 
+
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/图片3.png" alt="图片3" style="zoom:67%;" /> 
+
+<p><img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/图片4.png" alt="img" style="zoom:67%;" /> <img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/图片5.png" alt="图片5" style="zoom:67%;" /></p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919131927397.png" alt="image-20240919131927397" style="zoom:67%;" />
+
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919131936528.png" alt="image-20240919131936528" style="zoom:67%;" /> 
+
+
+
+<h4 id="step4"><a href="#step4" class="headerlink" title="step4"></a>step4</h4><p>下述代码使用<code>requests</code>库和<code>BeautifulSoup</code>库来抓取网页内容并解析，</p>
+<p>第一行使用<code>requests.get</code>方法发送一个GET请求到指定的URL；<code>headers</code>参数用于传递之前定义的请求头，避免被网站的反爬虫机制拦截。</p>
+<p>下一行<code>BeautifulSoup</code>库来解析服务器响应的内容（即网页源码）；<code>html.parser</code>是指定的HTML解析器，用于解析HTML文档。</p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919134630068.png" alt="image-20240919134630068" style="zoom:67%;" /> 
+
+
+
+<h4 id="step5"><a href="#step5" class="headerlink" title="step5"></a>step5</h4><p>通过<code>f12</code>查看网页源码，然后可以在页面中选择元素进行审查，然后通过选择来定位域名url的具体位置。</p>
+<p>需要注意的是下面带有<code>href</code>标签的代码是<u>百度的域名跳转链接</u>，而上面的<code> div class=”result c-container xpath-log new-pmd”</code>标签下的 mu 内容才是真正的 url。</p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919134924707.png" alt="image-20240919134924707" style="zoom:67%;" /> 
+
+
+
+<p>可以发现使用百度搜索引擎搜索<code>domain:qq.com</code>时的源代码和在bing搜索<code>domain:qq.com</code>时的代码存在不同，需要在原有的<code>bing_search()</code>函数的基础上，修改某些参数换成百度搜索引擎中的，即把<code>h2</code>换成<code>h3</code>。然后就可以定位域名url的位置（如上图红色下划线所示），从格式化数据中搜索获取url和title。</p>
+<p>另附下图，下图为使用bing搜索引擎的结果，标签是<code>h2</code>与百度不同。</p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/图片8.png" alt="图片8" style="zoom:67%;" /> 
+
+
+
+<h4 id="step6"><a href="#step6" class="headerlink" title="step6"></a>step6</h4><p> 然后为了实现功能要求中的显示域名所在的标题等信息功能，在<code>bing_search</code>函数的基础上修改代码，结果如下，</p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919135019477.png" alt="image-20240919135019477" style="zoom:67%;" /> 
+
+<ul>
+<li><p>首先修改 soup 方法里的参数，这一行代码使用<code>BeautifulSoup</code>库的<code>find_all</code>方法来查找所有具有<code>result c-container xpath-log new-pmd</code>类名（从上方百度搜索引擎的源代码标签内得知）的<code>div</code>元素，然后存储在变量<code>job_bt</code>中。注意这里的 class 后面要加下划线“_“，否则会出现问题。</p>
+</li>
+<li><p>for循环语句内的第一行代码尝试从当前遍历的div元素中获取一个名为mu的属性值，这个值被用于获取URL。</p>
+</li>
+<li><p>接下来继续扩充增加域名标题的功能，检查源代码，发现网页标题在<code>&lt;h3&gt;</code>标签下的<code>&lt;a&gt;</code>标签中，如下图所示。而获取标签中的内容可以用 <code>getText()</code>方法。下一行代码查找当前<code>div</code>元素下的<code>h3</code>标签，然后在这个<code>h3</code>标签下查找<code>a标签</code>，并获取<code>a标签</code>的文本内容，这个文本内容是网站的标题。</p>
+</li>
+</ul>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/图片9.png" alt="图片9" style="zoom:67%;" /> 
+
+<ul>
+<li><p>接下来的代码使用<code>urlparse</code>函数来解析link变量中的URL，提取出协议（scheme）和网络位置（netloc），并组合成完整的域名。</p>
+</li>
+<li><p>下一个判断语句目的是防止非<code>qq.com</code>的子域名出现在输出栏中，百度搜索引擎即使附加了限定条件也会显示一些非目标的url，因此需要筛选出不符合要求的域名。(仅使用<code>qq.com</code>的筛选条件的话可能仍然会把一些非要求域名显示出来，例如<code>imqq.com</code>，所以筛选条件要设置为<code>.qq.com</code>)</p>
+</li>
+<li><p>我们还需要判断这个域名是否为未曾出现的子域名，若是则加入列表内，然后输出。</p>
+</li>
+</ul>
+<h4 id="step7"><a href="#step7" class="headerlink" title="step7"></a>step7</h4><p> 输出结果如下所示，</p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919135217318.png" alt="image-20240919135217318" style="zoom:67%;" />
+
+ 
+
+<p>另外附上浏览器页面，（一些非<code>qq.com</code>的域名都被筛选出去了并未显示在输出框内）</p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919135307481.png" alt="image-20240919135307481" style="zoom:67%;" /> 
+
+
+
+<h4 id="功能拓展-翻页"><a href="#功能拓展-翻页" class="headerlink" title="功能拓展-翻页"></a>功能拓展-翻页</h4><p><u>代码详见压缩包内的</u><code>Sub_Domain_Search_baidu2.py</code><u>文件</u></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 本次实验内容主要为：收集baidu.com域名下的子域名，</span></span><br><span class="line"><span class="comment"># 收集方法为使用baidu搜索引擎，采用爬手段，爬取搜索到的域名</span></span><br><span class="line"><span class="comment"># baidu搜索引擎搜索子域名的语法为：domain:[域名]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests                          <span class="comment">#用于请求网页</span></span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup            <span class="comment">#用于处理获取的到的网页源码数据</span></span><br><span class="line"><span class="keyword">from</span> urllib.parse <span class="keyword">import</span> urlparse        <span class="comment">#用于处理url</span></span><br><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"><span class="keyword">import</span> urllib.error</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 本python用以拓展Sub_Domain_Search_baidu.py文件，实现了翻页爬取的功能</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义一个采用baidu搜索的方法</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">baidu_search</span>():</span><br><span class="line">    Subdomain = []  <span class="comment"># 定义一个空列表用于存储收集到的子域名</span></span><br><span class="line">    <span class="comment"># 定义请求头，绕过反爬机制</span></span><br><span class="line">    hearders = &#123;</span><br><span class="line">        <span class="string">&#x27;user-agent&#x27;</span>: <span class="string">&#x27;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;accept&#x27;</span>: <span class="string">&#x27;*/*&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;referer&#x27;</span>: <span class="string">&#x27;https://www.baidu.com/s?ie=utf-8&amp;f=8&amp;rsv_bp=1&amp;rsv_idx=1&amp;tn=88093251_127_hao_pg&amp;wd=domain%3Aqq.com&amp;fenlei=256&amp;rsv_pq=0xb0ebef1b003e0b45&amp;rsv_t=d009FrprT0AQBXEwtq7%2BuwLwPJN20YC0pdaQfo%2FkzU11n0FQHpr2B30OiGht&amp;rqlang=en&amp;rsv_enter=0&amp;rsv_dl=tb&amp;rsv_n=2&amp;rsv_sug3=1&amp;rsv_btype=i&amp;inputT=2684&amp;rsv_sug4=2685&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;cookie&#x27;</span>: <span class="string">&#x27;BIDUPSID=BF430F96E98BBB72838AA2BE75F2E4AB&#x27;</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">5</span>):</span><br><span class="line">        j = <span class="built_in">str</span>(j)</span><br><span class="line">        url = <span class="string">&quot;https://www.baidu.com/s?wd=domain%3Aqq.com&amp;pn=&quot;</span> + j + <span class="string">&quot;0&amp;rsv_spt=1&amp;rsv_iqid=0xeb03ce41011d24b6&amp;issp=1&amp;f=8&amp;rsv_bp=1&amp;rsv_idx=2&amp;ie=utf-8&amp;rqlang=cn&amp;tn=baiduhome_pg&amp;rsv_enter=1&amp;rsv_dl=tb&amp;oq=domain%253Aqq.com&amp;rsv_btype=t&amp;inputT=2766&amp;rsv_t=22aeYjLLjiQ%2BLdr1%2FTZRucxkBo8gYnEgOvRpHAvCgn1YTTMy2SYkC5XbeSxnJ%2F8x1FNx&amp;rsv_pq=dee5f54704fc63ba&amp;rsv_sug3=15&amp;rsv_n=2&amp;rsv_sug2=0&amp;rsv_sug4=2766&quot;</span></span><br><span class="line">        resp = requests.get(url,headers=hearders)           <span class="comment">#访问url，获取网页源码</span></span><br><span class="line">        </span><br><span class="line">        soup = BeautifulSoup(resp.content,<span class="string">&#x27;html.parser&#x27;</span>)    <span class="comment">#创建一个BeautifulSoup对象，第一个参数是网页源码，第二个参数是Beautiful Soup 使用的 HTML 解析器，</span></span><br><span class="line">        </span><br><span class="line">        job_bt = soup.find_all(<span class="string">&#x27;div&#x27;</span>, class_=<span class="string">&#x27;result c-container xpath-log new-pmd&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> job_bt:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                link = i.get(<span class="string">&#x27;mu&#x27;</span>)  <span class="comment"># 循环获取&#x27;href&#x27;的内容</span></span><br><span class="line">                <span class="comment"># urlparse是一个解析url的工具，scheme获取url的协议名，netLoc获取url的网络位置</span></span><br><span class="line">                name = i.find(<span class="string">&#x27;h3&#x27;</span>).find(<span class="string">&#x27;a&#x27;</span>).getText()</span><br><span class="line">                domain = <span class="built_in">str</span>(urlparse(link).scheme + <span class="string">&quot;://&quot;</span> + urlparse(link).netloc)</span><br><span class="line">                <span class="keyword">if</span> <span class="string">&quot;.qq.com&quot;</span> <span class="keyword">not</span> <span class="keyword">in</span> domain:				<span class="comment"># 防止非qq.com的子域名出现在输出栏中，百度搜索引擎即使附加了限定条件也会显示一些非目标的url</span></span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">if</span> domain <span class="keyword">in</span> Subdomain:  <span class="comment"># 如果解析后的domain存在于Subdomain中则跳过，否则将domain存入子域名表中pass</span></span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    Subdomain.append(domain)</span><br><span class="line">                    <span class="built_in">print</span>(domain + <span class="string">&#x27;\t&#x27;</span> + name)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">except</span> urllib.error.HTTPError <span class="keyword">as</span> e:</span><br><span class="line">                <span class="keyword">if</span> e.code == <span class="number">500</span>:</span><br><span class="line">                    <span class="comment"># 如果HTTP状态码为500，跳过该异常并继续执行其他代码</span></span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment"># 处理其他HTTP错误</span></span><br><span class="line">                    <span class="built_in">print</span>(<span class="string">&#x27;HTTPError:&#x27;</span>, e.code)</span><br><span class="line">                    <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">except</span> urllib.error.URLError <span class="keyword">as</span> e:</span><br><span class="line">                <span class="comment"># 处理URL错误</span></span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;URLError:&#x27;</span>, e.reason)</span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                <span class="comment"># 处理其他异常</span></span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&#x27;Error:&#x27;</span>, <span class="built_in">str</span>(e))</span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line">       </span><br><span class="line">        </span><br><span class="line">        time.sleep(<span class="number">2</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;-------------------------------------------------------已爬取页数：&quot;</span> + <span class="built_in">str</span>(j))</span><br><span class="line"></span><br><span class="line">baidu_search()</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">代码如下，</span><br><span class="line"></span><br><span class="line">&lt;img src=&quot;https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919195128212.png&quot; alt=&quot;image-20240919195128212&quot; style=&quot;zoom:67%;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">- ```j```的```for```循环通过变量```j```来构建用于搜索的URL，其中 `pn` 参数控制搜索结果的偏移量。```pn=00```表示第一页，```pn=10```则表示第二页，其中```pn=00```往往省略不写，其他变量```resp```、```soup```、```job_bt```保持不变,</span><br><span class="line"></span><br><span class="line">&lt;img src=&quot;https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919195528376.png&quot; alt=&quot;image-20240919195528376&quot; style=&quot;zoom:67%;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;img src=&quot;https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919195537501.png&quot; alt=&quot;image-20240919195537501&quot; style=&quot;zoom:70%;&quot; /&gt;</span><br><span class="line"></span><br><span class="line">- 有些网站因为停止维护或网络问题无法访问，为了不让程序停止运行，使用抛出异常机制进行处理。上述代码使用 `try-except` 块来捕获并处理可能发生的异常，逻辑大体如下所示，</span><br><span class="line"></span><br><span class="line">  ```python</span><br><span class="line">  try:</span><br><span class="line">      # 尝试执行的代码块</span><br><span class="line">  except urllib.error.HTTPError as e:</span><br><span class="line">      # 处理HTTP错误</span><br><span class="line">  except urllib.error.URLError as e:</span><br><span class="line">      # 处理URL错误</span><br><span class="line">  except Exception as e:</span><br><span class="line">      # 处理其他异常</span><br></pre></td></tr></table></figure>
+
+  <img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919200353643.png" alt="image-20240919200353643" style="zoom:70%;" />
+
+<ul>
+<li><p><code>time.sleep</code>函数与<code>for i in job_bt:</code>循环是同一层次的，每当爬取完一个页面后，会休眠一段时间，因为过快的访问速度会被百度服务器判定为爬虫，从而触发防爬机制。</p>
+</li>
+<li><p>最后在休眠完后，会打印已爬取的页数。</p>
+</li>
+</ul>
+<p>结果如下所示，通过设置<code>j</code>的循环数可以实现爬取多个页面的效果，</p>
+<img src="https://raw.githubusercontent.com/Hozenghan/blogResources/master/scu_images/image-20240919194306980.png" alt="image-20240919194306980" style="zoom:67%;" />
+
+
+
+<h1 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h1><p>一、显然，修改<code>url</code>变量的值会导致输出结果的不同，这是因为<code>url</code>的不同会使请求不同。而且不同搜索引擎的结果会不同，这应该涉及每个搜索引擎的查找算法，不同的算法导致不同的结果。</p>
+<p>二、原始代码仅能爬取单一页面的域名（无法翻页），而且不能指定主域名，需要修改源代码才能更换要爬取的子域名。</p>
+<p>三、百度搜索引擎在搜索子域名的时候也会把一些无关的网页选出并展示（即domain的限定条件有时候会失效，需要加以限制否则会出现错误），所以需要附加限定条件。</p>
+<p>四、当爬取多页的时候，可以在爬取的时候设置一定的睡眠时间，例如<code>time.sleep(2)</code>，否则较快的访问请求会增大被服务器拒绝的风险，触发防爬机制。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ol>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_21933615/article/details/81171951">Python中BeautifulSoup库的用法-CSDN博客</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.runoob.com/python3/python-requests.html">Python requests 模块 | 菜鸟教程 (runoob.com)</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://tate-young.github.io/2019/10/28/http-web-crawler.html">网络爬虫与反爬 - Tate &amp; Snow (tate-young.github.io)</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://sec-wiki.com/news/search?wd=%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86">https://sec-wiki.com/news/search?wd=%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_25834767/article/details/104532493">https://blog.csdn.net/qq_25834767/article/details/104532493</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/votEOvJafPjCka7gIB8DEA">https://mp.weixin.qq.com/s/votEOvJafPjCka7gIB8DEA</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/feiying0canglang/article/details/125389809">浏览器–常用的搜索操作符大全–使用&#x2F;实例-CSDN博客</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_59162248/article/details/130881935">可能是最全的 Python 反爬虫及应对方案了-CSDN博客</a></p>
+</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://hozenghan.github.io/blog">Hozenghan</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://hozenghan.github.io/blog/2025/05/08/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/Lab1_doc/">http://hozenghan.github.io/blog/2025/05/08/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/Lab1_doc/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://hozenghan.github.io/blog" target="_blank">Hozenghan的博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/blog/tags/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a><a class="post-meta__tags" href="/blog/tags/scu/">scu</a><a class="post-meta__tags" href="/blog/tags/%E4%B8%93%E4%B8%9A%E8%AF%BE/">专业课</a><a class="post-meta__tags" href="/blog/tags/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF/">网络攻防技术</a></div><div class="post-share"><div class="social-share" data-image="/blog/coverImages/scu_24-25_gf-lab1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/blog/2025/05/04/math/%E3%80%90%E6%95%B0%E5%AD%A6%E4%B8%8E%E8%AE%A1%E7%AE%97%E3%80%91Maple%E6%8E%A8%E5%AF%BC%E5%85%AC%E5%BC%8F%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="【数学与计算】Maple推导公式常用命令"><img class="cover" src="/blog/coverImages/math-maple.jpg" onerror="onerror=null;src='/blog/images/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">【数学与计算】Maple推导公式常用命令</div></div><div class="info-2"><div class="info-item-1">关于使用Maple进行数学推导的知识</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/blog/2025/01/16/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%9C%9F%E6%9C%AB%E9%87%8D%E7%82%B9/" title="【SCU期末】网络攻防技术期末重点"><img class="cover" src="/blog/coverImages/scu_24-25_gf-2.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="info-item-2">【SCU期末】网络攻防技术期末重点</div></div><div class="info-2"><div class="info-item-1">记录了scu_ccs期末专业课的重点笔记，对scu_ccs有较大帮助</div></div></div></a><a class="pagination-related" href="/blog/2025/01/16/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E5%AE%9E%E9%AA%8C%E6%80%BB%E7%BB%93/" title="【SCU期末】网络攻防技术实验总结"><img class="cover" src="/blog/coverImages/scu_24-25_gf-1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="info-item-2">【SCU期末】网络攻防技术实验总结</div></div><div class="info-2"><div class="info-item-1">记录了scu_ccs期末专业课的重点笔记，对scu_ccs有较大帮助</div></div></div></a><a class="pagination-related" href="/blog/2025/01/16/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF_final/" title="【SCU期末】网络空间安全技术期末整理"><img class="cover" src="/blog/coverImages/scu_24-25_js.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-01-16</div><div class="info-item-2">【SCU期末】网络空间安全技术期末整理</div></div><div class="info-2"><div class="info-item-1">记录了scu_ccs期末专业课的重点笔记，对scu_ccs有较大帮助</div></div></div></a><a class="pagination-related" href="/blog/2024/06/30/scu/2023-2024%E5%AD%A6%E5%B9%B4_%E6%98%A5/%E5%BA%94%E7%94%A8%E5%AF%86%E7%A0%81%E5%AD%A6%E6%8F%90%E7%BA%B2/" title="【SCU期末】scu应用密码学期末提纲"><img class="cover" src="/blog/coverImages/scu_23-24_yymmx.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-30</div><div class="info-item-2">【SCU期末】scu应用密码学期末提纲</div></div><div class="info-2"><div class="info-item-1">仅记录了任课老师课堂提示的重点提纲，对scu_ccs有较大帮助</div></div></div></a><a class="pagination-related" href="/blog/2024/06/30/scu/2023-2024%E5%AD%A6%E5%B9%B4_%E6%98%A5/os%E7%AE%80%E7%AD%94%E9%A2%98%E6%8F%90%E7%BA%B2/" title="【SCU期末】scu操作系统期末简答题提纲"><img class="cover" src="/blog/coverImages/scu_23-24_os-1.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-30</div><div class="info-item-2">【SCU期末】scu操作系统期末简答题提纲</div></div><div class="info-2"><div class="info-item-1">仅记录了任课老师课堂提示的重点提纲，具体细化梳理见“scu操作系统期末简答题提纲”，对scu_ccs的os有较大帮助</div></div></div></a><a class="pagination-related" href="/blog/2024/06/30/scu/2023-2024%E5%AD%A6%E5%B9%B4_%E6%98%A5/os%E7%AE%80%E7%AD%94%E9%A2%98%E6%95%B4%E7%90%86/" title="【SCU期末】scu操作系统期末简答题整理"><img class="cover" src="/blog/coverImages/scu_23-24_os-2.jpg" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-06-30</div><div class="info-item-2">【SCU期末】scu操作系统期末简答题整理</div></div><div class="info-2"><div class="info-item-1">重点梳理，对scu_ccs的os有较大帮助</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/blog/images/profile.jpg" onerror="this.onerror=null;this.src='/blog/images/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">Hozenghan</div><div class="author-info-description">📷   🖥️   📖  💤   🛵</div><div class="site-data"><a href="/blog/archives/"><div class="headline">文章</div><div class="length-num">42</div></a><a href="/blog/tags/"><div class="headline">标签</div><div class="length-num">43</div></a><a href="/blog/categories/"><div class="headline">分类</div><div class="length-num">27</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Hozenghan"><i class="fab fa-github"></i><span>Follow Me!</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Hozenghan" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="/blog/QQ" target="_blank" title=""><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:wuzhenghannnnnn@163.com" target="_blank" title="Email"><i class="fas fa-envelope-open-text"></i></a><a class="social-icon" href="https://hozenghan.github.io" target="_blank" title=""><i class="fas fa-home"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">无限进步！建议挂上梯子，不然有些图片可能会加载不出来。天天开心哦🥰</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A%E9%A2%98%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text">作业题目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4%E5%8F%8A%E7%BB%93%E6%9E%9C"><span class="toc-number">2.</span> <span class="toc-text">实验步骤及结果</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#step1"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">step1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step2"><span class="toc-number">2.0.0.2.</span> <span class="toc-text">step2</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step3"><span class="toc-number">2.0.0.3.</span> <span class="toc-text">step3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step4"><span class="toc-number">2.0.0.4.</span> <span class="toc-text">step4</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step5"><span class="toc-number">2.0.0.5.</span> <span class="toc-text">step5</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step6"><span class="toc-number">2.0.0.6.</span> <span class="toc-text">step6</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step7"><span class="toc-number">2.0.0.7.</span> <span class="toc-text">step7</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E6%8B%93%E5%B1%95-%E7%BF%BB%E9%A1%B5"><span class="toc-number">2.0.0.8.</span> <span class="toc-text">功能拓展-翻页</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%91%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">发现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">4.</span> <span class="toc-text">参考资料</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/05/08/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/Lab1_doc/" title="【网络攻防技术实验报告】实验1：域名信息收集工具"><img src="/blog/coverImages/scu_24-25_gf-lab1.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="【网络攻防技术实验报告】实验1：域名信息收集工具"/></a><div class="content"><a class="title" href="/blog/2025/05/08/scu/2024-2025%E5%AD%A6%E5%B9%B4_%E7%A7%8B/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E6%8A%80%E6%9C%AF%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A/Lab1_doc/" title="【网络攻防技术实验报告】实验1：域名信息收集工具">【网络攻防技术实验报告】实验1：域名信息收集工具</a><time datetime="2025-05-08T15:59:50.000Z" title="发表于 2025-05-08 23:59:50">2025-05-08</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/05/04/math/%E3%80%90%E6%95%B0%E5%AD%A6%E4%B8%8E%E8%AE%A1%E7%AE%97%E3%80%91Maple%E6%8E%A8%E5%AF%BC%E5%85%AC%E5%BC%8F%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="【数学与计算】Maple推导公式常用命令"><img src="/blog/coverImages/math-maple.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="【数学与计算】Maple推导公式常用命令"/></a><div class="content"><a class="title" href="/blog/2025/05/04/math/%E3%80%90%E6%95%B0%E5%AD%A6%E4%B8%8E%E8%AE%A1%E7%AE%97%E3%80%91Maple%E6%8E%A8%E5%AF%BC%E5%85%AC%E5%BC%8F%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="【数学与计算】Maple推导公式常用命令">【数学与计算】Maple推导公式常用命令</a><time datetime="2025-05-04T15:59:50.000Z" title="发表于 2025-05-04 23:59:50">2025-05-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/04/10/development/%E3%80%90%E5%BC%80%E5%8F%91%E3%80%91PyQt/" title="【开发】MacbookAir M2安装PyQt"><img src="/blog/coverImages/develop-pyqt.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="【开发】MacbookAir M2安装PyQt"/></a><div class="content"><a class="title" href="/blog/2025/04/10/development/%E3%80%90%E5%BC%80%E5%8F%91%E3%80%91PyQt/" title="【开发】MacbookAir M2安装PyQt">【开发】MacbookAir M2安装PyQt</a><time datetime="2025-04-10T15:59:50.000Z" title="发表于 2025-04-10 23:59:50">2025-04-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/03/26/code/latex/latex/" title="LaTeX常用网址"><img src="/blog/coverImages/code_latex.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="LaTeX常用网址"/></a><div class="content"><a class="title" href="/blog/2025/03/26/code/latex/latex/" title="LaTeX常用网址">LaTeX常用网址</a><time datetime="2025-03-26T15:59:50.000Z" title="发表于 2025-03-26 23:59:50">2025-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/2025/03/24/algorithm/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" title="【算法笔记】基础算法"><img src="/blog/coverImages/algorithm-1.jpg" onerror="this.onerror=null;this.src='/blog/images/404.jpg'" alt="【算法笔记】基础算法"/></a><div class="content"><a class="title" href="/blog/2025/03/24/algorithm/%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95/" title="【算法笔记】基础算法">【算法笔记】基础算法</a><time datetime="2025-03-24T15:59:51.000Z" title="发表于 2025-03-24 23:59:51">2025-03-24</time></div></div></div></div></div></div></main><footer id="footer" style="background: linear-gradient(20deg, #003366, #0066cc, #3399ff, #66ccff);"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By Hozenghan</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text">Hey you, welcome to my blog!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/blog/js/utils.js"></script><script src="/blog/js/main.js"></script><script src="/blog/js/tw_cn.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="text-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/blog/js/search/local-search.js"></script></div></div></body></html>
