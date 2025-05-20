@@ -8,7 +8,7 @@
       <link href="/blog/2025/05/20/development/%E3%80%90%E5%BC%80%E5%8F%91%E3%80%91%E5%85%B3%E4%BA%8Enode%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7nvm/"/>
       <url>/blog/2025/05/20/development/%E3%80%90%E5%BC%80%E5%8F%91%E3%80%91%E5%85%B3%E4%BA%8Enode%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7nvm/</url>
       
-        <content type="html"><![CDATA[<h2 id="Homebrew安装nvm"><a href="#Homebrew安装nvm" class="headerlink" title="Homebrew安装nvm"></a>Homebrew安装nvm</h2><p>先使用Homebrew检查nvm的安装位置：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew list nvm</span><br></pre></td></tr></table></figure><h2 id="nvm安装指定版本的node"><a href="#nvm安装指定版本的node" class="headerlink" title="nvm安装指定版本的node"></a>nvm安装指定版本的node</h2><p>使用 <code>nvm install node</code> 安装最新版本的node</p><h2 id="nvm切换node版本"><a href="#nvm切换node版本" class="headerlink" title="nvm切换node版本"></a>nvm切换node版本</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换到系统自带的 Node.js</span></span><br><span class="line">nvm use system</span><br><span class="line"><span class="comment"># 切换到特定版本的 Node.js</span></span><br><span class="line">nvm use &lt;version&gt;</span><br></pre></td></tr></table></figure><h2 id="使用nvm控制node版本的常用命令"><a href="#使用nvm控制node版本的常用命令" class="headerlink" title="使用nvm控制node版本的常用命令"></a>使用nvm控制node版本的常用命令</h2><ol><li>安装指定版本的 Node.js：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm install &lt;version&gt; <span class="comment"># 安装特定版本，例如 nvm install v14.17.0</span></span><br></pre></td></tr></table></figure><ol start="2"><li>列出所有可安装的 Node.js 版本</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm ls-remote <span class="comment"># 列出远程服务器上的所有可用版本</span></span><br></pre></td></tr></table></figure><ol start="3"><li>列出已安装的 Node.js 版本：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm list <span class="comment"># 显示已安装的 Node.js 版本和当前使用的版本</span></span><br></pre></td></tr></table></figure><ol start="4"><li>切换到已安装的某个版本：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm use &lt;version&gt; <span class="comment"># 切换到指定版本，例如 nvm use v12.22.11</span></span><br></pre></td></tr></table></figure><ol start="5"><li>设置默认版本：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm <span class="built_in">alias</span> default &lt;version&gt; <span class="comment"># 设置默认启动的 Node.js 版本</span></span><br></pre></td></tr></table></figure><ol start="6"><li>卸载指定版本的 Node.js：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm uninstall &lt;version&gt; <span class="comment"># 卸载特定版本</span></span><br></pre></td></tr></table></figure><ol start="7"><li>查看当前正在使用的 Node.js 版本：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm current <span class="comment"># 显示当前激活的 Node.js 版本</span></span><br></pre></td></tr></table></figure><ol start="8"><li>检查 Node.js 的版本信息：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v <span class="comment"># 在已通过nvm切换版本后，直接使用node命令查看当前版本</span></span><br></pre></td></tr></table></figure><ol start="9"><li>管理 LTS 版本：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm install --lts <span class="comment"># 安装最新长期支持版（LTS）</span></span><br><span class="line">nvm install lts/argon <span class="comment"># 安装特定 LTS 系列（如argon为旧版LTS代号）</span></span><br></pre></td></tr></table></figure>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>参考博客：<a href="https://blog.csdn.net/Ys709524905/article/details/136916096">https://blog.csdn.net/Ys709524905/article/details/136916096</a></p></blockquote><h2 id="Homebrew安装nvm"><a href="#Homebrew安装nvm" class="headerlink" title="Homebrew安装nvm"></a>Homebrew安装nvm</h2><p>先使用Homebrew检查nvm的安装位置：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">brew list nvm</span><br></pre></td></tr></table></figure><h2 id="nvm安装指定版本的node"><a href="#nvm安装指定版本的node" class="headerlink" title="nvm安装指定版本的node"></a>nvm安装指定版本的node</h2><p>使用 <code>nvm install node</code> 安装最新版本的node</p><h2 id="nvm切换node版本"><a href="#nvm切换node版本" class="headerlink" title="nvm切换node版本"></a>nvm切换node版本</h2><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 切换到系统自带的 Node.js</span></span><br><span class="line">nvm use system</span><br><span class="line"><span class="comment"># 切换到特定版本的 Node.js</span></span><br><span class="line">nvm use &lt;version&gt;</span><br></pre></td></tr></table></figure><h2 id="使用nvm控制node版本的常用命令"><a href="#使用nvm控制node版本的常用命令" class="headerlink" title="使用nvm控制node版本的常用命令"></a>使用nvm控制node版本的常用命令</h2><ol><li>安装指定版本的 Node.js：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm install &lt;version&gt; <span class="comment"># 安装特定版本，例如 nvm install v14.17.0</span></span><br></pre></td></tr></table></figure><ol start="2"><li>列出所有可安装的 Node.js 版本</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm ls-remote <span class="comment"># 列出远程服务器上的所有可用版本</span></span><br></pre></td></tr></table></figure><ol start="3"><li>列出已安装的 Node.js 版本：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm list <span class="comment"># 显示已安装的 Node.js 版本和当前使用的版本</span></span><br></pre></td></tr></table></figure><ol start="4"><li>切换到已安装的某个版本：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm use &lt;version&gt; <span class="comment"># 切换到指定版本，例如 nvm use v12.22.11</span></span><br></pre></td></tr></table></figure><ol start="5"><li>设置默认版本：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm <span class="built_in">alias</span> default &lt;version&gt; <span class="comment"># 设置默认启动的 Node.js 版本</span></span><br></pre></td></tr></table></figure><ol start="6"><li>卸载指定版本的 Node.js：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm uninstall &lt;version&gt; <span class="comment"># 卸载特定版本</span></span><br></pre></td></tr></table></figure><ol start="7"><li>查看当前正在使用的 Node.js 版本：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm current <span class="comment"># 显示当前激活的 Node.js 版本</span></span><br></pre></td></tr></table></figure><ol start="8"><li>检查 Node.js 的版本信息：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">node -v <span class="comment"># 在已通过nvm切换版本后，直接使用node命令查看当前版本</span></span><br></pre></td></tr></table></figure><ol start="9"><li>管理 LTS 版本：</li></ol><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">nvm install --lts <span class="comment"># 安装最新长期支持版（LTS）</span></span><br><span class="line">nvm install lts/argon <span class="comment"># 安装特定 LTS 系列（如argon为旧版LTS代号）</span></span><br></pre></td></tr></table></figure>]]></content>
       
       
       <categories>
@@ -49,13 +49,13 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 保研推免 </tag>
             
             <tag> 机试 </tag>
             
             <tag> 算法 </tag>
+            
+            <tag> 笔记 </tag>
             
         </tags>
       
@@ -80,13 +80,13 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 保研推免 </tag>
             
             <tag> 机试 </tag>
             
             <tag> 算法 </tag>
+            
+            <tag> 笔记 </tag>
             
         </tags>
       
@@ -210,11 +210,11 @@
             
             <tag> python </tag>
             
-            <tag> 开发 </tag>
-            
             <tag> PyQt5 </tag>
             
             <tag> PyQt6 </tag>
+            
+            <tag> 开发 </tag>
             
         </tags>
       
@@ -268,13 +268,13 @@
       
         <tags>
             
-            <tag> 笔记 </tag>
-            
             <tag> 保研推免 </tag>
             
             <tag> 机试 </tag>
             
             <tag> 算法 </tag>
+            
+            <tag> 笔记 </tag>
             
         </tags>
       
@@ -301,9 +301,9 @@
             
             <tag> python </tag>
             
-            <tag> 并发编程 </tag>
-            
             <tag> 开发 </tag>
+            
+            <tag> 并发编程 </tag>
             
         </tags>
       
@@ -374,6 +374,35 @@
     
     
     <entry>
+      <title>matlab</title>
+      <link href="/blog/2025/03/17/code/matlab/1-matlab/"/>
+      <url>/blog/2025/03/17/code/matlab/1-matlab/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Matlab清除命令，清空工作区代码，关闭所有窗口"><a href="#Matlab清除命令，清空工作区代码，关闭所有窗口" class="headerlink" title="Matlab清除命令，清空工作区代码，关闭所有窗口"></a>Matlab清除命令，清空工作区代码，关闭所有窗口</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clc,clear,close all; </span><br><span class="line"><span class="comment">%清除命令，清空工作区，关闭所有窗口</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> code </category>
+          
+          <category> matlab </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> code </tag>
+            
+            <tag> matlab </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>C语言安装第三方库</title>
       <link href="/blog/2025/03/17/code/c/C%E8%AF%AD%E8%A8%80%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/"/>
       <url>/blog/2025/03/17/code/c/C%E8%AF%AD%E8%A8%80%E5%AE%89%E8%A3%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/</url>
@@ -397,35 +426,6 @@
             <tag> code </tag>
             
             <tag> C语言 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>matlab</title>
-      <link href="/blog/2025/03/17/code/matlab/1-matlab/"/>
-      <url>/blog/2025/03/17/code/matlab/1-matlab/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Matlab清除命令，清空工作区代码，关闭所有窗口"><a href="#Matlab清除命令，清空工作区代码，关闭所有窗口" class="headerlink" title="Matlab清除命令，清空工作区代码，关闭所有窗口"></a>Matlab清除命令，清空工作区代码，关闭所有窗口</h2><figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line">clc,clear,close all; </span><br><span class="line"><span class="comment">%清除命令，清空工作区，关闭所有窗口</span></span><br></pre></td></tr></table></figure>]]></content>
-      
-      
-      <categories>
-          
-          <category> code </category>
-          
-          <category> matlab </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> code </tag>
-            
-            <tag> matlab </tag>
             
         </tags>
       
@@ -483,9 +483,9 @@
       
         <tags>
             
-            <tag> MachineLearning </tag>
-            
             <tag> 笔记 </tag>
+            
+            <tag> MachineLearning </tag>
             
             <tag> 科研 </tag>
             
@@ -828,9 +828,9 @@
             
             <tag> MacOS </tag>
             
-            <tag> 系统配置 </tag>
-            
             <tag> code </tag>
+            
+            <tag> 系统配置 </tag>
             
             <tag> node.js </tag>
             
@@ -961,6 +961,31 @@
     
     
     <entry>
+      <title>【Hexo】博客主题配置（持续更新）</title>
+      <link href="/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/"/>
+      <url>/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Hexo-Butterfly-主题文章置顶"><a href="#Hexo-Butterfly-主题文章置顶" class="headerlink" title="Hexo Butterfly 主题文章置顶"></a>Hexo Butterfly 主题文章置顶</h1><p>卸载 hexo-generator-index，然后安装 hexo-generator-index-pin-top</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure><h2 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h2><p>在需要置顶的文章的 Front-matter 中加上 top: true &#x2F; 数字即可，  </p><p>数字越大，文章越靠前。  </p><p><strong>例如</strong></p><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">cover:</span> </span><br><span class="line"><span class="attr">top:</span> <span class="number">1</span> <span class="comment">#这里加一个top就行</span></span><br><span class="line"><span class="attr">abbrlink:</span> <span class="string">1d5436e1</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2023-01-06 17:32:05</span></span><br></pre></td></tr></table></figure><blockquote><p>本文引用自：<a href="https://blog.aiheadn.cn/archives/1b4c065d.html">https://blog.aiheadn.cn/archives/1b4c065d.html</a></p></blockquote><h1 id="Hexo-Butterfly主题首页增加字数总计-阅读时间"><a href="#Hexo-Butterfly主题首页增加字数总计-阅读时间" class="headerlink" title="Hexo Butterfly主题首页增加字数总计&amp;阅读时间"></a>Hexo Butterfly主题首页增加字数总计&amp;阅读时间</h1><p>开启字数统计功能，需要安装<code>hexo-wordcount</code>插件</p><p>在 hexo 工作目录下运行<code>npm install hexo-wordcount --save</code>or<code> yarn add hexo-wordcount</code></p><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Need to install the hexo-wordcount plugin</span></span><br><span class="line"><span class="attr">wordcount:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the word count of the article in post meta</span></span><br><span class="line">  <span class="attr">post_wordcount:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the time to read the article in post meta</span></span><br><span class="line">  <span class="attr">min2read:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the total word count of the website in aside&#x27;s webinfo</span></span><br><span class="line">  <span class="attr">total_wordcount:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure><table><thead><tr><th>参数</th><th>解释</th></tr></thead><tbody><tr><td>post_wordcount</td><td>在文章页面显示字数</td></tr><tr><td>min2read</td><td>在文章页面显示阅读时间</td></tr><tr><td>total_wordcount</td><td>在侧边栏显示网站总字数</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Hexo </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hozenghan的Memoji</title>
       <link href="/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/"/>
       <url>/blog/2025/01/17/%E5%85%B6%E4%BB%96/memoji/</url>
@@ -980,31 +1005,6 @@
             <tag> 我的 </tag>
             
             <tag> top </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>【Hexo】博客主题配置（持续更新）</title>
-      <link href="/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/"/>
-      <url>/blog/2025/01/17/Hexo/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Hexo-Butterfly-主题文章置顶"><a href="#Hexo-Butterfly-主题文章置顶" class="headerlink" title="Hexo Butterfly 主题文章置顶"></a>Hexo Butterfly 主题文章置顶</h1><p>卸载 hexo-generator-index，然后安装 hexo-generator-index-pin-top</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-generator-index --save</span><br><span class="line">npm install hexo-generator-index-pin-top --save</span><br></pre></td></tr></table></figure><h2 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h2><p>在需要置顶的文章的 Front-matter 中加上 top: true &#x2F; 数字即可，  </p><p>数字越大，文章越靠前。  </p><p><strong>例如</strong></p><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">cover:</span> </span><br><span class="line"><span class="attr">top:</span> <span class="number">1</span> <span class="comment">#这里加一个top就行</span></span><br><span class="line"><span class="attr">abbrlink:</span> <span class="string">1d5436e1</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2023-01-06 17:32:05</span></span><br></pre></td></tr></table></figure><blockquote><p>本文引用自：<a href="https://blog.aiheadn.cn/archives/1b4c065d.html">https://blog.aiheadn.cn/archives/1b4c065d.html</a></p></blockquote><h1 id="Hexo-Butterfly主题首页增加字数总计-阅读时间"><a href="#Hexo-Butterfly主题首页增加字数总计-阅读时间" class="headerlink" title="Hexo Butterfly主题首页增加字数总计&amp;阅读时间"></a>Hexo Butterfly主题首页增加字数总计&amp;阅读时间</h1><p>开启字数统计功能，需要安装<code>hexo-wordcount</code>插件</p><p>在 hexo 工作目录下运行<code>npm install hexo-wordcount --save</code>or<code> yarn add hexo-wordcount</code></p><figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Need to install the hexo-wordcount plugin</span></span><br><span class="line"><span class="attr">wordcount:</span></span><br><span class="line">  <span class="attr">enable:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the word count of the article in post meta</span></span><br><span class="line">  <span class="attr">post_wordcount:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the time to read the article in post meta</span></span><br><span class="line">  <span class="attr">min2read:</span> <span class="literal">true</span></span><br><span class="line">  <span class="comment"># Display the total word count of the website in aside&#x27;s webinfo</span></span><br><span class="line">  <span class="attr">total_wordcount:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure><table><thead><tr><th>参数</th><th>解释</th></tr></thead><tbody><tr><td>post_wordcount</td><td>在文章页面显示字数</td></tr><tr><td>min2read</td><td>在文章页面显示阅读时间</td></tr><tr><td>total_wordcount</td><td>在侧边栏显示网站总字数</td></tr></tbody></table>]]></content>
-      
-      
-      <categories>
-          
-          <category> Hexo </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Hexo </tag>
             
         </tags>
       
@@ -1255,9 +1255,9 @@
       
         <tags>
             
-            <tag> MachineLearning </tag>
-            
             <tag> 笔记 </tag>
+            
+            <tag> MachineLearning </tag>
             
             <tag> MacOS </tag>
             
@@ -1286,11 +1286,11 @@
       
         <tags>
             
+            <tag> 笔记 </tag>
+            
             <tag> MachineLearning </tag>
             
             <tag> pytorch </tag>
-            
-            <tag> 笔记 </tag>
             
             <tag> MacOS </tag>
             
